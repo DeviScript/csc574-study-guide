@@ -10,6 +10,7 @@ The course archive is under `csc574/`.
 
 ## Project Structure
 
+- `index.html`: GitHub Pages root entry point that redirects to `csc574/`.
 - `csc574/index.html`: polished course archive and launcher.
 - `csc574/lec01-introduction/`: Lecture 01 Slidev export.
 - `csc574/lec02-fundamentals/`: Lecture 02 Slidev export.
@@ -42,6 +43,16 @@ python3 -m http.server 4176
 Open the archive at `http://localhost:4176/csc574/`.
 
 Slidev exports use JavaScript modules, dynamic imports, and generated assets. Prefer HTTP serving when testing the complete site. The local archive cards intentionally link to the published working decks at `https://slides.dwermke.com/csc574/...` so the root `file://` archive remains useful without relying on local module permissions.
+
+## GitHub Pages
+
+The public repository is `https://github.com/DeviScript/csc574-study-guide`. GitHub Pages deploys the `main` branch
+from `/(root)` at `https://deviscript.github.io/csc574-study-guide/`. The root `index.html` redirects visitors to the
+course archive at `https://deviscript.github.io/csc574-study-guide/csc574/`; keep this entry point in place so the
+GitHub Pages root URL does not return a 404.
+
+After site changes, commit and push to `main`. GitHub Pages automatically redeploys the site; allow a few minutes for
+the public URL to reflect a new commit.
 
 ## Slide Export Safety
 
