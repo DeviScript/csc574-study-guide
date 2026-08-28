@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSC 574 | Exam Question Flash Cards</title>
+    <style>
+        :root {
+            --ink: #152b3a;
+            --muted: #60717b;
+            --paper: #f4f1e8;
+            --card: #fffdf7;
+            --line: #d8d6ca;
+            --coral: #d95d4f;
+            --teal: #187f7b;
+            --gold: #e3a72f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            line-height: 1.6;
+        }
+
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            content: "";
+            opacity: .42;
+            background-image: linear-gradient(135deg, rgba(24, 127, 123, .08) 25%, transparent 25%), linear-gradient(315deg, rgba(217, 93, 79, .06) 25%, transparent 25%);
+            background-position: 0 0, 18px 18px;
+            background-size: 36px 36px;
+        }
+
+        .page {
+            width: min(960px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 30px 0 64px;
+        }
+
+        nav {
+            margin-bottom: 48px;
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        a {
+            color: var(--teal);
+        }
+
+        h1,
+        h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 1.08;
+        }
+
+        h1 {
+            margin: 0 0 18px;
+            font-size: clamp(2.3rem, 5vw, 4rem);
+        }
+
+        h2 {
+            margin: 38px 0 16px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+            color: var(--teal);
+            font-size: 2rem;
+        }
+
+        .lede {
+            max-width: 760px;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .rule {
+            width: 88px;
+            height: 5px;
+            margin: 34px 0 42px;
+            background: var(--coral);
+        }
+
+        .flashcard-section {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .flashcard {
+            display: block;
+            width: 100%;
+            min-height: 260px;
+            padding: 34px;
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--gold);
+            color: var(--ink);
+            background: var(--card);
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .flashcard:hover,
+        .flashcard:focus-visible {
+            border-color: var(--gold);
+            box-shadow: 8px 8px 0 rgba(21, 43, 58, .12);
+            outline: none;
+        }
+
+        .flashcard-label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--gold);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .flashcard-answer {
+            display: none;
+            color: var(--muted);
+        }
+
+        .flashcard-answer strong {
+            font-weight: 400;
+        }
+
+        .flashcard-answer ul,
+        .flashcard-answer ol {
+            margin: 0;
+            padding-left: 24px;
+        }
+
+        .flashcard-answer li+li {
+            margin-top: 6px;
+        }
+
+        .flashcard-answer ul,
+        .flashcard-answer ol {
+            margin: 0;
+            padding-left: 24px;
+        }
+
+        .flashcard-answer li+li {
+            margin-top: 6px;
+        }
+
+        .flashcard.is-revealed .flashcard-question {
+            display: none;
+        }
+
+        .flashcard.is-revealed .flashcard-answer {
+            display: block;
+        }
+
+        .card-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .card-controls button {
+            padding: 10px 16px;
+            border: 1px solid var(--teal);
+            color: var(--teal);
+            background: var(--card);
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .card-controls button:hover,
+        .card-controls button:focus-visible {
+            color: #fff;
+            background: var(--teal);
+            outline: none;
+        }
+
+        .card-controls button:disabled {
+            border-color: var(--line);
+            color: var(--muted);
+            background: transparent;
+            cursor: not-allowed;
+        }
+
+        .position {
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        @media(max-width:700px) {
+            .page {
+                width: min(100% - 28px, 560px);
+                padding-top: 16px;
+            }
+
+            .flashcard {
+                min-height: 240px;
+                padding: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <nav><a href="index.html">Back to course materials</a> · <a
+                href="exam%20questions/CSC574_possible_exam_questions.html">Question bank</a> · <a
+                href="exam%20questions/CSC574_possible_exam_questions_answer_key.html">Answer key</a></nav>
+        <main>
+            <h1>Exam Question Flash Cards</h1>
+            <p class="lede">Practice the question styles and core topics from the CSC/ECE 574 exam question bank. Select
+                a card to reveal the answer.</p>
+            <div class="rule"></div>
+            <section class="flashcard-section">
+                <h2>Exam Questions</h2>
+                <div id="card" class="flashcard" role="button" tabindex="0" aria-expanded="false"><span id="label"
+                        class="flashcard-label">Question</span><span id="question" class="flashcard-question">Loading
+                        exam questions...</span><span id="answer" class="flashcard-answer"></span></div>
+                <div class="card-controls"><button id="previous" type="button">Previous</button><span id="position"
+                        class="position" aria-live="polite"></span><button id="next" type="button">Next</button></div>
+            </section>
+        </main>
+    </div>
+    <script>
+        let current = 0;
+        const card = document.querySelector('#card');
+        const label = document.querySelector('#label');
+        const question = document.querySelector('#question');
+        const answer = document.querySelector('#answer');
+        const position = document.querySelector('#position');
+        const previous = document.querySelector('#previous');
+        const next = document.querySelector('#next');
+        let cards = [];
+        function render() {
+            question.textContent = cards[current].question;
+            answer.innerHTML = cards[current].answer;
+            position.textContent = `Card ${current + 1} of ${cards.length}`;
+            label.textContent = 'Question';
+            card.classList.remove('is-revealed');
+            card.setAttribute('aria-expanded', 'false');
+            previous.disabled = current === 0;
+            next.disabled = current === cards.length - 1;
+        }
+        function reveal() { const isRevealed = card.classList.toggle('is-revealed'); card.setAttribute('aria-expanded', String(isRevealed)); label.textContent = isRevealed ? 'Answer' : 'Question'; }
+        card.addEventListener('click', reveal);
+        card.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); reveal(); } });
+        previous.addEventListener('click', () => { current -= 1; render(); });
+        next.addEventListener('click', () => { current += 1; render(); });
+        async function loadCards() {
+            const [questionResponse, answerResponse] = await Promise.all([
+                fetch('exam%20questions/CSC574_possible_exam_questions.html'),
+                fetch('exam%20questions/CSC574_possible_exam_questions_answer_key.html')
+            ]);
+            if (!questionResponse.ok || !answerResponse.ok) throw new Error('Unable to load exam materials.');
+            const questionDocument = new DOMParser().parseFromString(await questionResponse.text(), 'text/html');
+            const answerDocument = new DOMParser().parseFromString(await answerResponse.text(), 'text/html');
+            const questions = [];
+            const quickQuestions = questionDocument.querySelector('#task-1-quick-questions + ol');
+            quickQuestions.querySelectorAll(':scope > li').forEach((item) => questions.push({ question: item.textContent.trim(), number: questions.length + 1 }));
+            questionDocument.querySelectorAll('h3[id^="possible-question-"]').forEach((heading) => {
+                const content = [];
+                let node = heading.nextElementSibling;
+                while (node && !['H2', 'H3'].includes(node.tagName)) { content.push(node.outerHTML); node = node.nextElementSibling; }
+                questions.push({ question: content.map((html) => html.replace(/<[^>]+>/g, ' ')).join(' ').replace(/\s+/g, ' ').trim(), number: Number(heading.id.replace('possible-question-', '').split('-')[0]) });
+            });
+            const answers = new Map();
+            answerDocument.querySelectorAll('h2').forEach((heading) => {
+                const match = heading.textContent.trim().match(/^(\d+)\./);
+                if (!match) return;
+                const content = [];
+                let node = heading.nextElementSibling;
+                while (node && node.tagName !== 'H2') { content.push(node.outerHTML); node = node.nextElementSibling; }
+                answers.set(Number(match[1]), content.join('').replace(/<strong>Answer:<\/strong>\s*/i, ''));
+            });
+            cards = questions.filter((item) => answers.has(item.number)).map((item) => ({ question: item.question, answer: answers.get(item.number) }));
+            const practiceQuestions = questionDocument.querySelector('#realistic-30-point-practice-exam');
+            const practiceAnswers = answerDocument.querySelector('#realistic-30-point-practice-exam-answer-key');
+            if (practiceQuestions && practiceAnswers) {
+                const practiceAnswerSections = new Map();
+                practiceAnswers.parentElement.querySelectorAll(':scope > h2').forEach((heading) => {
+                    const content = [];
+                    let node = heading.nextElementSibling;
+                    while (node && node.tagName !== 'H2' && node.tagName !== 'H1') { content.push(node.outerHTML); node = node.nextElementSibling; }
+                    practiceAnswerSections.set(heading.textContent.replace(/\s+/g, ' ').trim(), content.join('').replace(/<strong>Answer:<\/strong>\s*/gi, ''));
+                });
+                let node = practiceQuestions.nextElementSibling;
+                while (node && node.tagName !== 'H1') {
+                    if (node.tagName === 'H2' && practiceAnswerSections.has(node.textContent.replace(/\s+/g, ' ').trim())) {
+                        const content = [];
+                        let questionNode = node.nextElementSibling;
+                        while (questionNode && questionNode.tagName !== 'H2' && questionNode.tagName !== 'H1') { content.push(questionNode.outerHTML); questionNode = questionNode.nextElementSibling; }
+                        cards.push({ question: content.map((html) => html.replace(/<[^>]+>/g, ' ')).join(' ').replace(/\s+/g, ' ').trim(), answer: practiceAnswerSections.get(node.textContent.replace(/\s+/g, ' ').trim()) });
+                    }
+                    node = node.nextElementSibling;
+                }
+            }
+            if (!cards.length) throw new Error('No exam cards found.');
+            render();
+        }
+        loadCards().catch((error) => { question.textContent = error.message; position.textContent = 'Exam materials unavailable'; previous.disabled = true; next.disabled = true; });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSC 574 | Lecture 04 Symmetric Cryptography</title>
+    <style>
+        :root {
+            --ink: #152b3a;
+            --muted: #60717b;
+            --paper: #f4f1e8;
+            --card: #fffdf7;
+            --line: #d8d6ca;
+            --coral: #d95d4f;
+            --teal: #187f7b;
+            --gold: #e3a72f
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            line-height: 1.55
+        }
+
+        .page {
+            width: min(1060px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 30px 0 64px
+        }
+
+        nav {
+            margin-bottom: 48px;
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+
+        a {
+            color: var(--teal)
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 1.1
+        }
+
+        h1 {
+            max-width: 800px;
+            margin: 0 0 18px;
+            font-size: clamp(2.4rem, 6vw, 4.6rem);
+        }
+
+        h2 {
+            margin: 0 0 16px;
+            font-size: 2rem
+        }
+
+        h3 {
+            margin: 30px 0 8px;
+            color: var(--teal);
+            font-size: 1.25rem
+        }
+
+        .lede {
+            max-width: 800px;
+            color: var(--muted)
+        }
+
+        .rule {
+            width: 80px;
+            height: 5px;
+            margin: 34px 0 42px;
+            background: var(--coral)
+        }
+
+        .slide-gallery {
+            display: block;
+            margin: 0 0 42px
+        }
+
+        .slide-nav {
+            max-width: 420px;
+            margin: 0 0 18px;
+            padding: 8px;
+            border: 1px solid rgba(24, 127, 123, .35);
+            border-radius: 8px;
+            background: rgba(24, 127, 123, .08)
+        }
+
+        .slide-nav select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid rgba(24, 127, 123, .5);
+            border-radius: 6px;
+            color: #fff;
+            background: var(--teal);
+            font: inherit;
+            font-size: .72rem;
+            cursor: pointer
+        }
+
+        .slide-nav option {
+            color: var(--ink);
+            background: #fff
+        }
+
+        .slide-viewer {
+            display: block
+        }
+
+        .slide-card {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+            border: 1px solid var(--line);
+            background: var(--card)
+        }
+
+        .slide-card figcaption {
+            grid-column: 1/-1;
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .slide-frame {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #111
+        }
+
+        .slide-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0
+        }
+
+        .lecture-notes {
+            margin: 0;
+            padding: 16px;
+            border-left: 4px solid var(--teal);
+            color: var(--muted);
+            background: var(--paper);
+            font-size: .9rem
+        }
+
+        .lecture-notes strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--teal);
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .lecture-notes p {
+            margin: 0 0 12px
+        }
+
+        .lecture-notes p:last-child {
+            margin: 0
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr)
+        }
+
+        section {
+            padding-bottom: 30px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .collapsible-section {
+            margin-bottom: 18px;
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--teal);
+            background: var(--card);
+            overflow: hidden
+        }
+
+        .collapsible-section>summary {
+            padding: 14px 18px;
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.35rem;
+            cursor: pointer
+        }
+
+        .collapsible-section>.section-content {
+            padding: 0 18px 18px
+        }
+
+        .page-nav {
+            margin: 0 0 24px;
+            padding: 16px 18px;
+            border-top: 5px solid var(--coral);
+            background: var(--card)
+        }
+
+        .page-nav h2 {
+            margin-bottom: 10px
+        }
+
+        .page-nav ol {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px 18px;
+            padding: 0;
+            margin: 0;
+            list-style: none
+        }
+
+        .page-nav li {
+            margin: 0
+        }
+
+        .callout {
+            padding: 20px 22px;
+            margin: 20px 0;
+            border-left: 5px solid var(--teal);
+            background: var(--card)
+        }
+
+        .exam {
+            margin-top: 40px;
+            padding: 24px;
+            border-top: 5px solid var(--gold);
+            background: var(--card)
+        }
+
+        .exam li {
+            margin-bottom: 12px
+        }
+
+        .answer {
+            color: var(--muted)
+        }
+
+        @media(max-width:760px) {
+            .page {
+                width: min(100% - 28px, 600px);
+                padding-top: 20px
+            }
+
+            .slide-card {
+                grid-template-columns: 1fr
+            }
+
+            .slide-card figcaption {
+                grid-column: auto
+            }
+
+            .page-nav ol {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <nav><a href="../index.html">Back to slides</a> | <a href="../lec04-symmetric-crypto/index.html#/1">Open Lecture
+                04</a></nav>
+        <h1>Symmetric Cryptography</h1>
+        <p class="lede">Actual Lecture 04 slides with transcript-based Lecture Notes beside each slide. The notes
+            preserve the professor's lecture sequence and exam-relevant distinctions.</p>
+        <div class="rule"></div>
+        <aside class="page-nav">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#foundations">Foundations</a></li>
+                <li><a href="#stream-ciphers">Stream ciphers</a></li>
+                <li><a href="#block-ciphers">Block ciphers</a></li>
+                <li><a href="#modes">Modes</a></li>
+            </ol>
+        </aside>
+        <div id="slide-gallery" class="slide-gallery" aria-label="All 60 Lecture 04 slides"></div>
+        <div class="layout">
+            <main>
+                <section id="objectives">
+                    <h2>Learning objectives</h2>
+                    <ul>
+                        <li>Distinguish stream ciphers and block ciphers.</li>
+                        <li>Explain pseudorandomness, one-time pads, and keystream reuse.</li>
+                        <li>Compare ECB, CBC, and CTR modes.</li>
+                        <li>Explain confusion, diffusion, padding, parallelism, random access, and error propagation.
+                        </li>
+                        <li>Distinguish confidentiality from integrity.</li>
+                    </ul>
+                </section>
+                <section id="foundations">
+                    <h2>Symmetric cryptography foundations</h2>
+                    <p>Symmetric cryptography uses the same key for encryption and decryption. It is generally fast,
+                        but the communicating parties must share key material securely.</p>
+                    <p>Stream and block ciphers are tools with different operating assumptions. Neither provides a
+                        complete security solution by itself.</p>
+                </section>
+                <section id="stream-ciphers">
+                    <h2>Stream ciphers</h2>
+                    <p>A stream cipher combines plaintext with a pseudorandom keystream, commonly using XOR. A nonce
+                        or IV may make each generated stream different, but it must not be reused with the same key.</p>
+                    <p>Keystream reuse exposes relationships between plaintexts, and stream ciphers do not provide
+                        integrity by default.</p>
+                </section>
+                <section id="block-ciphers">
+                    <h2>Block ciphers</h2>
+                    <p>A block cipher is a keyed permutation over fixed-size blocks. Substitution and permutation
+                        create confusion, diffusion, and the avalanche effect.</p>
+                    <p>DES and 3DES are obsolete. AES is the modern block cipher emphasized in the lecture. Padding
+                        may be needed when data does not fill a complete block.</p>
+                </section>
+                <section id="modes">
+                    <h2>Modes of operation</h2>
+                    <ul>
+                        <li><strong>ECB:</strong> simple and parallel, but repeated plaintext blocks reveal patterns.
+                        </li>
+                        <li><strong>CBC:</strong> hides patterns with chaining, but encryption is sequential and errors
+                            can propagate.</li>
+                        <li><strong>CTR:</strong> supports parallelism and random access, but nonce or counter reuse is
+                            catastrophic.</li>
+                    </ul>
+                    <p>ECB, CBC, and CTR provide confidentiality only. Integrity requires authentication or an
+                        authenticated encryption construction.</p>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script>
+        const base = window.location.protocol === 'file:' ? 'http://localhost:4176/csc574/lec04-symmetric-crypto/index.html' : '../lec04-symmetric-crypto/index.html';
+        const collapsibleSections = ["objectives", "foundations", "stream-ciphers", "block-ciphers", "modes"];
+        collapsibleSections.forEach((sectionId) => {
+            const section = document.getElementById(sectionId);
+            const details = document.createElement("details");
+            details.className = "collapsible-section";
+            details.id = sectionId;
+            const summary = document.createElement("summary");
+            const heading = section.querySelector("h2");
+            summary.textContent = heading.textContent;
+            const content = document.createElement("div");
+            content.className = "section-content";
+            heading.remove();
+            while (section.firstChild) content.appendChild(section.firstChild);
+            details.append(summary, content);
+            section.replaceWith(details);
+        });
+        const notes = [
+            'Today we start to really dive into crypto, focusing mostly on symmetric cryptography.',
+            'Assignment zero is due Friday or within the no-penalty extension.',
+            'The shirt sidequest asks what the symbols on the professor\'s shirt say.',
+            'The answer to the shirt question can earn a sticker.',
+            'The course moves from foundations to symmetric crypto, hashes and MACs, asymmetric crypto, and key management.',
+            'Today\'s objectives include stream ciphers, block ciphers, security properties, modes, and confidentiality-only constructions.',
+            'Symmetric cryptography uses the same key for encryption and decryption.',
+            'The toolbox includes stream ciphers, block ciphers, modes of operation, and authenticated encryption concepts.',
+            'Last lecture introduced the cryptosystem process and the symmetric/asymmetric distinction.',
+            'Alice encrypts plaintext with a key, sends ciphertext over a public channel, and Bob decrypts with the same key.',
+            'Symmetric systems are generally fast but have a key-distribution problem.',
+            'Asymmetric systems use different keys and support operations such as key agreement and signatures.',
+            'A one-time pad XORs a uniformly random message-length key with the plaintext.',
+            'One-time pads provide perfect secrecy when the key is random, message-length, and never reused.',
+            'Key reuse is catastrophic because XORing ciphertexts cancels the shared key stream.',
+            'One-time pads also provide no integrity; an attacker can alter ciphertext.',
+            'Longer keys generally increase brute-force security for symmetric ciphers, ignoring algorithm flaws.',
+            'Crypto export restrictions historically limited exported key sizes and treated cryptography like munitions.',
+            'The crypto wars included legal disputes over publishing cryptographic source code.',
+            'Longer reusable keys are needed because one-time pads are operationally impractical.',
+            'A short seed can generate a longer pseudorandom stream, which leads to stream ciphers.',
+            'Chunking data into fixed-size pieces leads to block ciphers.',
+            'A stream cipher combines plaintext with a pseudorandom bitstream, commonly using XOR.',
+            'Stream-cipher encryption and decryption need the same key and reproducible generator state.',
+            'Pseudorandom is not truly random: the stream is approximately uniform but its bits are not independent.',
+            'Reusing a stream-cipher keystream exposes the XOR of plaintexts.',
+            'Frequency analysis or guessed words can exploit relationships between plaintexts.',
+            'Initialization vectors make a generated stream different for each message.',
+            'IVs may be public, but they must not be reused with the same key and should be sufficiently large.',
+            'WEP used a short IV with RC4; reuse made attacks practical after enough packets.',
+            'Stream ciphers are difficult to use correctly and do not provide integrity by default.',
+            'Stream ciphers are vulnerable to substitution attacks because XOR permits predictable bit changes.',
+            'Authentication or integrity protection is needed to detect manipulated ciphertext.',
+            'A block cipher is a keyed permutation mapping a fixed-length input block to a fixed-length output block.',
+            'Modern block ciphers use substitution and permutation steps.',
+            'Substitution changes values; permutation rearranges positions.',
+            'Confusion hides the relationship between ciphertext and key.',
+            'Diffusion hides the relationship between plaintext and ciphertext.',
+            'The avalanche effect means a small input change should produce a large output change.',
+            'Modern block ciphers use repeated rounds and round-specific subkeys.',
+            'Each round combines transformations so statistical relationships are difficult to exploit.',
+            'DES is obsolete and should not be used.',
+            '3DES repeated DES as a temporary fix but is also obsolete.',
+            'AES is the widely used modern block cipher recommended by the lecture.',
+            'AES internally substitutes bytes, shifts rows, mixes columns, and adds round keys.',
+            'AES was designed to provide strong transformations with efficient implementation.',
+            'Block ciphers need padding when the input is shorter than a complete block.',
+            'Long messages are split into blocks and processed using a block-cipher mode.',
+            'Electronic Codebook applies the block cipher independently to each block.',
+            'ECB supports parallel encryption and decryption but leaks patterns.',
+            'Do not use ECB for large files or structured data.',
+            'CBC chains blocks by XORing each plaintext block with the previous ciphertext block.',
+            'CBC uses an initialization vector for the first block and hides repeated patterns.',
+            'CBC encryption is sequential; decryption can be parallelized after ciphertext arrives.',
+            'CBC does not provide integrity and can permit predictable bit changes.',
+            'CTR generates a keystream from a key and a unique counter or nonce for each block.',
+            'CTR permits parallel encryption and decryption and can support random access.',
+            'CTR nonce or counter reuse regenerates a keystream and leaks plaintext relationships.',
+            'Other modes include CFB, OFB, and PCBC; the three emphasized modes are ECB, CBC, and CTR.',
+            'Choose a mode based on pattern leakage, manipulation, parallelism, error propagation, and random access.',
+            'ECB leaks patterns, CBC hides patterns but is sequential, and CTR hides patterns with parallelism.',
+            'None of these three modes provides integrity; authenticated modes are covered next lecture.',
+            'For messaging with errors, isolated error behavior can favor CTR; sequential backups can favor CBC.',
+            'For random access, CTR is usually a better fit when counters derive from positions.',
+            'Next lecture covers hashes, message authentication, and authenticated constructions.'
+        ];
+        const slideGallery = document.querySelector('#slide-gallery');
+        const slideNumbers = Array.from({ length: 60 }, (_, index) => index + 1);
+        let currentSlideIndex = 0;
+        const slideNav = document.createElement('div');
+        slideNav.className = 'slide-nav';
+        const select = document.createElement('select');
+        select.setAttribute('aria-label', 'Select lecture slide');
+        slideNumbers.forEach((slideNumber) => {
+            const option = document.createElement('option');
+            option.value = String(slideNumber);
+            option.textContent = `Slide ${slideNumber}: ${notes[slideNumber - 1]}`;
+            select.appendChild(option);
+        });
+        slideNav.appendChild(select);
+        slideGallery.appendChild(slideNav);
+        const slideViewer = document.createElement('div');
+        slideViewer.className = 'slide-viewer';
+        slideGallery.appendChild(slideViewer);
+        function renderSlideViewer() {
+            const slideNumber = slideNumbers[currentSlideIndex];
+            slideViewer.innerHTML = `<figure class="slide-card" role="button" tabindex="0" aria-label="Lecture 04 slide ${slideNumber} of 60"><figcaption>Slide ${slideNumber} of 60</figcaption><div class="slide-frame"><iframe loading="lazy" src="${base}#/${slideNumber}" title="CSC 574 Lecture 04 slide ${slideNumber} of 60"></iframe></div><aside class="lecture-notes"><strong>Lecture Notes</strong><p><strong>Slide Connection</strong>${notes[slideNumber - 1]}</p><p><strong>Professor's Words</strong>${notes[slideNumber - 1]}</p></aside></figure>`;
+            const figure = slideViewer.querySelector('.slide-card');
+            figure.addEventListener('click', () => { currentSlideIndex = (currentSlideIndex + 1) % slideNumbers.length; select.value = String(slideNumbers[currentSlideIndex]); renderSlideViewer(); });
+            figure.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); figure.click(); } });
+        }
+        select.addEventListener('change', (event) => { currentSlideIndex = slideNumbers.indexOf(Number(event.target.value)); renderSlideViewer(); });
+        renderSlideViewer();
+    </script>
+</body>
+
+</html>

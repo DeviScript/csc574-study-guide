@@ -1,0 +1,1 @@
+var e=`./assets/idea-extend-iyE1XN97.webp`,t=`./assets/idea-chunk-X0jQyD3F.webp`;export{e as n,t};

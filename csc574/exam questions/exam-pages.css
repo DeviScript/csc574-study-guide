@@ -1,0 +1,143 @@
+:root {
+    --ink: #152b3a;
+    --muted: #60717b;
+    --paper: #f4f1e8;
+    --card: #fffdf7;
+    --line: #d8d6ca;
+    --coral: #d95d4f;
+    --teal: #187f7b;
+    --gold: #e3a72f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+    line-height: 1.65;
+}
+
+body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    content: "";
+    opacity: .42;
+    background-image: linear-gradient(135deg, rgba(24, 127, 123, .08) 25%, transparent 25%), linear-gradient(315deg, rgba(217, 93, 79, .06) 25%, transparent 25%);
+    background-position: 0 0, 18px 18px;
+    background-size: 36px 36px;
+}
+
+.page {
+    width: min(980px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 28px 0 64px;
+}
+
+nav {
+    margin-bottom: 42px;
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+nav a,
+a {
+    color: var(--teal);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.12;
+}
+
+h1 {
+    margin: 0 0 18px;
+    font-size: clamp(2.3rem, 5vw, 4.4rem);
+}
+
+h2 {
+    margin: 42px 0 14px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--teal);
+    font-size: 1.8rem;
+}
+
+h3 {
+    margin: 30px 0 10px;
+    color: var(--coral);
+    font-size: 1.35rem;
+}
+
+h4 {
+    margin: 24px 0 8px;
+    color: var(--gold);
+    font-size: 1.12rem;
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre {
+    margin: 0 0 18px;
+}
+
+ul,
+ol {
+    padding-left: 26px;
+}
+
+li+li {
+    margin-top: 7px;
+}
+
+blockquote {
+    padding: 14px 18px;
+    border-left: 4px solid var(--coral);
+    color: var(--muted);
+    background: rgba(255, 253, 247, .72);
+}
+
+pre {
+    overflow-x: auto;
+    padding: 16px;
+    border: 1px solid var(--line);
+    background: var(--card);
+}
+
+code {
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: .9em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+    .page {
+        width: min(100% - 28px, 560px);
+        padding-top: 16px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.55rem;
+    }
+}

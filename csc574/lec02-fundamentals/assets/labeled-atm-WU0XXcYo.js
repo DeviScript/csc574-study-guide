@@ -1,0 +1,1 @@
+var e=`./assets/labeled-atm-FMoHF8vM.png`;export{e as t};

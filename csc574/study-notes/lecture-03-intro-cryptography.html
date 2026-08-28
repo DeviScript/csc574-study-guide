@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSC 574 | Lecture 03 Introduction to Cryptography</title>
+    <style>
+        :root {
+            --ink: #152b3a;
+            --muted: #60717b;
+            --paper: #f4f1e8;
+            --card: #fffdf7;
+            --line: #d8d6ca;
+            --coral: #d95d4f;
+            --teal: #187f7b;
+            --gold: #e3a72f
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            line-height: 1.55
+        }
+
+        .page {
+            width: min(1060px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 30px 0 64px
+        }
+
+        nav {
+            margin-bottom: 48px;
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+
+        a {
+            color: var(--teal)
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 1.1
+        }
+
+        h1 {
+            max-width: 800px;
+            margin: 0 0 18px;
+            font-size: clamp(2.4rem, 6vw, 4.6rem);
+        }
+
+        h2 {
+            margin: 0 0 16px;
+            font-size: 2rem
+        }
+
+        h3 {
+            margin: 30px 0 8px;
+            color: var(--teal);
+            font-size: 1.25rem
+        }
+
+        .lede {
+            max-width: 800px;
+            color: var(--muted)
+        }
+
+        .rule {
+            width: 80px;
+            height: 5px;
+            margin: 34px 0 42px;
+            background: var(--coral)
+        }
+
+        .slide-gallery {
+            display: block;
+            margin: 0 0 42px
+        }
+
+        .slide-nav {
+            max-width: 420px;
+            margin: 0 0 18px;
+            padding: 8px;
+            border: 1px solid rgba(24, 127, 123, .35);
+            border-radius: 8px;
+            background: rgba(24, 127, 123, .08)
+        }
+
+        .slide-nav select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid rgba(24, 127, 123, .5);
+            border-radius: 6px;
+            color: #fff;
+            background: var(--teal);
+            font: inherit;
+            font-size: .72rem;
+            cursor: pointer
+        }
+
+        .slide-nav option {
+            color: var(--ink);
+            background: #fff
+        }
+
+        .slide-viewer {
+            display: block
+        }
+
+        .slide-card {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+            border: 1px solid var(--line);
+            background: var(--card)
+        }
+
+        .slide-card figcaption {
+            grid-column: 1/-1;
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .slide-frame {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #111
+        }
+
+        .slide-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0
+        }
+
+        .lecture-notes {
+            margin: 0;
+            padding: 16px;
+            border-left: 4px solid var(--teal);
+            color: var(--muted);
+            background: var(--paper);
+            font-size: .9rem
+        }
+
+        .lecture-notes strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--teal);
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .lecture-notes p {
+            margin: 0 0 12px
+        }
+
+        .lecture-notes p:last-child {
+            margin: 0
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr)
+        }
+
+        section {
+            padding-bottom: 30px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .collapsible-section {
+            margin-bottom: 18px;
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--teal);
+            background: var(--card);
+            overflow: hidden
+        }
+
+        .collapsible-section>summary {
+            padding: 14px 18px;
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.35rem;
+            cursor: pointer
+        }
+
+        .collapsible-section>.section-content {
+            padding: 0 18px 18px
+        }
+
+        .page-nav {
+            margin: 0 0 24px;
+            padding: 16px 18px;
+            border-top: 5px solid var(--coral);
+            background: var(--card)
+        }
+
+        .page-nav h2 {
+            margin-bottom: 10px
+        }
+
+        .page-nav ol {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px 18px;
+            padding: 0;
+            margin: 0;
+            list-style: none
+        }
+
+        .page-nav li {
+            margin: 0
+        }
+
+        .callout {
+            padding: 20px 22px;
+            margin: 20px 0;
+            border-left: 5px solid var(--teal);
+            background: var(--card)
+        }
+
+        .exam {
+            margin-top: 40px;
+            padding: 24px;
+            border-top: 5px solid var(--gold);
+            background: var(--card)
+        }
+
+        .exam li {
+            margin-bottom: 12px
+        }
+
+        .answer {
+            color: var(--muted)
+        }
+
+        @media(max-width:760px) {
+            .page {
+                width: min(100% - 28px, 600px);
+                padding-top: 20px
+            }
+
+            .slide-card {
+                grid-template-columns: 1fr
+            }
+
+            .slide-card figcaption {
+                grid-column: auto
+            }
+
+            .lecture-notes {
+                margin: 0
+            }
+
+            .page-nav ol {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <nav><a href="../index.html">Back to slides</a> | <a href="../lec03-intro-crypto/index.html#/1">Open Lecture
+                03</a></nav>
+        <h1>Introduction to Cryptography</h1>
+        <p class="lede">Actual Lecture 03 slides with lecture notes placed beside the slide. Professor wording is
+            preserved in the transcript excerpts.</p>
+        <div class="rule"></div>
+        <aside class="page-nav">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#foundations">Foundations</a></li>
+                <li><a href="#cryptosystems">Cryptosystems</a></li>
+                <li><a href="#security">Security concepts</a></li>
+            </ol>
+        </aside>
+        <div id="slide-gallery" class="slide-gallery" aria-label="All 65 Lecture 03 slides"></div>
+        <div class="layout">
+            <main>
+                <section id="objectives">
+                    <h2>Learning objectives</h2>
+                    <ul>
+                        <li>Define cryptography, cryptanalysis, and cryptology.</li>
+                        <li>Distinguish plaintext, ciphertext, encryption, decryption, keys, and key space.</li>
+                        <li>Compare symmetric and asymmetric cryptography.</li>
+                        <li>Explain Kirchhoff's principle, one-time pads, and perfect secrecy.</li>
+                    </ul>
+                </section>
+                <section id="foundations">
+                    <h2>Cryptography foundations</h2>
+                    <p>Cryptography protects selected properties such as confidentiality, integrity, and authenticity.
+                        It is a toolbox rather than a complete security solution.</p>
+                    <p>Keep the lecture distinctions clear: cryptography develops cryptosystems, cryptanalysis studies
+                        how to break them, and cryptology includes both.</p>
+                </section>
+                <section id="cryptosystems">
+                    <h2>Cryptosystems and keys</h2>
+                    <p>A cryptosystem maps plaintext to ciphertext with an encryption key and recovers plaintext with a
+                        decryption key. Symmetric systems use the same key; asymmetric systems use different keys.</p>
+                    <p>Kirchhoff's principle requires security to depend on the secret key rather than a hidden
+                        algorithm. Key space is the set of possible key values.</p>
+                </section>
+                <section id="security">
+                    <h2>Security concepts</h2>
+                    <p>One-time pads provide perfect secrecy only with uniformly random, message-length keys that are
+                        never reused. Information-theoretic security permits unlimited computation, while
+                        computational security depends on practical limits.</p>
+                    <p>Historical ciphers illustrate key-space size and cryptanalysis, but they are not appropriate for
+                        modern systems. Do not roll your own cryptography.</p>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script>
+        const base = window.location.protocol === 'file:' ? 'http://localhost:4176/csc574/lec03-intro-crypto/index.html' : '../lec03-intro-crypto/index.html';
+        const collapsibleSections = ["objectives", "foundations", "cryptosystems", "security"];
+        collapsibleSections.forEach((sectionId) => {
+            const section = document.getElementById(sectionId);
+            const details = document.createElement("details");
+            details.className = "collapsible-section";
+            details.id = sectionId;
+            const summary = document.createElement("summary");
+            const heading = section.querySelector("h2");
+            summary.textContent = heading.textContent;
+            const content = document.createElement("div");
+            content.className = "section-content";
+            heading.remove();
+            while (section.firstChild) content.appendChild(section.firstChild);
+            details.append(summary, content);
+            section.replaceWith(details);
+        });
+        const notes = [
+            'And we will start getting into cryptography with the idea of building our crypto toolbox.',
+            'Assignment zero tests the website, Moodle, and Gradescope pipeline.',
+            'The course moves from foundations into cryptography and later symmetric, hash, asymmetric, and key-management topics.',
+            'These are the learning objectives for today.',
+            'Cryptography means cryptography here, not cryptocurrency.',
+            'Where do you think you have encountered encryption today?',
+            'You are surrounded by cryptography in websites, Wi-Fi, messaging, disk encryption, password managers, and VPNs.',
+            'Cryptography is the science and art of secret writing.',
+            'It can provide secrecy, authenticity, and integrity, but algorithms and implementations require careful analysis.',
+            'Cryptography gives selected security properties; it is not a complete security solution.',
+            'Cryptography is difficult: algorithm choices, parameters, implementations, keys, APIs, and defaults matter.',
+            'Do not roll your own crypto unless you know what you are doing.',
+            'Cryptography develops and uses cryptosystems; cryptanalysis is the attempt to break them; cryptology combines both.',
+            'Plaintext is the message before encryption or after successful decryption.',
+            'Ciphertext is the encrypted message between encryption and decryption.',
+            'Alice and Bob are fictional participants used to describe cryptographic processes.',
+            'Eve is an eavesdropper and Mallory is a malicious active attacker.',
+            'Today\'s threat model uses Alice and Bob on a public channel where Eve listens and Mallory can manipulate data.',
+            'Cryptography can provide confidentiality by encrypting data before sending or storing it.',
+            'Integrity lets Bob detect whether Mallory changed the message; authenticity binds data to its expected origin.',
+            'A cryptosystem is a process: Alice encrypts message M and Bob decrypts the ciphertext.',
+            'Encryption takes a message and encryption key and produces ciphertext.',
+            'Decryption takes ciphertext and a decryption key and recovers the plaintext.',
+            'A working cryptosystem must recover the same plaintext after encryption and decryption.',
+            'Symmetric cryptosystems use the same key for encryption and decryption and are usually fast.',
+            'Asymmetric cryptosystems use different keys and support public-key encryption, key agreement, and signatures.',
+            'The key is the important cryptosystem input and is often the part that must remain secret.',
+            'The key space is the set of all possible key values.',
+            'Longer symmetric keys generally increase brute-force security, though algorithms and security levels are not directly interchangeable.',
+            'Harvest now, decrypt later means storing encrypted data today for future decryption as computation improves.',
+            'Kirchhoff\'s principle: security should depend on the secret key, not a hidden algorithm.',
+            'Public algorithms receive broader review, and compromised keys are easier to replace than deployed algorithms.',
+            'Key management asks who receives keys, how keys are generated, rotated, revoked, backed up, stored, and destroyed.',
+            'Cryptosystem attacks may recover the key, plaintext, partial plaintext, or properties such as length or character counts.',
+            'Ciphertext-only attacks use only ciphertext; known-plaintext attacks also know plaintext.',
+            'Chosen-plaintext attacks let the adversary choose plaintext and observe ciphertext.',
+            'Chosen-ciphertext attacks let the adversary choose ciphertext and observe decryption behavior.',
+            'Brute force tries possible keys; other approaches include linear and differential cryptanalysis.',
+            'Side channels use information such as timing or power; coercion obtains the password directly.',
+            'A one-time pad uses a uniformly random key the same length as the message and XORs it with the message.',
+            'One-time pads provide perfect secrecy under their assumptions.',
+            'Perfect secrecy means ciphertext knowledge gives no information about the plaintext.',
+            'Perfect secrecy does not imply integrity; an attacker can still alter ciphertext.',
+            'One-time pads are difficult operationally because every message needs fresh random key material of equal length.',
+            'Reusing a one-time pad lets an attacker XOR ciphertexts and obtain the XOR of the plaintexts.',
+            'Frequency analysis and guessed words can reveal information after key reuse.',
+            'The Venona project exploited Soviet one-time-pad reuse to decrypt messages.',
+            'Information-theoretic security can withstand unlimited computation; computational security depends on assumptions about feasible computation.',
+            'Classical ciphers are educational examples and should not be used in real systems.',
+            'A Caesar cipher shifts every letter by a fixed amount.',
+            'Caesar cipher has a tiny key space and can be brute-forced or attacked with frequency analysis.',
+            'ROT13 uses a shift of 13 and was used to hide spoilers, not to provide security.',
+            'Monoalphabetic substitution maps each letter to another letter but preserves frequency patterns.',
+            'Homophonic substitution maps one plaintext letter to multiple ciphertext letters to make analysis harder.',
+            'Polyalphabetic substitution changes the mapping as the key is applied repeatedly.',
+            'Vigenere cipher repeats a shorter key and can be attacked when repeated patterns reveal key length.',
+            'Historical ciphers show key spaces, brute force, frequency analysis, and why modern designs are needed.',
+            'For the exam, distinguish cryptography, cryptanalysis, plaintext, ciphertext, encryption, decryption, key, and key space.',
+            'For the exam, explain the cryptosystem process and the difference between symmetric and asymmetric cryptography.',
+            'For the exam, state Kirchhoff\'s principle and explain why hidden algorithms are a poor security foundation.',
+            'For the exam, state the assumptions and limitations of a one-time pad.',
+            'For the exam, explain why key reuse is catastrophic.',
+            'For the exam, distinguish information-theoretic from computational security.',
+            'Historical cipher recap: Caesar, monoalphabetic, homophonic, and Vigenere ciphers are not modern secure choices.',
+            'Cryptography gives useful properties but does not fix insecure systems around it.',
+            'Security depends on algorithms, key lengths, attacks, implementation, and time invested.',
+            'Next lecture: symmetric cryptography, including stream ciphers, block ciphers, modes, and confidentiality versus integrity.'
+        ];
+        const slideGallery = document.querySelector('#slide-gallery');
+        const slideNumbers = Array.from({ length: 65 }, (_, index) => index + 1);
+        let currentSlideIndex = 0;
+        const slideNav = document.createElement('div');
+        slideNav.className = 'slide-nav';
+        const select = document.createElement('select');
+        select.setAttribute('aria-label', 'Select lecture slide');
+        slideNumbers.forEach((slideNumber) => {
+            const option = document.createElement('option');
+            option.value = String(slideNumber);
+            option.textContent = `Slide ${slideNumber}: ${notes[slideNumber - 1]}`;
+            select.appendChild(option);
+        });
+        slideNav.appendChild(select);
+        slideGallery.appendChild(slideNav);
+        const slideViewer = document.createElement('div');
+        slideViewer.className = 'slide-viewer';
+        slideGallery.appendChild(slideViewer);
+        function renderSlideViewer() {
+            const slideNumber = slideNumbers[currentSlideIndex];
+            slideViewer.innerHTML = `<figure class="slide-card" role="button" tabindex="0" aria-label="Lecture 03 slide ${slideNumber} of 65"><figcaption>Slide ${slideNumber} of 65</figcaption><div class="slide-frame"><iframe loading="lazy" src="${base}#/${slideNumber}" title="CSC 574 Lecture 03 slide ${slideNumber} of 65"></iframe></div><aside class="lecture-notes"><strong>Lecture Notes</strong><p><strong>Slide Connection</strong>${notes[slideNumber - 1]}</p><p><strong>Professor's Words</strong>${notes[slideNumber - 1]}</p></aside></figure>`;
+            const figure = slideViewer.querySelector('.slide-card');
+            figure.addEventListener('click', () => { currentSlideIndex = (currentSlideIndex + 1) % slideNumbers.length; select.value = String(slideNumbers[currentSlideIndex]); renderSlideViewer(); });
+            figure.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); figure.click(); } });
+        }
+        select.addEventListener('change', (event) => { currentSlideIndex = slideNumbers.indexOf(Number(event.target.value)); renderSlideViewer(); });
+        renderSlideViewer();
+    </script>
+</body>
+
+</html>

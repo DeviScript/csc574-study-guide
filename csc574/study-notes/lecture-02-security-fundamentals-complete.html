@@ -1,0 +1,1661 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSC 574 | Lecture 02 Complete Study Guide</title>
+    <style>
+        :root {
+            --ink: #152b3a;
+            --muted: #60717b;
+            --paper: #f4f1e8;
+            --card: #fffdf7;
+            --line: #d8d6ca;
+            --coral: #d95d4f;
+            --teal: #187f7b;
+            --gold: #e3a72f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            line-height: 1.65;
+        }
+
+        .page {
+            width: min(1060px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 30px 0 64px;
+        }
+
+        nav {
+            margin-bottom: 48px;
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        nav a,
+        a {
+            color: var(--teal);
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--coral);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 1.08;
+        }
+
+        h1 {
+            max-width: 800px;
+            margin: 0 0 18px;
+            font-size: clamp(2.2rem, 4vw, 3.6rem);
+        }
+
+        h2 {
+            margin: 0 0 16px;
+            font-size: 2rem;
+        }
+
+        h3 {
+            margin: 30px 0 8px;
+            color: var(--teal);
+            font-size: 1.25rem;
+        }
+
+        p {
+            margin: 0 0 16px;
+        }
+
+        .lede {
+            max-width: 760px;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .rule {
+            height: 5px;
+            width: 88px;
+            margin: 34px 0 42px;
+            background: var(--coral);
+        }
+
+        .slide-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            margin: 0 0 42px;
+            border: 1px solid var(--line);
+            background: #111;
+        }
+
+        .slide-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .slide-gallery {
+            display: block;
+            margin: 0 0 42px;
+        }
+
+        .slide-nav {
+            margin: 0 0 18px;
+            padding: 8px;
+            border: 1px solid rgba(24, 127, 123, 0.35);
+            background: rgba(24, 127, 123, 0.08);
+            border-radius: 8px;
+            max-width: 420px;
+        }
+
+        .slide-nav select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid rgba(24, 127, 123, 0.5);
+            background: var(--teal);
+            color: #fff;
+            font: inherit;
+            font-size: .72rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .slide-nav option {
+            color: var(--ink);
+            background: #fff;
+        }
+
+        .slide-viewer {
+            display: block;
+        }
+
+        .slide-card {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            cursor: pointer;
+        }
+
+        .slide-card:focus-visible {
+            outline: 2px solid var(--teal);
+            outline-offset: 3px;
+        }
+
+        .slide-card figcaption {
+            grid-column: 1 / -1;
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .slide-card .slide-frame {
+            margin: 0;
+        }
+
+        .slide-note {
+            margin: 0 2px;
+            padding: 16px;
+            border-left: 4px solid var(--teal);
+            color: var(--muted);
+            font-size: .84rem;
+            line-height: 1.45;
+            background: var(--paper);
+        }
+
+        .slide-note strong {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--teal);
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .slide-note p {
+            margin: 0 0 10px;
+        }
+
+        .slide-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .slide-answer {
+            grid-column: 1;
+            margin: 0;
+            padding: 14px 16px;
+            border-left: 4px solid var(--gold);
+            color: var(--ink);
+            background: var(--paper);
+        }
+
+        .slide-answer .slide-question {
+            margin: 10px 0 0;
+            padding-top: 8px;
+            border-top: 1px solid var(--line);
+        }
+
+        .slide-answer .slide-question strong {
+            display: inline;
+            margin: 0;
+            color: var(--ink);
+            font-size: inherit;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .slide-answer ol {
+            margin: 8px 0 0;
+            padding-left: 22px;
+        }
+
+        .slide-answer .property-list {
+            margin: 8px 0 0;
+            padding-left: 22px;
+        }
+
+        .slide-answer .property-list li {
+            margin-bottom: 8px;
+        }
+
+        .slide-answer li {
+            margin-bottom: 12px;
+        }
+
+        .slide-answer li:last-child {
+            margin-bottom: 0;
+        }
+
+        .slide-answer.has-definitions {
+            display: grid;
+            grid-column: 1 / -1;
+            grid-template-columns: minmax(0, 1.5fr) minmax(220px, 1fr);
+            gap: 16px;
+            align-items: start;
+        }
+
+        .answer-definitions {
+            padding: 10px 12px;
+            border-left: 3px solid var(--gold);
+            color: var(--muted);
+            background: var(--card);
+            font-size: .88rem;
+        }
+
+        .answer-definitions p {
+            margin: 0 0 10px;
+        }
+
+        .answer-definitions p:last-child {
+            margin-bottom: 0;
+        }
+
+        .answer-definitions strong {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--gold);
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        section {
+            padding-bottom: 30px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .definition,
+        .callout {
+            padding: 20px 22px;
+            margin: 20px 0;
+            background: var(--card);
+        }
+
+        .definition {
+            border-left: 5px solid var(--gold);
+        }
+
+        .callout {
+            border-left: 5px solid var(--teal);
+        }
+
+        .definition strong {
+            display: block;
+            margin-bottom: 4px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        .formula {
+            padding: 17px 20px;
+            margin: 20px 0;
+            color: var(--card);
+            background: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.15rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: var(--card);
+            font-size: .9rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .comparison-table th {
+            color: var(--card);
+            background: var(--ink);
+        }
+
+        .exam-checklist {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .exam-checklist li {
+            padding: 10px 12px;
+            border-left: 4px solid var(--gold);
+            background: var(--card);
+        }
+
+        .practice-answer {
+            margin-top: 8px;
+        }
+
+        .practice-answer summary {
+            color: var(--teal);
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .tile {
+            padding: 16px;
+            border-top: 4px solid var(--accent);
+            background: var(--card);
+        }
+
+        .tile strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--accent);
+        }
+
+        .tile span {
+            display: block;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        aside {
+            align-self: start;
+            position: sticky;
+            top: 20px;
+            padding: 22px;
+            border-top: 5px solid var(--coral);
+            background: var(--card);
+        }
+
+        .page-nav {
+            position: static;
+            margin: 0 0 24px;
+            padding: 16px 18px;
+            border-top: 5px solid var(--coral);
+        }
+
+        .page-nav h2 {
+            margin-bottom: 10px;
+        }
+
+        .page-nav ol {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px 18px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .page-nav li {
+            margin: 0;
+        }
+
+        aside h2 {
+            font-size: 1.5rem;
+        }
+
+        aside ol {
+            padding-left: 22px;
+            margin: 0;
+        }
+
+        aside li {
+            margin-bottom: 7px;
+        }
+
+        .checklist {
+            padding-left: 20px;
+        }
+
+        .inline-answer {
+            padding: 14px 18px;
+            margin: 12px 0 20px;
+            border-left: 4px solid var(--teal);
+            color: var(--ink);
+            background: var(--card);
+        }
+
+        .inline-answer em {
+            color: var(--muted);
+        }
+
+        .inline-answer p {
+            margin-bottom: 8px;
+        }
+
+        .inline-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .lecture-question {
+            margin: 22px 0;
+        }
+
+        .lecture-question h3 {
+            margin-top: 0;
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.15rem;
+        }
+
+        #review>ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        footer {
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                width: min(100% - 28px, 600px);
+                padding-top: 20px;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            aside {
+                position: static;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .exam-checklist {
+                grid-template-columns: 1fr;
+            }
+
+            .page-nav ol {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .comparison-table {
+                font-size: .82rem;
+            }
+
+            .slide-card {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-card figcaption {
+                grid-column: auto;
+            }
+
+            .slide-note {
+                margin-top: 0;
+            }
+
+            .slide-answer {
+                grid-column: auto;
+            }
+
+            .slide-answer.has-definitions {
+                grid-column: auto;
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <nav><a href="../index.html">Back to slides</a> · <a href="../lec02-fundamentals/index.html#/1">Open Lecture
+                02</a></nav>
+        <header>
+            <p class="eyebrow">CSC 574 · Lecture 02 · Complete Guide</p>
+            <h1>Security Fundamentals</h1>
+            <p class="lede">A combined study guide built from the Lecture 02 slides and the attached English captions.
+                Spoken digressions and transcription errors have been removed while the lecture's examples and
+                explanations are retained.</p>
+            <div class="rule"></div>
+            <aside class="page-nav">
+                <h2>On this page</h2>
+                <ol>
+                    <li><a href="#objectives">Objectives</a></li>
+                    <li><a href="#security">What secure means</a></li>
+                    <li><a href="#cia">CIA triad</a></li>
+                    <li><a href="#atm">ATM model</a></li>
+                    <li><a href="#vocabulary">Vocabulary and risk</a></li>
+                    <li><a href="#attacks">Attacks and defenses</a></li>
+                    <li><a href="#threat-modeling">Threat modeling</a></li>
+                    <li><a href="#trust">Trust concepts</a></li>
+                    <li><a href="#security-model">Security model</a></li>
+                    <li><a href="#economics">Economics</a></li>
+                    <li><a href="#lecture-questions">Lecture questions</a></li>
+                </ol>
+            </aside>
+            <div id="slide-gallery" class="slide-gallery" aria-label="Lecture 02 slides 6-70"></div>
+        </header>
+
+        <div class="layout">
+            <main>
+                <section id="objectives">
+                    <h2>Learning objectives</h2>
+                    <p>aka "What you might be tested on"</p>
+                    <ul>
+                        <li><strong>Explain</strong> definitions of security.</li>
+                        <li><strong>Define</strong> adversary, trust, threat, and security models.</li>
+                        <li><strong>Define</strong> confidentiality, integrity, availability, asset, participant,
+                            vulnerability, threat, attack, defense, TCB, and risk.</li>
+                        <li><strong>Identify</strong> common attacker types, four attack archetypes, and five defense
+                            archetypes.</li>
+                        <li><strong>Differentiate</strong> the concepts of trusted and trustworthy.</li>
+                        <li><strong>Create</strong> and articulate security models for well-understood systems.</li>
+                        <li><strong>Define</strong> the principle of adequate protection.</li>
+                    </ul>
+                    <div class="objective-answers">
+                        <h3>Answers</h3>
+                        <div class="objective-answer">
+                            <h4>Explain definitions of security</h4>
+                            <p><strong>Definition 1:</strong> Security prevents access by unauthorized users.</p>
+                            <p><strong>Definition 2:</strong> A computer is secure when you can depend on it and its
+                                software to behave as expected.</p>
+                            <p><strong>Course definition:</strong> A system is secure if it maintains well-specified
+                                properties despite the actions of well-specified adversaries. The participant,
+                                conditions, and time period must be stated.</p>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Define adversary, trust, threat, and security models</h4>
+                            <p><strong>Adversary:</strong> anybody attempting to circumvent security infrastructure.
+                                State what the adversary can access, observe, modify, or control.</p>
+                            <p><strong>Trust:</strong> the degree to which an entity is expected to behave in the
+                                system.</p>
+                            <p><strong>Threat model:</strong> a description of the threats, adversaries, capabilities,
+                                and assumptions relevant to a system.</p>
+                            <p><strong>Trust model:</strong> a description of who is trusted to do what in a particular
+                                environment.</p>
+                            <p><strong>Security model:</strong> the combination of a trust model and a threat model that
+                                addresses perceived risks.</p>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Define security properties and system vocabulary</h4>
+                            <h5>CIA Triad</h5>
+                            <ul>
+                                <li><strong>Confidentiality:</strong> prevent unauthorized disclosure.</li>
+                                <li><strong>Integrity:</strong> prevent unauthorized modification.</li>
+                                <li><strong>Availability:</strong> preserve authorized access.</li>
+                            </ul>
+                            <h5>System vocabulary</h5>
+                            <ul>
+                                <li><strong>Asset:</strong> something valuable that we protect.</li>
+                                <li><strong>Participant:</strong> an entity that interacts with the system, including
+                                    people, computers, agents, servers, clients, and hosts.</li>
+                                <li><strong>Vulnerability:</strong> a flaw that exposes an asset or system to a threat.
+                                </li>
+                                <li><strong>Threat:</strong> a possible danger that may exploit a vulnerability.</li>
+                                <li><strong>Attack:</strong> an attempt to exploit a vulnerability.</li>
+                                <li><strong>Defense:</strong> a measure that reduces the potential or impact of an
+                                    attack.</li>
+                                <li><strong>TCB:</strong> Trusted Computing Base, the components critical to system
+                                    security.</li>
+                                <li><strong>Risk:</strong> expected loss, modeled as <strong>R = T x V x C</strong> or
+                                    <strong>R = P x C</strong>.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Identify attacker, attack, and defense archetypes</h4>
+                            <p><strong>Attacker types:</strong> curious or clueless users, script kiddies, people with
+                                an axe to grind, organized criminals, competitors, and governments or nation-states.</p>
+                            <p><strong>Attack archetypes:</strong> interception, modification, fabrication, and
+                                interruption.</p>
+                            <p><strong>Defense archetypes:</strong> prevention, deterrence, deflection, detection, and
+                                recovery.</p>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Differentiate trusted and trustworthy</h4>
+                            <p><strong>Trusted:</strong> a component is relied upon because its compromise could break
+                                the security policy.</p>
+                            <p><strong>Trustworthy:</strong> there is evidence or assurance that a component will behave
+                                correctly under stated conditions. A component can be trusted without being proven
+                                trustworthy.</p>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Create and articulate a security model</h4>
+                            <p>Identify the assets and required properties; participants and trust assumptions; the TCB;
+                                adversaries and capabilities; vulnerabilities and threats; and attacks and defenses.
+                                State the model's assumptions and limits, then reassess it as the system and threats
+                                change.</p>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Define adequate protection</h4>
+                            <p>Protect assets to a degree consistent with their value. More security is not
+                                automatically better because controls cost money, performance, resources, usability, and
+                                complexity. A control is easier to justify when its cost is lower than the expected loss
+                                it prevents.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="slide-notes" hidden>
+                    <h2>Slide notes</h2>
+                    <p>These notes follow the Lecture 02 slide deck in order. The deck labels this material as what you
+                        might be tested on, so use these explanations together with the original slides.</p>
+
+                    <h3>Slides 1-6: Course context and objectives</h3>
+                    <p>Lecture 02 is the foundations lecture on security fundamentals. The stated objectives are to
+                        explain definitions of security; define adversary, trust, threat, and security models; define
+                        confidentiality, integrity, availability, asset, participant, vulnerability, threat, attack,
+                        defense, TCB, and risk; identify attacker, attack, and defense archetypes; differentiate trusted
+                        and trustworthy; create security models; and define adequate protection.</p>
+
+                    <h3>Slides 7-12: What is security?</h3>
+                    <p>The deck presents security as context-dependent. Harrison, Ruzzo, and Ullman describe preventing
+                        access by unauthorized users. Garfinkel and Spafford describe a computer as secure when you can
+                        depend on it and its software to behave as expected. The deck then asks: <em>As expected by
+                            whom? Under what conditions? When?</em> The course meta-definition is that a system is
+                        secure
+                        when it maintains well-specified properties despite well-specified adversaries.</p>
+
+                    <h3>Slides 13-16: ATM case study and core properties</h3>
+                    <p>The Glenwood Avenue ATM is used as a case study for constructing a security model. The system
+                        must protect money, PINs, account information, transaction records, balances, software, and
+                        authorized customer access. Withdrawals should be atomic: dispensing cash and updating the
+                        account must succeed consistently or not occur.</p>
+                    <p>The CIA triad is confidentiality, integrity, and availability. Confidentiality protects against
+                        unauthorized disclosure; integrity protects against unauthorized modification; and availability
+                        protects authorized access to information or services. Which property matters most depends on
+                        the asset and context. The slides use stained stolen cash and emergency communications to show
+                        that integrity, availability, and confidentiality can be traded off.</p>
+
+                    <h3>Slides 17-25: System vocabulary</h3>
+                    <p>An asset is something we protect, including systems, access, people, attention, data, money, and
+                        reputation. A participant is a system entity, not only a person: computers, agents, enterprises,
+                        servers, clients, hosts, and users can participate. Security can look different to different
+                        participants; a bank and a customer may protect different assets and expect different outcomes.
+                    </p>
+                    <p>An adversary attempts to circumvent security infrastructure. Examples include curious users or
+                        script kiddies, people with an axe to grind, organized criminals, competitors, and governments
+                        or nation-states. Users may be treated as adversaries in some models, but the slides also
+                        present
+                        the human-centered view that users are not the enemy.</p>
+
+                    <h3>Slides 26-37: Vulnerability, threat, and risk</h3>
+                    <p>A vulnerability, or attack vector, is a flaw that exposes a user, data, or system to a threat.
+                        A threat is a potential danger that may exploit a vulnerability. Threats can be intentional,
+                        accidental, or environmental. A broken server-room window is a vulnerability; an intruder is a
+                        possible threat that could exploit it.</p>
+                    <div class="formula">R = T x V x C &nbsp; and, with P as combined success probability, &nbsp; R = P
+                        x C</div>
+                    <p>The deck's ATM example estimates a 30% monthly chance of a stolen-card attempt, a 60% chance of
+                        successful exploitation, and an $800 cost: 0.3 x 0.6 x $800 = $144 expected loss per month.
+                        Reducing threat likelihood or vulnerability to 20% gives $48; reducing cost to $100 gives $18.
+                    </p>
+
+                    <h3>Slides 38-46: Attacks and defenses</h3>
+                    <p>An attack attempts to exploit a vulnerability; a compromise is a successful attack. The four
+                        attack archetypes are interception, modification, fabrication, and interruption. They can
+                        overlap: ransomware is modification plus interruption because it encrypts files and blocks
+                        access.</p>
+                    <p>The five defense archetypes are prevention, deterrence, deflection, detection, and recovery.
+                        Prevention blocks an attack or closes a vulnerability; deterrence makes an attack harder or less
+                        attractive; deflection makes a target less desirable; detection identifies an attack in
+                        progress;
+                        and recovery restores service or data.</p>
+
+                    <h3>Slides 47-53: Threat modeling</h3>
+                    <p>A threat model is a systematic identification of the threats a system faces. One approach is to
+                        brainstorm known threats, rank them by risk using likelihood and impact, and choose responses,
+                        techniques, and implementations. Threat modeling is iterative: scope the system, map data flows
+                        and trust boundaries, find threats using multiple approaches, mitigate them, and reassess the
+                        model as threats and attacker capabilities change.</p>
+                    <p>STRIDE asks about spoofing, tampering, repudiation, information disclosure, denial of service,
+                        and elevation of privilege. In academic papers, a threat model commonly states adversaries,
+                        goals and motivations, capabilities, the TCB, and other assumptions.</p>
+
+                    <h3>Slides 54-60: Authentication, authorization, and trust</h3>
+                    <p>Authentication asks, “Who are you?” Authorization asks, “What are you allowed to do?”
+                        Authentication alone is not enough because identifying an entity does not determine which
+                        actions
+                        or resources it may access. A trust model describes who is trusted to do what in a particular
+                        environment.</p>
+                    <p>The trusted computing base, or TCB, is the set of components critical to system security. A
+                        trusted component is one whose compromise would break the security policy. A trustworthy
+                        component
+                        is one for which there is reason or a guarantee to expect correct behavior under stated
+                        conditions. An ATM operating system is trusted because the ATM depends on it, but it is not
+                        automatically trustworthy.</p>
+
+                    <h3>Slides 61-64: Security model</h3>
+                    <p>A security model is the combination of a trust model and a threat model that addresses perceived
+                        risks. It asks: What are the security concerns and threats? Who are our adversaries? Who do we
+                        trust and to do what? The result becomes the security requirements used to develop a coherent
+                        design. Every secure design needs a security model, and it is difficult to retrofit security
+                        after deployment.</p>
+
+                    <h3>Slides 65-69: Security economics</h3>
+                    <p>Security costs money, resources, performance, and complexity. More security is not automatically
+                        better because controls add cost and failure points. The principle of adequate protection says
+                        computer items must be protected only until they lose their value and to a degree consistent
+                        with
+                        their value. A defense is easier to justify when its cost is lower than the expected loss it
+                        reduces, and the appropriate protection can change over time.</p>
+                    <p>For the ATM, the deck asks which protections are worth paying for: moving it indoors behind
+                        locked
+                        doors but losing 24/7 street access, adding cameras, lighting, and an alarm, adding anti-skimmer
+                        checks and PIN shielding, adding a guard overnight, or reducing the cash it holds.</p>
+
+                    <h3>Slide 70: Next time</h3>
+                    <p>The next lecture begins an introduction to cryptography and symmetric-key cryptography.</p>
+                </section>
+
+                <section id="security">
+                    <h2>1. What does secure mean?</h2>
+                    <p>There is no universal definition of security. Security depends on the participant, the asset,
+                        the properties being protected, the adversary, and the conditions of the claim.</p>
+                    <div class="definition"><strong>Course definition</strong>A system is secure if it can maintain
+                        well-specified properties despite the actions of well-specified adversaries.</div>
+                    <p>The slide definitions raise three questions: <em>As expected by whom? Under what conditions?
+                            When?</em></p>
+                    <p>Harrison, Ruzzo, and Ullman describe security as preventing access by unauthorized users.
+                        Garfinkel
+                        and Spafford describe a computer as secure when you can depend on it and its software to behave
+                        as
+                        expected. These definitions are useful, but they still require context: expected by whom, under
+                        what conditions, and when?</p>
+                </section>
+
+                <section id="cia">
+                    <h2>2. The CIA triad</h2>
+                    <div class="grid">
+                        <div class="tile" style="--accent: var(--coral);"><strong>Confidentiality</strong><span>Prevent
+                                unauthorized disclosure of information.</span></div>
+                        <div class="tile" style="--accent: var(--teal);"><strong>Integrity</strong><span>Prevent
+                                unauthorized modification of data, code, or configuration.</span></div>
+                        <div class="tile" style="--accent: var(--gold);"><strong>Availability</strong><span>Preserve
+                                authorized access to information and systems.</span></div>
+                    </div>
+                    <p>Which CIA property matters most depends on the asset, context, and consequences. The properties
+                        can conflict.</p>
+                    <p>Confidentiality protects against unauthorized disclosure, including content, metadata,
+                        relationships,
+                        and sometimes even the existence of communication. Integrity protects data, configuration, code,
+                        and behavior from unauthorized modification. Availability protects authorized access to an
+                        information system. An ATM may prioritize integrity by staining stolen cash, while emergency
+                        responders may prioritize availability by using an unencrypted fallback channel.</p>
+                </section>
+
+                <section id="atm">
+                    <h2>3. Applying a security model to an ATM</h2>
+                    <p>Return to the Glenwood Avenue ATM example. Important properties include confidentiality of PINs,
+                        account information, and transaction records; integrity of balances, withdrawal amounts,
+                        software, and cash dispensing; availability of cash, network connectivity, and authorized
+                        customer access; and atomic withdrawals.</p>
+                    <p>Possible adversaries include physical attackers, skimmer operators, shoulder surfers, hackers,
+                        criminals, users, and environmental events. Mechanisms include hardened cases, locks, PIN
+                        shielding, anti-skimmer checks, transaction verification, cash sensors, backup power, and
+                        redundant network connections.</p>
+                    <p>A secure ATM must also make withdrawals atomic: either the cash is dispensed and the account is
+                        updated consistently, or neither occurs. Other possible mechanisms include withdrawal limits,
+                        software checks, gas detection, and venting systems.</p>
+                </section>
+
+                <section id="vocabulary">
+                    <h2>4. Security vocabulary</h2>
+                    <p><strong>Assets</strong> are what we protect. <strong>Participants</strong> are system entities,
+                        including people, computers, agents, servers, clients, and hosts. An <strong>adversary</strong>
+                        attempts to circumvent security. A <strong>vulnerability</strong> is a flaw that exposes an
+                        asset
+                        to a threat. A <strong>threat</strong> is a possible danger that may exploit a vulnerability.
+                    </p>
+                    <div class="formula">R = T x V x C &nbsp; or, simplified, &nbsp; R = P x C</div>
+                    <p>Here, T is threat likelihood, V is the probability of successful exploitation, P is the combined
+                        probability of success, and C is cost or impact. The ATM example uses
+                        0.30 x 0.60 x $800 = $144 expected loss per month.</p>
+                    <p>A broken window in a server room is best classified as a vulnerability: it is a flaw or condition
+                        that exposes the system. An intruder is a possible threat that could exploit it. Threats may be
+                        intentional, accidental, or environmental.</p>
+                </section>
+
+                <section id="attacks">
+                    <h2>5. Attack and defense archetypes</h2>
+                    <p>Attacks include <strong>interception</strong> (unauthorized access),
+                        <strong>modification</strong> (unauthorized change), <strong>fabrication</strong> (introducing
+                        something false), and <strong>interruption</strong> (making an asset unavailable or unusable).
+                        Ransomware is modification plus interruption.
+                    </p>
+                    <p>Defenses include <strong>prevention</strong>, <strong>deterrence</strong>,
+                        <strong>deflection</strong>, <strong>detection</strong>, and <strong>recovery</strong>. Attacks
+                        and defenses can involve multiple types.
+                    </p>
+                    <p>For example, packet sniffing is interception, changing a bank-transfer amount is modification,
+                        forging a password-reset message is fabrication, and denial of service is interruption.
+                        Ransomware
+                        that encrypts files is both modification and interruption.</p>
+                </section>
+
+                <section id="threat-modeling">
+                    <h2>6. Threat modeling</h2>
+                    <p>A threat model is a systematic identification of the threats a system faces. Brainstorm known
+                        threats, rank them by likelihood and impact, choose responses, and reassess the model as the
+                        system and attacker capabilities change.</p>
+                    <div class="callout"><strong>STRIDE:</strong> spoofing, tampering, repudiation, information
+                        disclosure, denial of service, and elevation of privilege.</div>
+                    <p>For an academic paper, ask: Who are potential adversaries? What are their goals and motivations?
+                        What are their capabilities? What is the TCB? What other assumptions does the paper make?</p>
+                    <p>Threat modeling is iterative. Scope the system, map data flows and trust boundaries, identify
+                        threats with approaches such as STRIDE, rank them by likelihood and impact, choose mitigations,
+                        and reassess as the system and adversary capabilities change. If the threat model is wrong, the
+                        system remains vulnerable to the threat that was missed.</p>
+                </section>
+
+                <section id="lecture-questions">
+                    <h2>Slide and lecture questions</h2>
+                    <p>The prompts below follow the questions printed on the slides. The first and final prompts are
+                        included because the professor asked them verbally during lecture.</p>
+
+                    <div class="lecture-question">
+                        <h3>How would you define when a system is secure?</h3>
+                        <div class="inline-answer">A system is secure if it can maintain well-specified properties
+                            despite the actions of well-specified adversaries. The definition is contextual: identify
+                            the properties, adversaries, capabilities, and conditions.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>As expected by whom?</h3>
+                        <div class="inline-answer">Security expectations depend on the participant and the assets or
+                            properties that participant needs protected.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Under what conditions?</h3>
+                        <div class="inline-answer">State the relevant environment, assumptions, capabilities, and
+                            limits of the security claim.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>When?</h3>
+                        <div class="inline-answer">State the time period or circumstances in which the system is
+                            expected to behave as specified.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Which CIA property matters most? (Confidentiality, Integrity, Availability)</h3>
+                        <div class="inline-answer">It depends on the asset, context, and consequences. The properties
+                            can conflict, so the priority is a design decision rather than a universal answer.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Identify ATM properties or mechanisms that support:</h3>
+                        <div class="inline-answer"><strong>Confidentiality:</strong> PINs, account information, and
+                            transaction records. <strong>Integrity:</strong> balances, withdrawal amounts, software,
+                            and cash dispensing. <strong>Availability:</strong> cash, network connectivity, and
+                            authorized customer access.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Who are potential adversaries?</h3>
+                        <div class="inline-answer">Consider physical attackers, skimmer operators, shoulder surfers,
+                            hackers, organized criminals, competitors, governments, users, and environmental events.
+                        </div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What are their goals and motivations?</h3>
+                        <div class="inline-answer">Goals may include stealing money or credentials, disrupting service,
+                            damaging a system, gaining an advantage, or pursuing political or strategic objectives.
+                        </div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What are their capabilities?</h3>
+                        <div class="inline-answer">Specify what each adversary can access, observe, modify, or control,
+                            including physical access, network access, resources, expertise, and time.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What is the TCB?</h3>
+                        <div class="inline-answer">The trusted computing base is the set of hardware and software
+                            components critical to the security of the system.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What other assumptions does the paper make?</h3>
+                        <div class="inline-answer">State assumptions about the environment, components, access,
+                            communication, and conditions outside the threat model.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What is an entity not expected to do?</h3>
+                        <div class="inline-answer">This identifies a trust assumption: what a trusted entity is not
+                            expected to do in the particular environment.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Why is “Who are you?” an important security question?</h3>
+                        <div class="inline-answer">It is the authentication question. It identifies the participant so
+                            the system can apply the appropriate access decisions.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Why is it alone not enough?</h3>
+                        <div class="inline-answer">Authentication identifies a participant but does not determine what
+                            that participant is allowed to do. That is authorization.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What are you allowed to do?</h3>
+                        <div class="inline-answer">This is the authorization question: determine which resources or
+                            actions the authenticated participant may access.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What are physical world examples?</h3>
+                        <div class="inline-answer">A key can authenticate possession, while a locked room or a staff
+                            role can authorize access to a particular physical resource.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Can we have access control without authentication?</h3>
+                        <div class="inline-answer">Yes. A system can authorize based on location, possession, a public
+                            policy, or another condition, though authentication is often used to identify a user.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What are the security concerns (risks)? Threats?</h3>
+                        <div class="inline-answer">Identify the risks and threats affecting the system, then use the
+                            threat and trust models to state what must be protected and against whom.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Who are our adversaries?</h3>
+                        <div class="inline-answer">List the adversaries relevant to the system and specify their goals,
+                            motivations, and capabilities.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Who do we trust and to do what?</h3>
+                        <div class="inline-answer">The trust model identifies which entities are trusted for which
+                            actions and assumptions.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What are the C, I, and A properties?</h3>
+                        <div class="inline-answer">Confidentiality prevents unauthorized disclosure, integrity prevents
+                            unauthorized modification, and availability preserves authorized access.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What other properties are important?</h3>
+                        <div class="inline-answer">The answer depends on the system. For the ATM, atomic withdrawals,
+                            correct balances, correct cash dispensing, privacy, and physical protection are important.
+                        </div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What adversary types did you account for?</h3>
+                        <div class="inline-answer">Account for physical attackers, skimmer operators, shoulder surfers,
+                            hackers, criminals, users, and environmental or accidental causes as relevant.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What attack archetypes did you account for?</h3>
+                        <div class="inline-answer">Consider interception, modification, fabrication, and interruption.
+                            A single attack can involve more than one archetype.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What defense archetypes did you use?</h3>
+                        <div class="inline-answer">Consider prevention, deterrence, deflection, detection, and recovery.
+                        </div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Did adequate protection come into play?</h3>
+                        <div class="inline-answer">Compare the cost of a control with the value of the asset and the
+                            expected loss it reduces. More security is not automatically better.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Which protections are worth paying for, and which are not?</h3>
+                        <div class="inline-answer">For the ATM, consider moving it indoors behind locked doors but
+                            losing 24/7 street access, adding camera coverage, lighting, and an alarm, adding
+                            anti-skimmer checks and PIN shielding, adding a guard overnight, and reducing how much cash
+                            it holds.</div>
+                    </div>
+                    <div class="callout"><strong>Quiz hint from the end of lecture:</strong> The professor asked the
+                        class to identify where the GeoGuessr-style image shown on the final slide is located.</div>
+                </section>
+
+                <section id="trust">
+                    <h2>7. Authentication, authorization, and trust</h2>
+                    <p><strong>Authentication</strong> answers “Who are you?” <strong>Authorization</strong> answers
+                        “What are you allowed to do?” A student and an instructor may authenticate successfully but
+                        receive different authorization.</p>
+                    <p>A <strong>trust model</strong> describes who is trusted to do what. The <strong>trusted computing
+                            base (TCB)</strong> is the set of hardware and software components critical to system
+                        security, such as firmware, a boot chain, a kernel, a reference monitor, or an ATM's internal
+                        control system.</p>
+                    <p>A <strong>trusted</strong> component is one whose compromise would break a security policy. A
+                        <strong>trustworthy</strong> component is one we have reason to expect will behave correctly
+                        under stated conditions. These terms are related but not interchangeable.
+                    </p>
+                    <p>For the ATM, the operating system is trusted because the ATM depends on it to perform security-
+                        critical work. That does not automatically prove that the operating system is trustworthy. Trust
+                        decisions are made even when systems are not completely secure.</p>
+                </section>
+
+                <section id="security-model">
+                    <h2>8. The security model</h2>
+                    <p>A security model combines the trust model and the threat model. It identifies assets, properties,
+                        participants, assumptions, adversaries, capabilities, threats, and defenses.</p>
+                    <div class="definition"><strong>Design principle</strong>Build the security model before deployment.
+                        Security is difficult to retrofit after a system's architecture and interfaces are already
+                        fixed.</div>
+                    <p>The model must evolve as new vulnerabilities, technologies, and attacker capabilities appear.</p>
+                    <p>Every secure design needs a security model. A lack of a coherent model is a major security
+                        mistake,
+                        and security is difficult to retrofit after architecture and interfaces are fixed.</p>
+                </section>
+
+                <section id="economics">
+                    <h2>9. Security economics</h2>
+                    <p>Security costs money, performance, resources, and complexity. Controls can introduce additional
+                        failure points, so more security is not automatically better.</p>
+                    <div class="definition"><strong>Principle of adequate protection</strong>Protect assets to a degree
+                        consistent with their value. A defense is easier to justify when its cost is lower than the
+                        expected loss it prevents.</div>
+                    <p>For an ATM, a camera, lighting, alarms, keypad shielding, cash limits, and tamper checks may be
+                        reasonable. Moving the machine behind locked doors or assigning an armed guard may cost more
+                        than the risk justifies. The right choice changes with the asset's value, the environment, and
+                        the adversaries.</p>
+                    <p>The principle of adequate protection says computer items should be protected only until they lose
+                        their value and to a degree consistent with that value. Security also adds complexity and
+                        failure
+                        points, so a control is easiest to justify when its cost is lower than the expected loss it
+                        reduces.
+                    </p>
+                </section>
+
+                <section id="lecture-questions-legacy" hidden>
+                    <h2>Questions asked during lecture</h2>
+                    <p>These prompts are preserved from the professor's discussion and placed with their lecture-based
+                        answers for practice.</p>
+
+                    <div class="lecture-question">
+                        <h3>How would you define when a system is secure?</h3>
+                        <div class="inline-answer">There is no universal definition. For this course, a system is
+                            secure if it can maintain well-specified properties despite the actions of well-specified
+                            adversaries. The properties, adversaries, capabilities, and conditions must be stated
+                            because security is context-dependent.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What properties do you think it needs to maintain or should maintain at least?</h3>
+                        <div class="inline-answer">For the ATM, protect PINs, account information, transaction records,
+                            cash, and correct balances; dispense the correct amount; prevent unauthorized access; and
+                            keep withdrawals atomic so a failure cannot dispense money without updating the account.
+                        </div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What type of adversaries do you think you have or like this ATM?</h3>
+                        <div class="inline-answer">Possible adversaries include physical attackers, skimmer operators,
+                            shoulder surfers, hackers, organized criminals, users who make mistakes, and environmental
+                            events such as fire, weather, power loss, or other natural causes.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What mechanisms do you think this ATM has to prevent some of these things?</h3>
+                        <div class="inline-answer">Examples include a hardened case and locks, shielded or recessed
+                            keypads, tamper-evident seals, cash sensors, withdrawal limits, transaction verification,
+                            backup power, redundant network connections, gas detection, and venting systems.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Which three of those do you think matters most for security?</h3>
+                        <div class="inline-answer">The answer depends on the system and context. Confidentiality,
+                            integrity, and availability can conflict: an ATM may sacrifice availability to protect the
+                            integrity of stolen cash, while emergency responders may sacrifice confidentiality to
+                            preserve an available communication channel.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Would you say users are adversaries?</h3>
+                        <div class="inline-answer">It depends on the context. Users may be treated as adversaries when
+                            they circumvent controls or violate policies, but the human-centered view is that users are
+                            not the enemy. Security should account for their context, information, and task constraints
+                            instead of forcing unsafe workarounds.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What type of attack would you say is packet sniffing on a public Wi-Fi?</h3>
+                        <div class="inline-answer"><strong>Interception:</strong> the attacker gains unauthorized access
+                            to network traffic.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What would you say of these four is changing a bank transfer amount?</h3>
+                        <div class="inline-answer"><strong>Modification:</strong> the attacker makes an unauthorized
+                            change to transaction data.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What is forging a password reset email so we can trick the user into maybe entering their
+                            password on a phishing website?</h3>
+                        <div class="inline-answer"><strong>Fabrication</strong> creates a false artifact; the theft of
+                            credentials can also involve <strong>interception</strong>.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What would you say is a denial of service against the login service?</h3>
+                        <div class="inline-answer"><strong>Interruption:</strong> the attack disrupts access to or use
+                            of
+                            the login service.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What would you say is a ransomware that encrypts files?</h3>
+                        <div class="inline-answer"><strong>Modification plus interruption:</strong> ransomware changes
+                            the files by encrypting them and prevents normal access to them. Attack archetypes can
+                            overlap.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What would you say of these five defenses is having backups of your systems?</h3>
+                        <div class="inline-answer"><strong>Recovery:</strong> backups help restore data or service after
+                            an attack or failure.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>What is the difference between authentication and authorization?</h3>
+                        <div class="inline-answer"><strong>Authentication</strong> asks, “Who are you?”
+                            <strong>Authorization</strong> asks, “What are you allowed to do?” A participant can
+                            authenticate successfully but have limited authorization.
+                        </div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>How can we come up with a security model?</h3>
+                        <div class="inline-answer">Identify assets and properties; participants and trust assumptions;
+                            adversaries and capabilities; vulnerabilities and threats; and defenses. State the model's
+                            limits, then reassess it as systems, threats, and attacker capabilities change.</div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>How important is it to you that your home is safe?</h3>
+                        <div class="inline-answer">Locks, alarms, monitoring, and armed guards provide different levels
+                            of protection at different costs. More security is not automatically the economic choice.
+                        </div>
+                    </div>
+                    <div class="lecture-question">
+                        <h3>Would you invest in moving this ATM behind locked doors but lose 24-hour street access?</h3>
+                        <div class="inline-answer">Evaluate the cost and lost convenience against the expected reduction
+                            in risk under the principle of adequate protection.</div>
+                    </div>
+                    <div class="callout"><strong>Quiz hint from the end of lecture:</strong> Be ready to identify where
+                        the GeoGuessr-style image shown on the final slide is located.</div>
+                </section>
+
+            </main>
+
+        </div>
+
+        <footer>Prepared from the attached auto-generated English captions, the Lecture 02 slide deck, and the provided
+            master study guide. Review exact
+            slide wording and course learning objectives when preparing for an assessment.</footer>
+    </div>
+    <style>
+        .collapsible-section {
+            margin-bottom: 18px;
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--teal);
+            background: var(--card);
+            overflow: hidden;
+        }
+
+        .collapsible-section>summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 18px;
+            cursor: pointer;
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            background: rgba(24, 127, 123, 0.06);
+        }
+
+        .collapsible-section>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .collapsible-section>summary::after {
+            content: "▾";
+            color: var(--teal);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        .collapsible-section:not([open])>summary::after {
+            content: "▸";
+        }
+
+        .collapsible-section>.section-content {
+            padding: 0 18px 18px;
+        }
+
+        .objective-answers {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-left: 5px solid var(--gold);
+            background: var(--paper);
+        }
+
+        .objective-answers h3 {
+            margin: 0 0 18px;
+            color: var(--ink);
+        }
+
+        .objective-answer {
+            margin: 0 0 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .objective-answer:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .objective-answer h4 {
+            margin: 0 0 6px;
+            color: var(--teal);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .objective-answer p {
+            margin: 0 0 8px;
+        }
+
+        .objective-answer p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+    <script>
+        const collapsibleSections = [
+            "objectives",
+            "security",
+            "cia",
+            "atm",
+            "vocabulary",
+            "attacks",
+            "threat-modeling",
+            "lecture-questions",
+            "trust",
+            "security-model",
+            "economics",
+            "review"
+        ];
+
+        collapsibleSections.forEach((sectionId) => {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+            const details = document.createElement("details");
+            details.className = "collapsible-section";
+            details.id = sectionId;
+            const summary = document.createElement("summary");
+            const heading = section.querySelector("h2");
+            summary.textContent = heading ? heading.textContent : sectionId.replace(/-/g, " ");
+            const content = document.createElement("div");
+            content.className = "section-content";
+            if (heading) heading.remove();
+            while (section.firstChild) {
+                content.appendChild(section.firstChild);
+            }
+            details.appendChild(summary);
+            details.appendChild(content);
+            section.replaceWith(details);
+        });
+
+        const slideGallery = document.querySelector("#slide-gallery");
+        const slideDeckBase = window.location.protocol === "file:"
+            ? "http://localhost:4176/csc574/lec02-fundamentals/index.html"
+            : "../lec02-fundamentals/index.html";
+        const slideNotes = [
+            "Course title and lecture context.",
+            "Fast feedback form for the course.",
+            "Administrative reminder: Packapalooza.",
+            "Sticker incentive and optional attendance motivation.",
+            "Course structure: foundations, cryptography, authentication, network security, systems, applications, and privacy.",
+            "Learning objectives: definitions, models, CIA, archetypes, trust, and adequate protection.",
+            "Lecture roadmap: terminology, attacks and defenses, security models, and security economics.",
+            "Security is difficult because systems have many entry points, competing goals, and adversaries.",
+            "Security is not a discrete feature; it is a design goal shaped by context.",
+            "Definitions of security from Harrison, Ruzzo, and Ullman and from Garfinkel and Spafford.",
+            "Ask: as expected by whom, under what conditions, and when?",
+            "The course meta-definition: well-specified properties despite well-specified adversaries.",
+            "Case study: an ATM on Glenwood Avenue.",
+            "Build the ATM model by identifying properties, adversaries, and mechanisms.",
+            "ATM properties include confidentiality, integrity, availability, and atomic withdrawals.",
+            "Core properties: confidentiality, integrity, and availability.",
+            "Confidentiality prevents unauthorized disclosure.",
+            "Integrity prevents unauthorized modification of data, code, configuration, or behavior.",
+            "Availability prevents disruption of access to or use of information or systems.",
+            "CIA properties can conflict; the most important property depends on context.",
+            "Discussion: which CIA property matters most?",
+            "Apply CIA to the ATM: identify properties or mechanisms supporting each.",
+            "ATM examples: PIN shielding, transaction checks, cash sensors, backup power, and network connectivity.",
+            "Assets are what we protect: systems, access, people, attention, data, money, and reputation.",
+            "Participants are system entities, including users, computers, agents, servers, clients, and hosts.",
+            "Security can look different to different participants.",
+            "A trusted third party is trusted by all parties for a defined set of actions.",
+            "An adversary attempts to circumvent security infrastructure.",
+            "Adversaries range from curious users and script kiddies to criminals, competitors, and nation-states.",
+            "Users may be modeled as adversaries, but human-centered security treats users as part of the context.",
+            "A vulnerability is a flaw that exposes a user, data, or system to a threat.",
+            "A threat is a potential danger that may exploit a vulnerability.",
+            "Threats may be intentional, accidental, or environmental.",
+            "Risk combines threat likelihood, exploitation probability, and cost.",
+            "Use R = T x V x C, or R = P x C when probability is combined.",
+            "ATM risk example: 0.3 x 0.6 x $800 = $144 expected loss per month.",
+            "Compare mitigations by how they reduce threat, vulnerability, or cost.",
+            "An attack attempts to exploit a vulnerability; a compromise is a successful attack.",
+            "Attack archetypes: interception, modification, fabrication, and interruption.",
+            "Interception is unauthorized access to an asset.",
+            "Modification is an unauthorized change to an asset.",
+            "Fabrication introduces something false.",
+            "Interruption makes an asset unavailable or unusable.",
+            "Attacks can overlap; ransomware is modification plus interruption.",
+            "Modern attacks often chain phishing, credential theft, privilege escalation, and modification.",
+            "Defense archetypes: prevention, deterrence, deflection, detection, and recovery.",
+            "Prevention blocks an attack or closes a vulnerability.",
+            "Threat modeling is a systematic identification of the threats a system faces.",
+            "Brainstorm threats, rank likelihood and impact, and choose responses.",
+            "STRIDE: spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege.",
+            "Use data-flow diagrams, user flows, misuse cases, and risk ranking.",
+            "Threat modeling is iterative; reassess as systems and adversaries change.",
+            "Academic papers state adversaries, goals, capabilities, TCB, and assumptions.",
+            "Authentication asks: Who are you?",
+            "Authorization asks: What are you allowed to do?",
+            "Authentication identifies; authorization controls access.",
+            "Trust is the degree to which an entity is expected to behave.",
+            "A trust model describes who is trusted to do what.",
+            "Trusted and trustworthy are different concepts.",
+            "A trusted component is critical to the security policy.",
+            "A trustworthy component has evidence or guarantees supporting expected behavior.",
+            "A security model combines a trust model and a threat model.",
+            "Security models identify concerns, adversaries, trust assumptions, and requirements.",
+            "Security is difficult to retrofit; build the model before deployment.",
+            "Security has costs: money, resources, performance, and complexity.",
+            "Principle of adequate protection: protect assets to a degree consistent with their value.",
+            "Protection changes as asset value and adversary capabilities change.",
+            "ATM adequate-protection discussion: compare locks, cameras, alarms, shielding, guards, and cash limits.",
+            "Revisit the ATM security model: properties, adversaries, attacks, defenses, and adequate protection.",
+            "Next time: introduction to cryptography and symmetric-key cryptography."
+        ];
+        const transcriptNotes = [
+            "The professor introduced security fundamentals and explained that most course content is on the website.",
+            "He encouraged students to use the slides and recordings as course resources.",
+            "Administrative discussion: Packapalooza was happening on Hillsborough Street.",
+            "Attendance is optional; the sticker is only an incentive for attending content lectures.",
+            "The lecture fits into the foundations portion of the course before the cryptography toolbox.",
+            "The learning objectives are intended to describe what students may be tested on.",
+            "The lecture plan was terminology, attack and defense archetypes, security models, and economics.",
+            "Security is difficult because systems have many entry points and defenders must protect every attack surface.",
+            "Security is also difficult because it is often treated as an afterthought rather than designed from the beginning.",
+            "The professor noted that security claims must explain what behavior is expected and by whom.",
+            "The discussion emphasized that expected behavior depends on conditions and time.",
+            "The meta-definition requires both properties and adversaries to be well specified.",
+            "The ATM on Glenwood Avenue was introduced as the running example for the rest of the lecture.",
+            "Students were asked to reason from ATM properties to adversaries and then to mechanisms.",
+            "A withdrawal should not dispense money without also updating the account; this is the atomicity concern.",
+            "The CIA triad was introduced as three recurring security properties.",
+            "Confidentiality also covers metadata, relationships, and sometimes the existence of communication.",
+            "Integrity applies to files, configuration, code, balances, and system behavior.",
+            "Availability means maintaining authorized access even when attacks or failures occur.",
+            "The professor stressed that no CIA property is always the most important.",
+            "Students compared ATM cash-staining, emergency radio fallback, and encrypted devices.",
+            "The class activity asked students to identify ATM properties or mechanisms supporting each CIA property.",
+            "Examples included PIN shielding, balance verification, cash sensors, network connectivity, and backup power.",
+            "Assets can include a user's attention and time, not only hardware or data.",
+            "Participants are system entities and can include computers, agents, enterprises, servers, and clients.",
+            "The bank and the customer can view the same ATM as secure in different ways.",
+            "A trusted third party is trusted by all parties for a defined set of actions.",
+            "An adversary can be anyone attempting to circumvent security infrastructure.",
+            "The professor listed script kiddies, angry individuals, criminals, competitors, and nation-states.",
+            "The user-as-adversary view was contrasted with human-centered security, where users are not the enemy.",
+            "Vulnerabilities arise from poor software or hardware, requirements, design, policies, misuse, or reuse.",
+            "A threat may be intentional, accidental, or environmental, such as fire, weather, or a power surge.",
+            "A threat needs a vulnerability to exploit; an adversary cannot succeed without an applicable weakness.",
+            "Risk was presented as a multiplication of threat likelihood, vulnerability, and cost.",
+            "The simplified probability form is useful when threat and vulnerability are combined into one probability.",
+            "The ATM example estimated a 30 percent attempt rate, 60 percent success rate, and 800 dollar loss.",
+            "Risk becomes useful when comparing alternative controls and their effects on threat, vulnerability, or cost.",
+            "An attack is an attempt to exploit a vulnerability; a compromise means the attack succeeded.",
+            "The professor classified public Wi-Fi packet sniffing as interception.",
+            "Changing a bank transfer amount is modification because transaction data is changed without authorization.",
+            "A forged password-reset email is fabrication, while stolen credentials can also involve interception.",
+            "A denial-of-service attack against login is interruption.",
+            "Ransomware encrypts files, so it modifies them and interrupts normal access.",
+            "Real attacks commonly chain several archetypes instead of fitting one category.",
+            "The five defense archetypes were prevention, deterrence, deflection, detection, and recovery.",
+            "Backups illustrate recovery; warning banners illustrate deterrence; hidden services can provide deflection.",
+            "Threat modeling gives a systematic way to identify the threats a system faces.",
+            "The basic approach is brainstorm threats, rank likelihood and damage, and choose responses.",
+            "STRIDE supplies questions about spoofing, tampering, repudiation, disclosure, denial of service, and elevation.",
+            "Data-flow diagrams, user flows, misuse cases, and risk ranking provide complementary views.",
+            "Threat modeling is repeated because systems, vulnerabilities, and attacker capabilities change.",
+            "Academic papers commonly state their threat model and assumptions explicitly.",
+            "Authentication asks who a participant is; authorization asks what that participant may do.",
+            "The professor used student and instructor roles to show that successful authentication does not imply equal authorization.",
+            "Access control can sometimes be based on location, possession, or another condition without identifying a user.",
+            "Trust decisions happen constantly even though systems are not perfectly secure.",
+            "Trust means the degree to which an entity is expected to behave in the system.",
+            "A trust model records who is trusted to do what in a particular environment.",
+            "The TCB includes critical hardware and software such as firmware, the boot chain, kernels, and reference monitors.",
+            "A trusted component matters because compromising it can break the security policy.",
+            "Trustworthy means there is evidence or a guarantee supporting expected behavior under stated conditions.",
+            "For the ATM, the operating system is trusted because the ATM depends on it, but it is not automatically trustworthy.",
+            "The security model combines trust and threat models and addresses the system's perceived risks.",
+            "A coherent model should be created before deployment because security is hard to retrofit.",
+            "The model must state assets, trust, adversaries, defenses, and the security requirements for design.",
+            "Security controls cost money, resources, performance, and complexity.",
+            "More protection is not automatically better if its cost and added failure points exceed its value.",
+            "The principle of adequate protection balances expected loss against the cost of the defense.",
+            "The appropriate protection can change as asset value, threats, and adversary capabilities change.",
+            "The ATM discussion compared cameras, lighting, alarms, shielding, guards, cash limits, and locked doors.",
+            "The final ATM review combined properties, adversaries, attack archetypes, defense archetypes, and adequate protection.",
+            "The professor ended by previewing the next lecture's introduction to cryptography."
+        ];
+        const lectureNotes = slideNotes.map((note, index) => `${note} ${transcriptNotes[index]}`);
+        const exactTranscriptNotes = [
+            "And we will be looking at some security fundamentals meaning things like threat models.",
+            "You are probably aware that there are usually at the towards the end of the classes.",
+            "On Saturday there is Packapalooza happening, which is like NC state's all day block party.",
+            "There is no attendance. You don't have to attend. Right. But to motivate you to attend, I will be or we will be creating a sticker design.",
+            "We are here, right? We are still in the foundations this week.",
+            "These are the learning objectives for today. You will encounter similar slides basically for every lecture from here on out.",
+            "Specifically for today we'll talk a little bit about terminology.",
+            "One difficulty is also that security is often not a primary task.",
+            "Security is not like a discrete object. You can't necessarily add or remove security from things, right? It's more like a design goal.",
+            "There's no perfect definition of security. That's like the takeaway already here.",
+            "But these definitions raise questions: as expected by whom? Under what conditions are they supposed to behave as expected?",
+            "A system is secure if it can maintain well specified properties in spite of the actions of well-diversified adversaries.",
+            "This is basically a Wells Fargo ATM. It's like in front of this pharmacy market, Glenwood Avenue.",
+            "What properties do you think it needs to maintain or should maintain at least?",
+            "It shouldn't like split out $100, but also not withdraw $100 from your account.",
+            "These are like sort of the three properties that you want to maintain if you want security right in the system.",
+            "We want to prevent the unauthorized disclosure of information in some way.",
+            "We want to prevent the unauthorized modification of data.",
+            "For our system to be secure, it also needs to be available generally.",
+            "You do trade offs between these in some way.",
+            "Which three of those do you think matters most for security?",
+            "Identify ATM properties or mechanisms that support confidentiality, integrity, availability.",
+            "For confidentiality, you have things like pins or like you need to know some account information.",
+            "The items we are trying to protect and this can be very different things.",
+            "They are system entities. Meaning we are not just talking about humans.",
+            "A system may appear secure to one participant but then not to the other.",
+            "A trusted third party is somebody that's trusted by all parties in a system for some set of actions.",
+            "An adversary is anybody that attempts to circumvent our security infrastructure.",
+            "It could also be people with an ax to grind. It could be organized criminals.",
+            "Users are not the enemy.",
+            "A vulnerability is an attack vector. And this is a flaw that exposes users data or systems to a threat.",
+            "A threat is a possible danger that might exploit a vulnerability.",
+            "An adversary can't do anything if there is not a vulnerability to exploit on the other side.",
+            "For risk we generally have like a multiplication which is threat, which is like the likelihood from threats.",
+            "We can just replace the threat and vulnerability part also with p probability here.",
+            "This gives us $144 per month.",
+            "Where the risk stuff gets pretty powerful is if you combine it with scenarios.",
+            "An attacker attempts to exploit a vulnerability.",
+            "These are the four attack types.",
+            "We intercept the packages that are flowing around, and we have unauthorized access to this traffic.",
+            "So changing data right to a transaction.",
+            "It's more of a fabrication. But they are actually aiming for like stolen credentials as an interception.",
+            "Denial of service against the login service: disruption.",
+            "Ransomware that encrypts files ... modification or and and interruption.",
+            "Modern attackers probably chain a lot of those together.",
+            "We have five there. So definition for defense here is defenses are measures that we take to reduce the potential or impact of an attack.",
+            "So we want to block an attack or close the vulnerability.",
+            "Threat modeling gives us the threat model part of the trust model plus threat model is our security model.",
+            "You brainstorm your threats, you rank the threats by risks, maybe like likelihood and damage.",
+            "It's called STRIDE because those are just the starting letters of these threats.",
+            "You also combine that with other artifacts. So dataflow diagrams are pretty common.",
+            "It's more like an iterative process and you need to combine a lot of things.",
+            "They have a normal threat model usually as in they talk about yeah, we developed this new networking secure networking system.",
+            "Authentication is generally who are you?",
+            "Authorization is the what are you allowed to do right?",
+            "Authentication and authorization are not the same.",
+            "Our definition for this class for trust is the degree to which an entity is expected to behave in our system.",
+            "A trust model ... describes who is trusted to do what in our environment.",
+            "These are often confused. Which is why I'm mentioning them here.",
+            "This is like all components that are critical to the security of a system.",
+            "We trust our kernel or kernel is trusted as a component.",
+            "A trustworthy system is our component. It's one that won't fail.",
+            "This is like the combination of trust and threat model.",
+            "If you develop software, it's like pretty important to come up with a security model probably before you start.",
+            "Lack of a coherent security model is probably one of the biggest mistakes in security.",
+            "Security always has a cost money, resources, performance stuff like this.",
+            "More protection is not automatically the economic choice.",
+            "This whole thing, just like trade off, has a name. It's called a principle of adequate protection.",
+            "Assets should be protected to a degree consistent with their value.",
+            "Which protections are worth paying for, and which are not?",
+            "The general takeaway ... is just to talk about, like some of the fundamentals.",
+            "Next lecture we will talk about an intro to cryptography."
+        ];
+        const lectureNotesWithTranscript = slideNotes.map((note, index) => `${note} ${exactTranscriptNotes[index] || ""}`);
+        exactTranscriptNotes[8] = "How would you define when a system is secure?";
+        exactTranscriptNotes[9] = "But these definitions raise questions: as expected by whom? Under what conditions are they supposed to behave as expected?";
+        exactTranscriptNotes[13] = "What properties do you think it needs to maintain or should maintain at least?";
+        exactTranscriptNotes[67] = "Which protections are worth paying for, and which are not? The professor compared cameras, lighting, alarms, shielding, guards, cash limits, and locked doors.";
+        exactTranscriptNotes[68] = "The final ATM review combined properties, adversaries, attack archetypes, defense archetypes, and adequate protection.";
+        exactTranscriptNotes[69] = "Next lecture we will talk about an intro to cryptography.";
+        lectureNotes[68] = `${slideNotes[68]} The professor's final ATM review combined properties, adversaries, attack archetypes, defense archetypes, and adequate protection.`;
+        lectureNotes[69] = `${slideNotes[69]} The professor ended by previewing the next lecture's introduction to cryptography and symmetric-key cryptography.`;
+        const slideNumbers = Array.from({ length: 70 - 6 + 1 }, (_, index) => index + 6);
+        let currentSlideIndex = 0;
+
+        const slideNav = document.createElement("div");
+        slideNav.className = "slide-nav";
+        slideGallery.appendChild(slideNav);
+
+        const select = document.createElement("select");
+        select.setAttribute("aria-label", "Select lecture slide");
+
+        slideNumbers.forEach((slideNumber) => {
+            const option = document.createElement("option");
+            option.value = String(slideNumber);
+            option.textContent = `Slide ${slideNumber}: ${slideNotes[slideNumber - 1]}`;
+            select.appendChild(option);
+        });
+
+        select.addEventListener("change", (event) => {
+            currentSlideIndex = slideNumbers.indexOf(Number(event.target.value));
+            renderSlideViewer();
+        });
+
+        slideNav.appendChild(select);
+
+        const slideViewer = document.createElement("div");
+        slideViewer.className = "slide-viewer";
+        slideGallery.appendChild(slideViewer);
+
+        function renderSlideViewer() {
+            const slideNumber = slideNumbers[currentSlideIndex];
+            slideViewer.innerHTML = "";
+
+            const figure = document.createElement("figure");
+            figure.className = "slide-card";
+            figure.setAttribute("role", "button");
+            figure.setAttribute("tabindex", "0");
+            figure.setAttribute("aria-label", `Lecture 02 slide ${slideNumber} of 70`);
+            figure.innerHTML = `<figcaption>Slide ${slideNumber} of 70</figcaption>
+                    <div class="slide-frame"><iframe loading="lazy"
+                        src="${slideDeckBase}#/${slideNumber}"
+                        title="CSC 574 Lecture 02 slide ${slideNumber} of 70"></iframe></div>
+                    <aside class="slide-note"><strong>Lecture Notes</strong>
+                        <p><strong>Slide connection</strong>${slideNotes[slideNumber - 1]}</p>
+                        <p><strong>Professor's words</strong>${exactTranscriptNotes[slideNumber - 1] || ""}</p>
+                    </aside>
+                    ${slideNumber === 14 ? `<div class="slide-answer has-definitions"><div><strong>Answers</strong><ol>
+                        <li><strong>What properties does it need to maintain?</strong><ul class="property-list">
+                            <li><strong>Confidentiality:</strong> protect PINs, account information, and transaction records from unauthorized disclosure.</li>
+                            <li><strong>Integrity:</strong> protect balances, withdrawal amounts, software, and cash dispensing from unauthorized changes or errors.</li>
+                            <li><strong>Availability:</strong> preserve access to cash, network connectivity, and authorized customer services.</li>
+                            <li><strong>Atomicity:</strong> ensure the withdrawal and account update complete consistently, so the ATM cannot dispense cash without updating the account correctly.</li>
+                        </ul></li>
+                        <li><strong>What adversaries might attack it, and what can they do?</strong><ul class="property-list">
+                            <li><strong>Physical attackers:</strong> break into the machine.</li>
+                            <li><strong>Skimmer operators:</strong> capture card data or PINs.</li>
+                            <li><strong>Shoulder surfers:</strong> observe PIN entry.</li>
+                            <li><strong>Hackers:</strong> manipulate software or networks.</li>
+                            <li><strong>Criminals:</strong> redirect cash.</li>
+                            <li><strong>Users:</strong> make mistakes that affect security or transactions.</li>
+                            <li><strong>Environmental events:</strong> disrupt service.</li>
+                        </ul></li>
+                        <li><strong>What mechanisms maintain important properties despite those adversaries?</strong><ul class="property-list">
+                            <li><strong>Physical protection:</strong> hardened case, locks, and tamper-evident seals.</li>
+                            <li><strong>Input protection:</strong> PIN shielding and anti-skimmer checks.</li>
+                            <li><strong>Transaction protection:</strong> transaction and balance verification, cash sensors, and withdrawal limits.</li>
+                            <li><strong>Availability protection:</strong> backup power, redundant network connections, and gas detection or venting.</li>
+                        </ul></li>
+                    </ol></div><div class="answer-definitions"><strong>Definitions</strong><p><b>Confidentiality</b>: prevent unauthorized disclosure.</p><p><b>Integrity</b>: prevent unauthorized modification.</p><p><b>Availability</b>: preserve authorized access.</p><p><b>Atomicity</b>: complete the withdrawal and account update consistently.</p><p><b>Adversary</b>: anybody that attempts to circumvent the security infrastructure. Capabilities describe what the adversary can access, observe, modify, or control.</p><p><b>Mechanism</b>: a specific control that helps maintain a required property.</p><p><b>Defense</b>: a measure taken to reduce the potential or impact of an attack.</p></div></div>` : ""}
+                    ${slideNumber === 10 ? `<div class="slide-answer"><strong>Answers</strong><ol>
+                        <li><strong>As expected by whom?</strong><br>Security is relative to the participant. A bank and a customer may have different assets, expectations, and capabilities, so the same system can appear secure to one participant but not the other.</li>
+                        <li><strong>Under what conditions?</strong><br>Specify the system's environment, assumptions, capabilities, and the conditions under which it is expected to behave as expected.</li>
+                        <li><strong>When?</strong><br>Specify the relevant time period and circumstances. A system's security claim is not an abstract guarantee that applies in every situation forever.</li>
+                    </ol></div>` : ""}`;
+
+            const advance = () => {
+                currentSlideIndex = (currentSlideIndex + 1) % slideNumbers.length;
+                renderSlideViewer();
+            };
+
+            figure.addEventListener("click", advance);
+            figure.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    advance();
+                }
+            });
+
+            slideViewer.appendChild(figure);
+
+            slideNav.querySelectorAll("button").forEach((button, index) => {
+                button.classList.toggle("is-active", index === currentSlideIndex);
+            });
+        }
+
+        renderSlideViewer();
+    </script>
+</body>
+
+</html>

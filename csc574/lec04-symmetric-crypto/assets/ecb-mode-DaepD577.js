@@ -1,0 +1,1 @@
+var e=`./assets/ecb-mode-ynmU8PUa.webp`;export{e as t};

@@ -1,0 +1,1 @@
+import{C as e,L as t,ht as n,y as r,yt as i}from"./modules-shiki-OaElCqKv.js";import{H as a}from"./useNav-Ke5UluKA.js";var o=e({__name:`SlidesTotal`,setup(e){let{$nav:o}=a();return(e,a)=>(t(),r(`span`,null,i(n(o).total),1))}}),s=e({__name:`SlideCurrentNo`,setup(e){let{$page:o}=a();return(e,a)=>(t(),r(`span`,null,i(n(o)),1))}});export{o as n,s as t};

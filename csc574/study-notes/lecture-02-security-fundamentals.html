@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lecture 02 | Security Fundamentals Notes</title>
+    <style>
+        :root {
+            --ink: #152b3a;
+            --muted: #60717b;
+            --paper: #f4f1e8;
+            --card: #fffdf7;
+            --line: #d8d6ca;
+            --coral: #d95d4f;
+            --teal: #187f7b;
+            --gold: #e3a72f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            line-height: 1.65;
+        }
+
+        .page {
+            width: min(920px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 32px 0 64px;
+        }
+
+        nav {
+            margin-bottom: 52px;
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: var(--teal);
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--coral);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 1.05;
+        }
+
+        h1 {
+            max-width: 720px;
+            margin: 0 0 18px;
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+        }
+
+        .lede {
+            max-width: 660px;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        .rule {
+            height: 5px;
+            width: 88px;
+            margin: 34px 0 42px;
+            background: var(--coral);
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 250px;
+            gap: 44px;
+        }
+
+        h2 {
+            margin: 0 0 14px;
+            font-size: 2rem;
+        }
+
+        h3 {
+            margin: 28px 0 6px;
+            color: var(--teal);
+            font-size: 1rem;
+            letter-spacing: .03em;
+        }
+
+        p {
+            margin: 0 0 16px;
+        }
+
+        .definition {
+            padding: 20px 22px;
+            border-left: 5px solid var(--gold);
+            background: var(--card);
+        }
+
+        .definition strong {
+            display: block;
+            margin-bottom: 4px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        aside {
+            align-self: start;
+            padding: 22px;
+            border-top: 5px solid var(--teal);
+            background: var(--card);
+        }
+
+        aside h2 {
+            font-size: 1.45rem;
+        }
+
+        aside ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        aside a {
+            color: var(--teal);
+        }
+
+        .formula {
+            padding: 16px 20px;
+            margin: 18px 0;
+            color: var(--card);
+            background: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            margin-top: 56px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        @media (max-width: 720px) {
+            .page {
+                width: min(100% - 28px, 560px);
+                padding-top: 20px;
+            }
+
+            nav {
+                margin-bottom: 36px;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <nav><a href="../index.html">← Back to slides</a></nav>
+        <header>
+            <p class="eyebrow">CSC 574 · Lecture 02</p>
+            <h1>Security Fundamentals</h1>
+            <p class="lede">A cleaned study-notes example based on the auto-generated lecture transcript. The transcript
+                remains the source; this page turns the spoken material into a reviewable structure.</p>
+            <div class="rule"></div>
+        </header>
+
+        <div class="layout">
+            <main>
+                <section>
+                    <h2>The central idea</h2>
+                    <p>A system is secure only in context. We must specify the properties the system should preserve and
+                        the adversaries who may try to violate them.</p>
+                    <div class="definition"><strong>Security model</strong>A combination of a trust model, which
+                        describes what we rely on, and a threat model, which describes adversaries and their
+                        capabilities.</div>
+                </section>
+
+                <section>
+                    <h3>The CIA triad</h3>
+                    <p><strong>Confidentiality</strong> prevents unauthorized disclosure. <strong>Integrity</strong>
+                        prevents unauthorized modification. <strong>Availability</strong> preserves authorized access to
+                        systems and information.</p>
+                    <p>These properties can conflict. An ATM that stains stolen cash protects integrity, but sacrifices
+                        availability. Emergency responders may sacrifice confidentiality by falling back to an
+                        unencrypted radio channel when availability matters most.</p>
+                </section>
+
+                <section>
+                    <h3>Security vocabulary</h3>
+                    <p><strong>Assets</strong> are what we protect: systems, access, people, attention, data, money, and
+                        reputation. <strong>Participants</strong> are entities in the system, including users, hosts,
+                        clients, servers, and agents.</p>
+                    <p>An <strong>adversary</strong> attempts to circumvent security. Adversaries may be curious users,
+                        criminals, competitors, nation-states, environmental events, or even accidental mistakes,
+                        depending on the system.</p>
+                    <p>A <strong>vulnerability</strong> is a flaw that exposes an asset to a threat. A
+                        <strong>threat</strong> is a possible danger that may exploit a vulnerability.
+                        <strong>Risk</strong> combines likelihood, vulnerability, and cost.</p>
+                    <div class="formula">risk = threat likelihood × probability of successful exploitation × cost</div>
+                </section>
+
+                <section>
+                    <h3>Attacks and defenses</h3>
+                    <p>Attack archetypes include <strong>interception</strong>, <strong>modification</strong>,
+                        <strong>fabrication</strong>, and <strong>interruption</strong>. Real attacks often chain
+                        several types together, such as a phishing message followed by credential theft and unauthorized
+                        account changes.</p>
+                    <p>Defense archetypes include <strong>prevention</strong>, <strong>deterrence</strong>,
+                        <strong>detection</strong>, <strong>recovery</strong>, and <strong>resistance</strong>. Backups
+                        support recovery; logging supports detection; shielding an ATM keypad can reduce interception.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Threat modeling</h3>
+                    <p>Threat modeling is iterative. Scope the system, map data flows and trust boundaries, identify
+                        threats, rank their risks, choose mitigations, and reassess the result. STRIDE is one useful
+                        framework: spoofing, tampering, repudiation, information disclosure, denial of service, and
+                        elevation of privilege.</p>
+                </section>
+
+                <section>
+                    <h3>Trust and economics</h3>
+                    <p>Authentication asks <em>who are you?</em> Authorization asks <em>what are you allowed to do?</em>
+                        A trusted component is one the system depends on for security. A trustworthy component is one
+                        for which we have reason to expect correct behavior.</p>
+                    <p>The principle of adequate protection says that assets should be protected to a degree consistent
+                        with their value. Security has costs in money, performance, resources, and complexity, so the
+                        strongest control is not automatically the best choice.</p>
+                </section>
+            </main>
+
+            <aside>
+                <h2>Review prompts</h2>
+                <ul>
+                    <li>What properties must an ATM preserve?</li>
+                    <li>Who are its participants and adversaries?</li>
+                    <li>Give one example of each CIA property.</li>
+                    <li>How could an attack use multiple archetypes?</li>
+                    <li>What belongs in a security model?</li>
+                    <li>When is a defense economically justified?</li>
+                </ul>
+                <p style="margin-top: 20px;"><a href="https://slides.dwermke.com/csc574/lec02-fundamentals/#/1">Open
+                        Lecture 02 slides ↗</a></p>
+            </aside>
+        </div>
+
+        <footer>Prepared from the attached auto-generated English captions. Verify exact wording against the recording
+            or slides when precision matters.</footer>
+    </div>
+</body>
+
+</html>

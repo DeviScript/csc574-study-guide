@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#152b3a">
+    <title>CSC 574 | Flash Cards</title>
+    <style>
+        :root {
+            --ink: #152b3a;
+            --muted: #60717b;
+            --paper: #f4f1e8;
+            --card: #fffdf7;
+            --line: #d8d6ca;
+            --coral: #d95d4f;
+            --teal: #187f7b;
+            --gold: #e3a72f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            line-height: 1.6;
+        }
+
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            content: "";
+            opacity: .42;
+            background-image: linear-gradient(135deg, rgba(24, 127, 123, .08) 25%, transparent 25%), linear-gradient(315deg, rgba(217, 93, 79, .06) 25%, transparent 25%);
+            background-position: 0 0, 18px 18px;
+            background-size: 36px 36px;
+        }
+
+        .page {
+            width: min(1060px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 30px 0 64px;
+        }
+
+        nav {
+            margin-bottom: 48px;
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        a {
+            color: var(--teal);
+        }
+
+        h1,
+        h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 1.08;
+        }
+
+        h1 {
+            margin: 0 0 18px;
+            font-size: clamp(2.3rem, 5vw, 4rem);
+        }
+
+        h2 {
+            margin: 38px 0 16px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+            color: var(--teal);
+            font-size: 2rem;
+        }
+
+        .lede {
+            max-width: 760px;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .rule {
+            width: 88px;
+            height: 5px;
+            margin: 34px 0 42px;
+            background: var(--coral);
+        }
+
+        .section-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .section-controls button {
+            padding: 10px 16px;
+            border: 1px solid var(--teal);
+            color: var(--teal);
+            background: var(--card);
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .section-controls button:hover,
+        .section-controls button:focus-visible {
+            color: #fff;
+            background: var(--teal);
+            outline: none;
+        }
+
+        .section-controls button:disabled {
+            border-color: var(--line);
+            color: var(--muted);
+            background: transparent;
+            cursor: not-allowed;
+        }
+
+        .section-position {
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .flashcard-stage {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .flashcard {
+            display: block;
+            width: 100%;
+            min-height: 260px;
+            padding: 34px;
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--gold);
+            color: var(--ink);
+            background: var(--card);
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .flashcard:hover,
+        .flashcard:focus-visible {
+            border-color: var(--gold);
+            box-shadow: 8px 8px 0 rgba(21, 43, 58, .12);
+            outline: none;
+            transform: translateY(-4px);
+        }
+
+        .flashcard-label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--gold);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .flashcard-answer {
+            display: none;
+            color: var(--muted);
+        }
+
+        .flashcard-answer strong {
+            font-weight: 400;
+        }
+
+        .flashcard-answer ul,
+        .flashcard-answer ol {
+            margin: 0;
+            padding-left: 22px;
+        }
+
+        .flashcard-answer li+li {
+            margin-top: 6px;
+        }
+
+        .flashcard.is-revealed .flashcard-question {
+            display: none;
+        }
+
+        .flashcard.is-revealed .flashcard-answer {
+            display: block;
+        }
+
+        .flashcard-section .flashcards>li {
+            display: none;
+        }
+
+        .flashcard-section .flashcards>li.is-active {
+            display: block;
+        }
+
+        .card-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .card-navigation button {
+            padding: 10px 16px;
+            border: 1px solid var(--teal);
+            color: var(--teal);
+            background: var(--card);
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .card-navigation button:hover,
+        .card-navigation button:focus-visible {
+            color: #fff;
+            background: var(--teal);
+            outline: none;
+        }
+
+        .card-position {
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 700px) {
+            .page {
+                width: min(100% - 28px, 560px);
+                padding-top: 16px;
+            }
+
+            .flashcard {
+                min-height: 240px;
+                padding: 26px;
+            }
+
+            .card-navigation button {
+                padding: 9px 12px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <nav><a href="index.html">Back to course materials</a></nav>
+        <main>
+            <h1>Flash Cards</h1>
+            <p class="lede">Review one flash card from each lecture section, one card at a time.</p>
+            <div class="rule"></div>
+            <section class="flashcard-section" id="lecture-02">
+                <h2>Lecture 02: Security Fundamentals</h2>
+                <ul class="flashcards">
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is the difference between a vulnerability, a threat, and
+                                an attack?</span><span class="flashcard-answer"><strong>A vulnerability is a weakness, a
+                                    threat is a possible danger that may exploit it, and an attack is an attempt to
+                                    exploit the weakness.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does CIA stand for?</span><span
+                                class="flashcard-answer">
+                                <ul>
+                                    <li>Confidentiality</li>
+                                    <li>Integrity</li>
+                                    <li>Availability</li>
+                                </ul>
+                            </span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is an asset?</span><span
+                                class="flashcard-answer"><strong>Something valuable that the system is intended to
+                                    protect.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does TCB stand for?</span><span
+                                class="flashcard-answer"><strong>Trusted Computing Base.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is the difference between trusted and
+                                trustworthy?</span><span class="flashcard-answer"><strong>Trusted means security depends
+                                    on a component; trustworthy means there is evidence it will behave
+                                    correctly.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What are the four attack archetypes?</span><span
+                                class="flashcard-answer">
+                                <ul>
+                                    <li>Interception</li>
+                                    <li>Modification</li>
+                                    <li>Fabrication</li>
+                                    <li>Interruption</li>
+                                </ul>
+                            </span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What are the five defense archetypes?</span><span
+                                class="flashcard-answer">
+                                <ul>
+                                    <li>Prevention</li>
+                                    <li>Deterrence</li>
+                                    <li>Deflection</li>
+                                    <li>Detection</li>
+                                    <li>Recovery</li>
+                                </ul>
+                            </span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is the principle of adequate protection?</span><span
+                                class="flashcard-answer"><strong>Protect assets to a degree consistent with their value
+                                    and the cost of the controls.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is confidentiality?</span><span
+                                class="flashcard-answer"><strong>Prevent unauthorized disclosure of
+                                    information.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is integrity?</span><span
+                                class="flashcard-answer"><strong>Prevent unauthorized modification of data, code,
+                                    configuration, or behavior.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is availability?</span><span
+                                class="flashcard-answer"><strong>Preserve authorized access to information and
+                                    systems.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is a security model?</span><span
+                                class="flashcard-answer"><strong>The combination of a trust model and a threat model
+                                    that addresses perceived risks.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What two models make up a security model?</span><span
+                                class="flashcard-answer"><strong>A trust model and a threat
+                                    model.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is a trust model?</span><span
+                                class="flashcard-answer"><strong>A description of who is trusted to do what in a
+                                    particular environment.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is a threat model?</span><span
+                                class="flashcard-answer"><strong>A description of relevant threats, adversaries,
+                                    capabilities, and assumptions.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What are the four attack archetypes?</span><span
+                                class="flashcard-answer"><strong>Interception, modification, fabrication, and
+                                    interruption.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">How is ransomware classified?</span><span
+                                class="flashcard-answer"><strong>Modification plus interruption: it changes files and
+                                    blocks access to them.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is the difference between authentication and
+                                authorization?</span><span class="flashcard-answer"><strong>Authentication asks who you
+                                    are; authorization asks what you are allowed to do.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What should be identified when creating a security
+                                model?</span><span class="flashcard-answer">
+                                <ul>
+                                    <li>Assets and properties</li>
+                                    <li>Participants and trust assumptions</li>
+                                    <li>The TCB</li>
+                                    <li>Adversaries and capabilities</li>
+                                    <li>Vulnerabilities and threats</li>
+                                    <li>Attacks and defenses</li>
+                                </ul>
+                            </span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Is a broken server-room window a threat?</span><span
+                                class="flashcard-answer"><strong>No. It is a vulnerability; an intruder could be a
+                                    possible threat that exploits it.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does security depend on?</span><span
+                                class="flashcard-answer"><strong>The participant, asset, required properties, adversary,
+                                    and conditions of the security claim.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is trust?</span><span
+                                class="flashcard-answer"><strong>The degree to which an entity is expected to behave in
+                                    the system.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is a trusted third party?</span><span
+                                class="flashcard-answer"><strong>An entity trusted by all parties in a system for a
+                                    defined set of actions.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is a defense?</span><span
+                                class="flashcard-answer"><strong>A measure taken to reduce the potential or impact of an
+                                    attack.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is a compromise?</span><span
+                                class="flashcard-answer"><strong>A successful attack that violates a system’s security
+                                    properties.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What are common attacker types?</span><span
+                                class="flashcard-answer"><strong>Curious or clueless users, script kiddies, people with
+                                    an axe to grind, organized criminals, competitors, and governments or
+                                    nation-states.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is interception?</span><span
+                                class="flashcard-answer"><strong>Unauthorized access to an asset, such as silently
+                                    copying confidential traffic.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is modification?</span><span
+                                class="flashcard-answer"><strong>An unauthorized change to an asset, such as altering a
+                                    bank transfer.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is fabrication?</span><span
+                                class="flashcard-answer"><strong>Introducing something false, such as a forged
+                                    password-reset message.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is interruption?</span><span
+                                class="flashcard-answer"><strong>Making an asset unavailable or unusable, such as
+                                    through denial of service.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is prevention?</span><span
+                                class="flashcard-answer"><strong>Blocking an attack or closing the vulnerability it
+                                    would exploit.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is deterrence?</span><span
+                                class="flashcard-answer"><strong>Making an attack harder or less attractive to an
+                                    adversary.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is deflection?</span><span
+                                class="flashcard-answer"><strong>Making a target less desirable or directing an
+                                    adversary away from protected assets.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is detection?</span><span
+                                class="flashcard-answer"><strong>Identifying an attack or compromise in
+                                    progress.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is recovery?</span><span
+                                class="flashcard-answer"><strong>Restoring service or data after an attack or
+                                    failure.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is the first step in threat modeling?</span><span
+                                class="flashcard-answer"><strong>Scope the system and identify its assets, properties,
+                                    participants, and boundaries.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What should a threat model identify?</span><span
+                                class="flashcard-answer"><strong>Threats, adversaries, capabilities, vulnerabilities,
+                                    assumptions, and relevant security requirements.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Why is threat modeling iterative?</span><span
+                                class="flashcard-answer"><strong>Systems, vulnerabilities, threats, and attacker
+                                    capabilities change, so the model must be reassessed.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does STRIDE stand for?</span><span
+                                class="flashcard-answer">
+                                <ol>
+                                    <li>Spoofing</li>
+                                    <li>Tampering</li>
+                                    <li>Repudiation</li>
+                                    <li>Information disclosure</li>
+                                    <li>Denial of service</li>
+                                    <li>Elevation of privilege</li>
+                                </ol>
+                            </span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What should an adversary description include?</span><span
+                                class="flashcard-answer"><strong>The adversary’s goals, motivations, and capabilities:
+                                    what they can access, observe, modify, or control.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Can users be adversaries?</span><span
+                                class="flashcard-answer"><strong>Yes, depending on the model; however, human-centered
+                                    security also treats users as part of the system rather than simply the
+                                    enemy.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does authentication ask?</span><span
+                                class="flashcard-answer"><strong>“Who are you?” It identifies a
+                                    participant.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does authorization ask?</span><span
+                                class="flashcard-answer"><strong>“What are you allowed to do?” It determines permitted
+                                    actions and resources.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Can access control exist without authentication?</span><span
+                                class="flashcard-answer"><strong>Yes. Access can be based on location, possession, or
+                                    another condition without identifying a specific user.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What belongs in a TCB?</span><span
+                                class="flashcard-answer"><strong>Hardware and software whose correct operation is
+                                    critical to enforcing the security policy.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Why should the TCB be minimized?</span><span
+                                class="flashcard-answer"><strong>A smaller TCB reduces the amount of security-critical
+                                    functionality that must be correct and protected.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Why is the ATM operating system trusted?</span><span
+                                class="flashcard-answer"><strong>The ATM depends on it to control the keypad, display,
+                                    card reader, transactions, and communication.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Does trusted mean trustworthy?</span><span
+                                class="flashcard-answer"><strong>No. Trusted means security depends on the component;
+                                    trustworthy requires evidence that it behaves correctly.</strong></span></button>
+                    </li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does risk measure?</span><span
+                                class="flashcard-answer"><strong>Expected loss from a threat, its exploitation
+                                    probability, and its cost or impact.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does adequate protection mean?</span><span
+                                class="flashcard-answer"><strong>Protect assets to a degree consistent with their value
+                                    and the expected loss being reduced.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">Why is maximum security not always adequate
+                                protection?</span><span class="flashcard-answer"><strong>Controls cost money, resources,
+                                    performance, usability, and complexity; more security is not automatically the best
+                                    economic choice.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">How should ATM withdrawals be handled?</span><span
+                                class="flashcard-answer"><strong>Atomically: dispensing cash and updating the account
+                                    should complete consistently or neither should occur.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does PIN shielding defend against?</span><span
+                                class="flashcard-answer"><strong>Shoulder surfing and visual observation of PIN
+                                    entry.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What does a skimmer attempt to capture?</span><span
+                                class="flashcard-answer"><strong>Card data and potentially the customer’s
+                                    PIN.</strong></span></button></li>
+                    <li><button class="flashcard" type="button"><span class="flashcard-label">Question</span><span
+                                class="flashcard-question">What is a good way to analyze an unfamiliar security
+                                scenario?</span><span class="flashcard-answer"><strong>Connect the asset and property to
+                                    the adversary and capability, then the vulnerability and threat, attack
+                                    classification, and defense.</strong></span></button></li>
+                </ul>
+            </section>
+            <section class="flashcard-section" id="lecture-03">
+                <h2>Lecture 03: Introduction to Cryptography</h2>
+                <ul class="flashcards">
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is
+                                cryptography?</span><span class="flashcard-answer"><strong>The science and art of secret
+                                    writing, providing selected properties such as confidentiality, integrity, and
+                                    authenticity.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is the
+                                difference between plaintext and ciphertext?</span><span
+                                class="flashcard-answer"><strong>Plaintext is the original message; ciphertext is the
+                                    encrypted message.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is a
+                                cryptosystem?</span><span class="flashcard-answer"><strong>A process that maps plaintext
+                                    to ciphertext and back using encryption and decryption
+                                    keys.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is
+                                cryptanalysis?</span><span class="flashcard-answer"><strong>The study or practice of
+                                    analyzing cryptosystems to recover information or break their
+                                    security.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is
+                                Kirchhoff's principle?</span><span class="flashcard-answer"><strong>Security should
+                                    depend on the secret key, not on keeping the algorithm
+                                    hidden.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is perfect
+                                secrecy?</span><span class="flashcard-answer"><strong>The ciphertext gives no
+                                    information about the plaintext, even to an adversary with unlimited
+                                    computation.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What are the
+                                requirements for a one-time pad?</span><span class="flashcard-answer"><strong>The key
+                                    must be uniformly random, as long as the message, and never
+                                    reused.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is the
+                                difference between information-theoretic and computational security?</span><span
+                                class="flashcard-answer"><strong>Information-theoretic security holds against unlimited
+                                    computation; computational security relies on practical
+                                    limits.</strong></span></button></li>
+                </ul>
+            </section>
+            <section class="flashcard-section" id="lecture-04">
+                <h2>Lecture 04: Symmetric Cryptography</h2>
+                <ul class="flashcards">
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is a stream
+                                cipher?</span><span class="flashcard-answer"><strong>A cipher that combines plaintext
+                                    with a generated pseudorandom keystream, commonly using
+                                    XOR.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">Why must a
+                                stream-cipher nonce or IV not be reused?</span><span
+                                class="flashcard-answer"><strong>Reuse can regenerate the same keystream and expose
+                                    relationships between plaintexts.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is a block
+                                cipher?</span><span class="flashcard-answer"><strong>A keyed permutation that maps
+                                    fixed-size input blocks to fixed-size output blocks.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What are
+                                confusion and diffusion?</span><span class="flashcard-answer"><strong>Confusion hides
+                                    the relationship between key and ciphertext; diffusion hides the relationship
+                                    between plaintext and ciphertext.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">Why should ECB
+                                not be used for structured data?</span><span class="flashcard-answer"><strong>Equal
+                                    plaintext blocks produce equal ciphertext blocks, which reveals
+                                    patterns.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What is the main
+                                property of CBC mode?</span><span class="flashcard-answer"><strong>CBC chains each
+                                    plaintext block with the previous ciphertext block to hide repeated
+                                    patterns.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">What does CTR
+                                mode support?</span><span class="flashcard-answer"><strong>Parallel encryption and
+                                    decryption and random access, when nonce and counter management is
+                                    correct.</strong></span></button></li>
+                    <li><button class="flashcard" type="button" aria-expanded="false"><span
+                                class="flashcard-label">Question</span><span class="flashcard-question">Do ECB, CBC, and
+                                CTR provide integrity?</span><span class="flashcard-answer"><strong>No. They provide
+                                    confidentiality; authentication is needed to detect
+                                    tampering.</strong></span></button></li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.querySelectorAll('.flashcard-section').forEach((section) => {
+            const cards = Array.from(section.querySelectorAll('.flashcards .flashcard'));
+            let currentIndex = 0;
+            const listItems = cards.map((card) => card.parentElement);
+            const controls = document.createElement('div');
+            controls.className = 'section-controls';
+            controls.innerHTML = '<button type="button" class="previous-card">Previous</button><span class="section-position" aria-live="polite"></span><button type="button" class="next-card">Next</button>';
+            section.appendChild(controls);
+            const position = controls.querySelector('.section-position');
+            const previous = controls.querySelector('.previous-card');
+            const next = controls.querySelector('.next-card');
+            function render() {
+                listItems.forEach((item, index) => item.classList.toggle('is-active', index === currentIndex));
+                cards.forEach((card, index) => card.setAttribute('aria-expanded', index === currentIndex && card.classList.contains('is-revealed') ? 'true' : 'false'));
+                position.textContent = `Card ${currentIndex + 1} of ${cards.length}`;
+                previous.disabled = currentIndex === 0;
+                next.disabled = currentIndex === cards.length - 1;
+            }
+            cards.forEach((card) => card.addEventListener('click', () => {
+                const revealed = card.classList.toggle('is-revealed');
+                card.setAttribute('aria-expanded', String(revealed));
+                card.querySelector('.flashcard-label').textContent = revealed ? 'Answer' : 'Question';
+            }));
+            previous.addEventListener('click', () => { currentIndex -= 1; render(); });
+            next.addEventListener('click', () => { currentIndex += 1; render(); });
+            render();
+        });
+    </script>
+</body>
+
+</html>
