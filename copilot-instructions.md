@@ -8,8 +8,14 @@ The active project root is:
 
 The course archive is under `csc574/`.
 
+Professor-provided reference materials for creating study content belong in `course-reference/`. Treat their wording,
+terminology, exam guidance, and learning expectations as authoritative for the study guides, exam questions, and flash
+cards. This public repository publishes that folder, so do not add student work, credentials, or private course
+materials unless the repository visibility is changed.
+
 ## Project Structure
 
+- `course-reference/`: professor-provided guidance that informs study content but is not rendered in the site.
 - `index.html`: GitHub Pages root entry point that redirects to `csc574/`.
 - `csc574/index.html`: polished course archive and launcher.
 - `csc574/lec01-introduction/`: Lecture 01 Slidev export.
