@@ -13,12 +13,14 @@ terminology, exam guidance, and learning expectations as authoritative for the s
 cards. This public repository publishes that folder, so do not add student work, credentials, or private course
 materials unless the repository visibility is changed.
 
-For exam-oriented content, follow `course-reference/exam-preparation-guidance.md`: the Learning Objectives on the
+For exam-oriented content, use `course-reference/CSC_574_Fall_2026_Exam_Guide_Week_1.docx` as the authoritative
+source and follow `course-reference/exam-preparation-guidance.md` when applying it. The Learning Objectives on the
 slides and exam page define testable material, while gray-line examples show possible Bloom-aligned task phrasing.
 
 ## Project Structure
 
 - `course-reference/`: professor-provided guidance that informs study content but is not rendered in the site.
+- `course-reference/CSC_574_Fall_2026_Exam_Guide_Week_1.docx`: authoritative Week 1 exam philosophy and Learning Objectives.
 - `course-reference/exam-preparation-guidance.md`: professor guidance on Learning Objectives and Bloom-aligned exam tasks.
 - `index.html`: GitHub Pages root entry point that redirects to `csc574/`.
 - `csc574/index.html`: polished course archive and launcher.
@@ -188,10 +190,10 @@ After editing HTML:
 2. Open the changed page in a browser.
 3. Check both desktop and narrow mobile layouts when changing presentation.
 4. For study-guide changes, verify slide count/order, dropdown behavior, collapsed sections, responsive layout, and the
-  absence of a standalone Exam Review section.
+   absence of a standalone Exam Review section.
 5. For Flash Cards changes, verify the three lecture sections, one visible card per section, independent Previous/Next
-  controls, answer reveal behavior, and responsive layout.
+   controls, answer reveal behavior, and responsive layout.
 6. For Exam Question Flash Cards changes, verify one visible card, Previous/Next navigation, answer reveal behavior,
-  question-bank coverage, and responsive layout.
+   question-bank coverage, and responsive layout.
 
 Do not modify the original transcript or supplied Word documents unless explicitly requested.
