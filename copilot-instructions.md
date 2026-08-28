@@ -13,9 +13,13 @@ terminology, exam guidance, and learning expectations as authoritative for the s
 cards. This public repository publishes that folder, so do not add student work, credentials, or private course
 materials unless the repository visibility is changed.
 
+For exam-oriented content, follow `course-reference/exam-preparation-guidance.md`: the Learning Objectives on the
+slides and exam page define testable material, while gray-line examples show possible Bloom-aligned task phrasing.
+
 ## Project Structure
 
 - `course-reference/`: professor-provided guidance that informs study content but is not rendered in the site.
+- `course-reference/exam-preparation-guidance.md`: professor guidance on Learning Objectives and Bloom-aligned exam tasks.
 - `index.html`: GitHub Pages root entry point that redirects to `csc574/`.
 - `csc574/index.html`: polished course archive and launcher.
 - `csc574/lec01-introduction/`: Lecture 01 Slidev export.
