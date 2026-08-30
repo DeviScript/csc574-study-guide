@@ -63,8 +63,9 @@ Open the archive at `http://localhost:4176/`. Study guides use the same root, fo
 
 Slidev exports use JavaScript modules, dynamic imports, and generated assets. Use Python's HTTP server for local testing;
 do not use `npx serve`, because its clean-URL redirect changes the exported deck's relative `assets/` paths and leaves
-embedded slide viewers blank. The extensionless local Lecture 04 study-guide route
-`/study-notes/lecture-04-symmetric-cryptography` is supported by its adjacent redirect page.
+embedded slide viewers blank. The extensionless local complete Lecture 02, Lecture 03, and Lecture 04 study-guide routes
+`/study-notes/lecture-02-security-fundamentals-complete`, `/study-notes/lecture-03-intro-cryptography`, and
+`/study-notes/lecture-04-symmetric-cryptography` are supported by adjacent redirect pages.
 The local archive cards intentionally link to the published working decks at `https://slides.dwermke.com/csc574/...` so
 the root `file://` archive remains useful without relying on local module permissions.
 
