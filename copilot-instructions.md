@@ -13,15 +13,14 @@ terminology, exam guidance, and learning expectations as authoritative for the s
 cards. This public repository publishes that folder, so do not add student work, credentials, or private course
 materials unless the repository visibility is changed.
 
-For exam-oriented content, use `course-reference/CSC_574_Fall_2026_Exam_Guide_Week_1.docx` as the authoritative
-source and follow `course-reference/exam-preparation-guidance.md` when applying it. The Learning Objectives on the
-slides and exam page define testable material, while gray-line examples show possible Bloom-aligned task phrasing.
+For exam-oriented content, use `course-reference/CSC_574_Fall_2026_Exam_Guide_Week_1.md` as the authoritative
+checked-in source. The Learning Objectives define testable material, while the nested example questions show possible
+Bloom-aligned task phrasing.
 
 ## Project Structure
 
 - `course-reference/`: professor-provided guidance that informs study content but is not rendered in the site.
-- `course-reference/CSC_574_Fall_2026_Exam_Guide_Week_1.docx`: authoritative Week 1 exam philosophy and Learning Objectives.
-- `course-reference/exam-preparation-guidance.md`: professor guidance on Learning Objectives and Bloom-aligned exam tasks.
+- `course-reference/CSC_574_Fall_2026_Exam_Guide_Week_1.md`: authoritative Week 1 exam philosophy, Learning Objectives, and example tasks.
 - `index.html`: GitHub Pages root entry point that redirects to `csc574/`.
 - `csc574/index.html`: polished course archive and launcher.
 - `csc574/lec01-introduction/`: Lecture 01 Slidev export.
@@ -77,7 +76,7 @@ If assets are missing, compare against the matching published deck at `https://s
 Authoritative source files for Lecture 02 are outside this project tree:
 
 - Transcript: `/Users/home/Desktop/CSC-ECE 574 CompNetSec - Lec02_ Fundamentals_Captions_English (United States).txt`
-- Exam guide: `/Users/home/Desktop/Home/Classes/CSC 574 | Computer Network Security/Weeks/Week 01 - Aug 17-21/Notes/Exam Page | Outline Topics | Week 1/CSC_574_Fall_2026_Exam_Guide_Week_1.docx`
+- Original exam-guide DOCX (provenance only; use the checked-in Markdown reference above for future updates): `/Users/home/Desktop/Home/Classes/CSC 574 | Computer Network Security/Weeks/Week 01 - Aug 17-21/Notes/Exam Page | Outline Topics | Week 1/CSC_574_Fall_2026_Exam_Guide_Week_1.docx`
 - Master guide with instructor-provided answers: `/Users/home/Desktop/Home/Classes/CSC 574 | Computer Network Security/Weeks/Week 01 - Aug 17-21/Study/Week 1 | Master Study Guide/CSC_574_Week_1_Master_Study_Guide.docx`
 
 Use the `.txt` transcript for searchable spoken detail. Use the master guide as the authority for answer wording, course terminology, slide references, distinctions, formulas, and caveats. Do not replace instructor-specific answers with generic security explanations.
@@ -181,6 +180,11 @@ The source files are `csc574/exam questions/CSC574_possible_exam_questions.md` a
 `csc574/exam questions/CSC574_possible_exam_questions_answer_key.md`. Their rendered pages are the matching `.html`
 files in the same directory. Preserve all question-bank and answer-key content when updating the presentation; update the
 rendered pages from the Markdown sources when the source content changes.
+
+The possible-exam-questions page is titled `CSC 574 Midterm Exam Questions`. Keep the exam-format guidance directly
+below that title, followed by an `Exams Guide` section. In the source Markdown, preserve the authoritative hierarchy:
+the seven Learning Objectives are parent bullets, and each instructor-provided example task is a nested child bullet
+under its related objective. Do not flatten those example tasks into a separate numbered list.
 
 ## Validation
 

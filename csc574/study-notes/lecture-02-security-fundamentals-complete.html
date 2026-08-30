@@ -563,17 +563,16 @@
             <aside class="page-nav">
                 <h2>On this page</h2>
                 <ol>
+                    <li><a href="#atm">ATM model</a></li>
                     <li><a href="#objectives">Objectives</a></li>
                     <li><a href="#security">What secure means</a></li>
                     <li><a href="#cia">CIA triad</a></li>
-                    <li><a href="#atm">ATM model</a></li>
                     <li><a href="#vocabulary">Vocabulary and risk</a></li>
                     <li><a href="#attacks">Attacks and defenses</a></li>
                     <li><a href="#threat-modeling">Threat modeling</a></li>
                     <li><a href="#trust">Trust concepts</a></li>
                     <li><a href="#security-model">Security model</a></li>
                     <li><a href="#economics">Economics</a></li>
-                    <li><a href="#lecture-questions">Lecture questions</a></li>
                 </ol>
             </aside>
             <div id="slide-gallery" class="slide-gallery" aria-label="Lecture 02 slides 6-70"></div>
@@ -581,6 +580,204 @@
 
         <div class="layout">
             <main>
+                <section id="atm">
+                    <h2>ATM Model: Security Fundamentals in One System</h2>
+                    <p>The Glenwood Avenue ATM is the lecture's running case study. A security model starts by naming
+                        the properties the ATM must maintain and the adversaries that may act against it, then selects
+                        mechanisms that maintain those properties despite those adversaries.</p>
+                    <div class="definition"><strong>Security model</strong><strong>Trust model + Threat model =
+                            Security model</strong>For this ATM, state the assets and required properties, participants
+                        and trust assumptions, adversaries and capabilities, credible threats and vulnerabilities, and
+                        the controls that address the resulting risk.</div>
+
+                    <h3>Assets, participants, and required properties</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Model element</th>
+                                <th>ATM application</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Assets</strong></td>
+                                <td>Cash, PINs, card and account data, transaction records, balances, ATM software,
+                                    network access, customer time, and the bank's reputation.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Participants</strong></td>
+                                <td>Customers, the bank and its backend server, the ATM provider and technicians, the
+                                    payment network, and the ATM itself. The bank and customer can view the same ATM
+                                    differently because their assets and expectations differ.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Confidentiality</strong></td>
+                                <td>Prevent unauthorized disclosure of PINs, card and account information, and
+                                    transaction records.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Integrity</strong></td>
+                                <td>Prevent unauthorized changes to balances, withdrawal amounts, software,
+                                    configuration, transaction records, and cash dispensing.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Availability</strong></td>
+                                <td>Preserve authorized customer access to cash, the ATM, and the network service.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Atomicity</strong></td>
+                                <td>A withdrawal must dispense cash and update the account consistently, or do neither.
+                                    The ATM must not dispense $100 without recording the $100 withdrawal.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Trust model and TCB</h3>
+                    <p>Customers trust the bank not to leak their data and to return correct account information. The
+                        bank trusts the ATM, its network connection, and its operational processes to carry out
+                        authorized transactions. These are assumptions, not guarantees.</p>
+                    <p>The ATM operating system, firmware and boot chain, hardware protections, transaction software,
+                        cryptographic keys, and bank authorization service are security-critical components of the
+                        <strong>Trusted Computing Base (TCB)</strong>. The operating system is <strong>trusted</strong>
+                        because the ATM depends on it; it is not automatically <strong>trustworthy</strong>, which
+                        requires reason to expect correct behavior under stated conditions.
+                    </p>
+
+                    <h3>Threat model: adversaries, capabilities, and weaknesses</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Adversary</th>
+                                <th>Goal or capability</th>
+                                <th>Vulnerability or threat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ordinary thief or physical attacker</td>
+                                <td>Open, remove, or damage the ATM; steal cash; interrupt service.</td>
+                                <td>Weak enclosure, poor placement, or inadequate physical monitoring.</td>
+                            </tr>
+                            <tr>
+                                <td>Skimmer operator or card thief</td>
+                                <td>Capture card data and PINs to make fraudulent withdrawals.</td>
+                                <td>Skimming hardware, exposed keypad entry, or stolen credentials.</td>
+                            </tr>
+                            <tr>
+                                <td>Technically skilled attacker</td>
+                                <td>Manipulate ATM software, the network, or transaction messages.</td>
+                                <td>Unpatched software, insecure configuration, or weak network authentication.</td>
+                            </tr>
+                            <tr>
+                                <td>Fraudster with stolen credentials</td>
+                                <td>Authenticate as a customer and withdraw cash.</td>
+                                <td>Compromised cards or PINs, excessive transaction limits, or missed fraud signals.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Malicious insider</td>
+                                <td>Misuse legitimate maintenance or bank access.</td>
+                                <td>Overly broad authorization, weak auditing, or insufficient separation of duties.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Environmental or accidental event</td>
+                                <td>Cause a power, network, or hardware outage.</td>
+                                <td>Single points of failure and missing backup or recovery procedures.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Attacks and defenses</h3>
+                    <p>A stolen-card withdrawal can involve <strong>interception</strong> of credentials,
+                        <strong>fabrication</strong> of fraudulent transaction data, <strong>modification</strong> of a
+                        balance or transaction, and <strong>interruption</strong> when the service or cash is made
+                        unavailable. One incident may use more than one attack archetype.
+                    </p>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Defense archetype</th>
+                                <th>ATM mechanisms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Prevention</strong></td>
+                                <td>Card-and-PIN authentication, encryption, access controls, secure configuration,
+                                    software updates, transaction limits, and network authentication.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Deterrence</strong></td>
+                                <td>Visible cameras, lighting, warning signs, tamper-resistant enclosure, and card
+                                    lockout after repeated PIN failures.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Deflection</strong></td>
+                                <td>Make this machine a less appealing target through anti-skimming hardware,
+                                    inspections, and protections that raise the effort needed for successful fraud.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Detection</strong></td>
+                                <td>Transaction logs, audit records, tamper alerts, cameras, monitoring, and fraud
+                                    detection.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Recovery</strong></td>
+                                <td>Backup power and networking, incident response, restoring secure configurations,
+                                    card replacement, and procedures for resolving disputed transactions.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Risk and adequate protection</h3>
+                    <div class="formula">R = T x V x C &nbsp; or, with combined success probability, &nbsp; R = P x C
+                    </div>
+                    <p>For an unauthorized withdrawal using a stolen or fake card:</p>
+                    <ul>
+                        <li><strong>Threat likelihood ($T$) = 0.3:</strong> an estimated 30% monthly chance that
+                            someone attempts a fraudulent withdrawal.</li>
+                        <li><strong>Vulnerability ($V$) = 0.6:</strong> if an attack is attempted, an estimated 60%
+                            chance that the attacker has sufficient card or PIN information to succeed.</li>
+                        <li><strong>Consequence ($C$) = $800:</strong> estimated direct financial loss and response
+                            cost from one successful fraudulent withdrawal.</li>
+                        <li><strong>Baseline risk:</strong> $R = 0.3 x 0.6 x $800 = $144/month$.</li>
+                    </ul>
+                    <h3>Risk-reduction scenarios</h3>
+                    <ul>
+                        <li><strong>Reduce threat with fraud monitoring and blocked-card lists:</strong>
+                            <ul>
+                                <li>$T = 0.3 \rightarrow 0.1$</li>
+                                <li>New risk: $R = 0.1 x 0.6 x $800 = $48/month$.</li>
+                                <li>Risk reduction: $144 - $48 = $96/month$.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Reduce vulnerability with a security audit and current industry controls:</strong>
+                            <ul>
+                                <li>$V = 0.6 \rightarrow 0.2$</li>
+                                <li>New risk: $R = 0.3 x 0.2 x $800 = $48/month$.</li>
+                                <li>Risk reduction: $144 - $48 = $96/month$.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Reduce consequence or transfer risk with insurance:</strong>
+                            <ul>
+                                <li>$C = $800 \rightarrow $100$</li>
+                                <li>New risk: $R = 0.3 x 0.6 x $100 = $18/month$.</li>
+                                <li>Risk reduction: $144 - $18 = $126/month$.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>By these estimates alone, insurance produces the largest expected financial reduction:
+                        $144/month \rightarrow $18/month. It does not make fraud less likely or the ATM less
+                        vulnerable; it transfers much of the loss. The control is economically justified only when its
+                        cost is reasonable compared with the expected reduction in loss.</p>
+                    <p>The principle of adequate protection asks whether a defense costs less than the expected loss it
+                        reduces. Camera coverage, lighting, alarms, anti-skimmer checks, PIN shielding, and lower cash
+                        limits can be cost-effective. Moving an ATM indoors can sacrifice 24/7 availability, and an
+                        overnight guard may cost more than the risk reduction justifies. The appropriate choice changes
+                        with the ATM's location, assets, adversaries, and operating conditions.</p>
+                </section>
+
                 <section id="objectives">
                     <h2>Learning objectives</h2>
                     <p>aka "What you might be tested on"</p>
@@ -805,6 +1002,26 @@
                         as
                         expected. These definitions are useful, but they still require context: expected by whom, under
                         what conditions, and when?</p>
+                    <h3>From a definition to a security model</h3>
+                    <ul>
+                        <li>The properties assumed to hold form the <strong>trust model</strong>.</li>
+                        <li>The adversaries and their capabilities form the <strong>threat model</strong>.</li>
+                        <li><strong>Trust model + Threat model = Security model.</strong></li>
+                    </ul>
+                    <p>To create a secure design, first name the properties that must be maintained and the adversaries
+                        that may act against the system. Then build mechanisms that maintain those properties despite
+                        those adversaries.</p>
+                    <h3>What a complete security claim must state</h3>
+                    <ul>
+                        <li><strong>Properties:</strong> what the system must preserve, such as confidentiality,
+                            integrity, availability, or another system-specific property.</li>
+                        <li><strong>Assumptions and conditions:</strong> the environment, operating conditions, and
+                            components expected to behave as assumed.</li>
+                        <li><strong>Adversaries:</strong> who might attempt to violate the properties and what they can
+                            access, observe, modify, or control.</li>
+                        <li><strong>Participant viewpoint and time:</strong> whose expectation is being evaluated and
+                            when the claim is intended to hold.</li>
+                    </ul>
                 </section>
 
                 <section id="cia">
@@ -825,21 +1042,45 @@
                         and behavior from unauthorized modification. Availability protects authorized access to an
                         information system. An ATM may prioritize integrity by staining stolen cash, while emergency
                         responders may prioritize availability by using an unencrypted fallback channel.</p>
-                </section>
-
-                <section id="atm">
-                    <h2>3. Applying a security model to an ATM</h2>
-                    <p>Return to the Glenwood Avenue ATM example. Important properties include confidentiality of PINs,
-                        account information, and transaction records; integrity of balances, withdrawal amounts,
-                        software, and cash dispensing; availability of cash, network connectivity, and authorized
-                        customer access; and atomic withdrawals.</p>
-                    <p>Possible adversaries include physical attackers, skimmer operators, shoulder surfers, hackers,
-                        criminals, users, and environmental events. Mechanisms include hardened cases, locks, PIN
-                        shielding, anti-skimmer checks, transaction verification, cash sensors, backup power, and
-                        redundant network connections.</p>
-                    <p>A secure ATM must also make withdrawals atomic: either the cash is dispensed and the account is
-                        updated consistently, or neither occurs. Other possible mechanisms include withdrawal limits,
-                        software checks, gas detection, and venting systems.</p>
+                    <h3>Context determines the priority</h3>
+                    <ul>
+                        <li><strong>ATM:</strong> ink staining can make stolen cash unavailable, but discourages theft;
+                            integrity can take priority over availability.</li>
+                        <li><strong>Online banking or stock trading:</strong> a service can halt transfers or trading
+                            when transaction data appears suspicious; integrity can take priority over availability.
+                        </li>
+                        <li><strong>Hospital records or aircraft control:</strong> extra verification or rejecting a
+                            questionable command can delay access, but altered information or commands can cause greater
+                            harm; integrity can take priority over availability.</li>
+                        <li><strong>Emergency response and 911 systems:</strong> a less-secure fallback channel can be
+                            preferable to no communication; availability can take priority over confidentiality.</li>
+                        <li><strong>Military plans, classified documents, and password databases:</strong> denying
+                            access can be preferable to exposing sensitive information; confidentiality can take
+                            priority over availability.</li>
+                        <li><strong>Public websites and streaming services:</strong> published content has little
+                            confidentiality need compared with reliable access; availability can take priority over
+                            confidentiality.</li>
+                        <li><strong>Electronic voting:</strong> temporarily stopping a system can be preferable to
+                            recording altered votes; integrity can take priority over availability.</li>
+                        <li><strong>Cloud storage and backup:</strong> delaying restoration until backups are verified
+                            can be preferable to restoring corrupted or ransomware-encrypted files; integrity can take
+                            priority over availability.</li>
+                    </ul>
+                    <h3>Examples of each property</h3>
+                    <ul>
+                        <li><strong>Confidentiality:</strong> prevent Alice from reading Bob's files without
+                            permission; prevent Bob from learning that Alice has a sensitive file; prevent an
+                            eavesdropper from reading network traffic; or prevent someone from learning that Alice is a
+                            clinic patient.</li>
+                        <li><strong>Integrity:</strong> prevent unauthorized changes to files, network traffic,
+                            transaction data, code, or system configuration; prevent replacement of an important system
+                            binary.</li>
+                        <li><strong>Availability:</strong> prevent a site or service from crashing, being flooded with
+                            requests, or otherwise becoming unusable by authorized users.</li>
+                    </ul>
+                    <div class="callout"><strong>Study shortcut:</strong> prioritize confidentiality when a secret
+                        leaking is the greatest harm, integrity when incorrect or altered information is the greatest
+                        harm, and availability when losing access altogether is the greatest harm.</div>
                 </section>
 
                 <section id="vocabulary">
@@ -857,6 +1098,29 @@
                     <p>A broken window in a server room is best classified as a vulnerability: it is a flaw or condition
                         that exposes the system. An intruder is a possible threat that could exploit it. Threats may be
                         intentional, accidental, or environmental.</p>
+                    <h3>Terms in context</h3>
+                    <ul>
+                        <li><strong>Assets</strong> can be systems (hardware, operating systems, and software), access
+                            (networks, accounts, and privileges), people (including user time and attention), and value
+                            such as data, money, and reputation.</li>
+                        <li><strong>Participants</strong> can be principals, servers, clients, users, entities, hosts,
+                            routers, computers, agents, people, or enterprises. A system can appear secure to one
+                            participant and insecure to another because their assets, expectations, and capabilities
+                            differ.</li>
+                        <li><strong>Trusted third party:</strong> an entity trusted by all relevant parties for a
+                            defined set of actions. For example, customers trust a bank not to leak data and to return
+                            a correct account balance.</li>
+                        <li><strong>Adversaries</strong> include curious or generally clueless users, script kiddies,
+                            people with an axe to grind, organized criminals, competitors, and nation-state actors.
+                            Authorized users can also violate policy deliberately or carelessly; usable-security design
+                            considers their context, available information, and task constraints.</li>
+                        <li><strong>Vulnerabilities</strong> include buffer overflows and WEP key leakage. They can
+                            result from faulty software or hardware, poor requirements or design, insecure policy or
+                            configuration, system misuse, or an unintended purpose or environment.</li>
+                        <li><strong>Threats</strong> can be intentional, such as an attacker, or accidental and
+                            environmental, such as an earthquake, fire, tornado, or power failure. A successful attack
+                            needs an applicable weakness to exploit.</li>
+                    </ul>
                 </section>
 
                 <section id="attacks">
@@ -874,6 +1138,29 @@
                         forging a password-reset message is fabrication, and denial of service is interruption.
                         Ransomware
                         that encrypts files is both modification and interruption.</p>
+                    <h3>Attack archetypes can overlap</h3>
+                    <ul>
+                        <li><strong>Phishing login page:</strong> fabrication creates the fake site; interception
+                            occurs when the attacker collects credentials.</li>
+                        <li><strong>Transaction tampering:</strong> interception occurs when an attacker observes a
+                            payment request; modification occurs when they alter its amount or destination.</li>
+                        <li><strong>Ransomware:</strong> modification encrypts or changes files; interruption blocks
+                            normal access to services that rely on those files.</li>
+                    </ul>
+                    <h3>Defense archetypes in practice</h3>
+                    <ul>
+                        <li><strong>Prevention:</strong> block an attack or close the vulnerability. Rate limiting can
+                            block high-volume attempts.</li>
+                        <li><strong>Deterrence:</strong> make an attack harder or less attractive, without making it
+                            impossible. Warning banners can increase an attacker's perceived risk; rate limiting can
+                            also deter costly repeated attempts.</li>
+                        <li><strong>Deflection:</strong> make this target less desirable than alternatives. A hidden
+                            service can be harder to discover or less attractive to attack.</li>
+                        <li><strong>Detection:</strong> identify an attack in progress and respond. Logging records
+                            evidence so attacks can be noticed and investigated.</li>
+                        <li><strong>Recovery:</strong> assume an attack may occur and prepare to restore data or
+                            service. Backups support recovery after a failure or compromise.</li>
+                    </ul>
                 </section>
 
                 <section id="threat-modeling">
@@ -883,15 +1170,66 @@
                         system and attacker capabilities change.</p>
                     <div class="callout"><strong>STRIDE:</strong> spoofing, tampering, repudiation, information
                         disclosure, denial of service, and elevation of privilege.</div>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>STRIDE threat</th>
+                                <th>Desired security property</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Spoofing</td>
+                                <td>Authenticity</td>
+                            </tr>
+                            <tr>
+                                <td>Tampering</td>
+                                <td>Integrity</td>
+                            </tr>
+                            <tr>
+                                <td>Repudiation</td>
+                                <td>Non-repudiability</td>
+                            </tr>
+                            <tr>
+                                <td>Information disclosure</td>
+                                <td>Confidentiality</td>
+                            </tr>
+                            <tr>
+                                <td>Denial of service</td>
+                                <td>Availability</td>
+                            </tr>
+                            <tr>
+                                <td>Elevation of privilege</td>
+                                <td>Authorization</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <p>For an academic paper, ask: Who are potential adversaries? What are their goals and motivations?
                         What are their capabilities? What is the TCB? What other assumptions does the paper make?</p>
                     <p>Threat modeling is iterative. Scope the system, map data flows and trust boundaries, identify
                         threats with approaches such as STRIDE, rank them by likelihood and impact, choose mitigations,
                         and reassess as the system and adversary capabilities change. If the threat model is wrong, the
                         system remains vulnerable to the threat that was missed.</p>
+                    <h3>Iterative threat-model workflow</h3>
+                    <ul>
+                        <li><strong>Scope:</strong> identify what the system does, where data flows, and where trust
+                            changes.</li>
+                        <li><strong>Find threats:</strong> combine diagrams, STRIDE, misuse cases, and known threat
+                            lists.</li>
+                        <li><strong>Mitigate:</strong> map threats to controls, design changes, or explicit risk
+                            acceptance.</li>
+                        <li><strong>Assess:</strong> review whether the model covers the system and supports sound
+                            decisions.</li>
+                    </ul>
+                    <p>Useful artifacts include data-flow diagrams, which reveal trust boundaries and hidden
+                        assumptions; use and misuse cases, which compare expected and attacker workflows; and risk
+                        ranking, which compares impact, likelihood, and ease of exploitation on a consistent scale.</p>
+                    <p>Other useful lenses include an asset inventory, entry points, trust boundaries, attack trees,
+                        STRIDE checklists, misuse cases, LINDDUN, and risk ranking. Different lenses expose different
+                        assumptions and attack paths.</p>
                 </section>
 
-                <section id="lecture-questions">
+                <section id="lecture-questions" hidden>
                     <h2>Slide and lecture questions</h2>
                     <p>The prompts below follow the questions printed on the slides. The first and final prompts are
                         included because the professor asked them verbally during lecture.</p>
@@ -1059,6 +1397,20 @@
                     <p>For the ATM, the operating system is trusted because the ATM depends on it to perform security-
                         critical work. That does not automatically prove that the operating system is trustworthy. Trust
                         decisions are made even when systems are not completely secure.</p>
+                    <h3>Trust decisions and TCB boundaries</h3>
+                    <ul>
+                        <li><strong>Everyday trust decisions:</strong> trusting a phone or computer with data, a
+                            website with a password or payment, a Wi-Fi network with traffic, or an app with location,
+                            camera, or contacts permissions.</li>
+                        <li><strong>Inside a typical TCB:</strong> CPU and memory isolation, firmware and the boot
+                            chain, the kernel and reference monitor, and security-critical services.</li>
+                        <li><strong>Outside a typical TCB:</strong> ordinary applications, user workflows, and network
+                            peers. Their compromise can still be harmful, but the core security policy is not assumed to
+                            depend on their correct operation in the same way.</li>
+                        <li><strong>Trusted examples:</strong> a kernel, root certificate authority, or payment
+                            processor can be trusted because its failure can break the security policy. Audited code or
+                            a hardened service provides evidence of trustworthiness.</li>
+                    </ul>
                 </section>
 
                 <section id="security-model">
@@ -1091,6 +1443,18 @@
                         points, so a control is easiest to justify when its cost is lower than the expected loss it
                         reduces.
                     </p>
+                    <h3>What security costs</h3>
+                    <ul>
+                        <li>Performance and usability.</li>
+                        <li>Developer, administrator, educator, and user time.</li>
+                        <li>Capital for hardware, replacement devices, or more servers.</li>
+                        <li>Services such as denial-of-service protection, antivirus subscriptions, and monitoring.</li>
+                        <li>Additional complexity and potential failure points.</li>
+                    </ul>
+                    <p>The home-security comparison makes the same point: locks may be justified, while monitored
+                        alarms or overnight guards depend on the asset value and expected benefit. More protection is
+                        not automatically the economic choice. Unlikely attacks may not merit a defense when its
+                        deployment cost exceeds the expected compromise cost.</p>
                 </section>
 
                 <section id="lecture-questions-legacy" hidden>
@@ -1299,7 +1663,6 @@
             "vocabulary",
             "attacks",
             "threat-modeling",
-            "lecture-questions",
             "trust",
             "security-model",
             "economics",
