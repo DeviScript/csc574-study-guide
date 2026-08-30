@@ -241,19 +241,95 @@
             background: var(--card)
         }
 
-        .exam {
-            margin-top: 40px;
-            padding: 24px;
-            border-top: 5px solid var(--gold);
+        .objective-answers {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-left: 5px solid var(--gold);
+            background: var(--paper)
+        }
+
+        .objective-answers h3 {
+            margin: 0 0 18px;
+            color: var(--ink)
+        }
+
+        .objective-answer {
+            margin: 0 0 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .objective-answer:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0
+        }
+
+        .objective-answer h4 {
+            margin: 0 0 8px;
+            color: var(--teal);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.1rem;
+            font-weight: 400
+        }
+
+        .objective-answer p {
+            margin: 0 0 8px
+        }
+
+        .objective-answer p:last-child {
+            margin-bottom: 0
+        }
+
+        .formula {
+            padding: 16px 20px;
+            margin: 20px 0;
+            color: var(--card);
+            background: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.1rem
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
             background: var(--card)
         }
 
-        .exam li {
-            margin-bottom: 12px
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top
         }
 
-        .answer {
-            color: var(--muted)
+        .comparison-table th {
+            color: var(--card);
+            background: var(--ink)
+        }
+
+        .slide-reference {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 7px;
+            border: 1px solid var(--teal);
+            border-radius: 4px;
+            color: var(--teal);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            font-size: .7rem;
+            font-weight: 700;
+            line-height: 1.4;
+            text-decoration: none;
+            vertical-align: middle
+        }
+
+        .slide-reference:hover,
+        .slide-reference:focus-visible {
+            color: var(--card);
+            background: var(--teal);
+            outline: none
         }
 
         @media(max-width:760px) {
@@ -282,8 +358,7 @@
         <nav><a href="../index.html">Back to slides</a> | <a href="../lec04-symmetric-crypto/index.html#/1">Open Lecture
                 04</a></nav>
         <h1>Symmetric Cryptography</h1>
-        <p class="lede">Actual Lecture 04 slides with transcript-based Lecture Notes beside each slide. The notes
-            preserve the professor's lecture sequence and exam-relevant distinctions.</p>
+        <p class="lede">Actual Lecture 04 slides with source-aligned study material and slide connections.</p>
         <div class="rule"></div>
         <aside class="page-nav">
             <h2>On this page</h2>
@@ -300,48 +375,275 @@
             <main>
                 <section id="objectives">
                     <h2>Learning objectives</h2>
+                    <p>By the end of this lecture, you should be able to:</p>
                     <ul>
-                        <li>Distinguish stream ciphers and block ciphers.</li>
-                        <li>Explain pseudorandomness, one-time pads, and keystream reuse.</li>
-                        <li>Compare ECB, CBC, and CTR modes.</li>
-                        <li>Explain confusion, diffusion, padding, parallelism, random access, and error propagation.
+                        <li>Distinguish stream ciphers from block ciphers.</li>
+                        <li>Explain why stream-cipher reuse and IV reuse are catastrophic.</li>
+                        <li>Describe the high-level structure of modern block ciphers.</li>
+                        <li>Explain ECB, CBC, and CTR at a high level.</li>
+                        <li>Identify major risks of confidentiality-only modes.</li>
+                        <li>Choose between confidentiality-only and authenticated constructions for simple scenarios.
                         </li>
-                        <li>Distinguish confidentiality from integrity.</li>
                     </ul>
+                    <p><strong>Not required:</strong> Derive AES internals by hand.</p>
+                    <div class="objective-answers">
+                        <h3>Answers</h3>
+                        <div class="objective-answer">
+                            <h4>Distinguish stream ciphers from block ciphers</h4>
+                            <ul>
+                                <li><strong>Stream cipher:</strong> generates a pseudorandom keystream from a key and
+                                    additional state, then commonly XORs it with plaintext.</li>
+                                <li><strong>Block cipher:</strong> encrypts fixed-size plaintext blocks into fixed-size
+                                    ciphertext blocks; a mode of operation handles longer messages.</li>
+                                <li><strong>Examples:</strong> RC4 is a historical stream cipher; DES, 3DES, and AES are
+                                    block ciphers.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Explain why stream-cipher reuse and IV reuse are catastrophic</h4>
+                            <ul>
+                                <li><strong>Reuse:</strong> encrypting two messages with the same keystream reveals $C_1
+                                    \oplus C_2 = M_1 \oplus M_2$.</li>
+                                <li><strong>IV or nonce:</strong> may be public, but it must not repeat with the same
+                                    key because repetition can regenerate the same keystream.</li>
+                                <li><strong>WEP:</strong> its 24-bit IV repeated quickly, making RC4 keystream reuse
+                                    practical to exploit.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Describe the high-level structure of modern block ciphers</h4>
+                            <ul>
+                                <li><strong>Keyed permutation:</strong> a fixed key selects a reversible mapping over a
+                                    fixed-size block space.</li>
+                                <li><strong>Rounds:</strong> repeated keyed transformations compose substitutions,
+                                    permutations, and round-specific subkeys from a key schedule.</li>
+                                <li><strong>Confusion and diffusion:</strong> substitutions hide the key relationship;
+                                    permutations spread input influence across output bits.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Explain ECB, CBC, and CTR at a high level</h4>
+                            <ul>
+                                <li><strong>ECB:</strong> encrypts blocks independently and leaks repeated-block
+                                    patterns.</li>
+                                <li><strong>CBC:</strong> XORs each plaintext block with the prior ciphertext block,
+                                    using an IV for the first block.</li>
+                                <li><strong>CTR:</strong> encrypts unique nonce/counter values to create a keystream,
+                                    then XORs it with plaintext or ciphertext.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Identify major risks of confidentiality-only modes</h4>
+                            <ul>
+                                <li><strong>Pattern leakage:</strong> ECB retains visible structure in repeated
+                                    plaintext blocks.</li>
+                                <li><strong>Malleability:</strong> CBC and CTR alone allow ciphertext manipulation
+                                    without detecting it.</li>
+                                <li><strong>Operational rules:</strong> IV unpredictability and nonce uniqueness are
+                                    part of the security argument.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Choose between confidentiality-only and authenticated constructions for simple scenarios
+                            </h4>
+                            <ul>
+                                <li><strong>Authenticated encryption:</strong> prefer an approved AEAD mode in a vetted
+                                    protocol whenever attackers can modify ciphertexts.</li>
+                                <li><strong>Confidentiality-only:</strong> use only when integrity and authenticity are
+                                    provided elsewhere and the mode's IV or nonce rules are met.</li>
+                                <li><strong>Implementation:</strong> use vetted cryptographic libraries; do not roll
+                                    your own cryptography.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
                 <section id="foundations">
                     <h2>Symmetric cryptography foundations</h2>
-                    <p>Symmetric cryptography uses the same key for encryption and decryption. It is generally fast,
-                        but the communicating parties must share key material securely.</p>
-                    <p>Stream and block ciphers are tools with different operating assumptions. Neither provides a
-                        complete security solution by itself.</p>
+                    <p><strong>Symmetric cryptography</strong> uses the same shared secret key for encryption and
+                        decryption. It is generally fast and performant, but Alice and Bob must securely obtain and
+                        share that secret key.</p>
+                    <h3>Reusable-key approaches <a class="slide-reference" href="#slide-gallery" data-slide="19">Slide
+                            19</a></h3>
+                    <ul>
+                        <li><strong>Stream cipher:</strong> extend a short reusable secret key into a much longer
+                            keystream, then combine that stream with the message.</li>
+                        <li><strong>Block cipher:</strong> split the message into fixed-size blocks, apply a key-based
+                            encryption operation to each block, and combine the encrypted blocks.</li>
+                    </ul>
+                    <h3>One-time pad recap <a class="slide-reference" href="#slide-gallery" data-slide="13">Slide 13</a>
+                    </h3>
+                    <p>A one-time pad uses a random bit sequence as long as the plaintext and combines it with the
+                        message using XOR. It offers perfect secrecy only when its key is random, secret, message
+                        length, and never reused.</p>
+                    <div class="formula">C_1 \oplus C_2 = (M_1 \oplus K) \oplus (M_2 \oplus K) = M_1 \oplus M_2</div>
+                    <p>Reusing the key is catastrophic because the repeated key cancels. An OTP also has no built-in
+                        integrity: an attacker may alter ciphertext even without learning the plaintext.</p>
+                    <h3>Key size and security <a class="slide-reference" href="#slide-gallery" data-slide="15">Slide
+                            15</a></h3>
+                    <ul>
+                        <li><strong>Brute-force resistance:</strong> key length generally corresponds to symmetric
+                            security level, unless an algorithm flaw reduces that protection.</li>
+                        <li><strong>Comparison caution:</strong> security levels do not transfer directly between
+                            different algorithms. Triple DES has a 168-bit key but an attack complexity of $2^{112}$;
+                            1024-bit RSA approximates 80-bit symmetric security.</li>
+                        <li><strong>Reference levels:</strong> 80-bit symmetric security is legacy; 128-bit is near-term
+                            protection; 256-bit is long-term protection.</li>
+                    </ul>
                 </section>
                 <section id="stream-ciphers">
                     <h2>Stream ciphers</h2>
-                    <p>A stream cipher combines plaintext with a pseudorandom keystream, commonly using XOR. A nonce
-                        or IV may make each generated stream different, but it must not be reused with the same key.</p>
-                    <p>Keystream reuse exposes relationships between plaintexts, and stream ciphers do not provide
-                        integrity by default.</p>
+                    <p>A <strong>stream cipher</strong> generates a long keystream from a short key, acting like a
+                        reproducible pseudorandom number generator whose output can be used like an OTP pad. Encryption
+                        and decryption commonly use XOR with that stream.</p>
+                    <h3>Pseudorandomness <a class="slide-reference" href="#slide-gallery" data-slide="23">Slide 23</a>
+                    </h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>True randomness</th>
+                                <th>Pseudorandomness</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Uniformly distributed, independent bits.</td>
+                                <td>Approximately uniform output generated deterministically from a seed; its bits
+                                    cannot be independent.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>A pseudorandom keystream is not truly random, so a stream cipher does not offer perfect secrecy:
+                        not every possible keystream is possible.</p>
+                    <h3>Reuse and IV rules <a class="slide-reference" href="#slide-gallery" data-slide="24">Slide 24</a>
+                        <a class="slide-reference" href="#slide-gallery" data-slide="25">Slide 25</a>
+                    </h3>
+                    <p>When $E(M_1) = M_1 \oplus C(K)$ and $E(M_2) = M_2 \oplus C(K)$, XORing the ciphertexts cancels
+                        the shared stream and reveals $M_1 \oplus M_2$. Frequency analysis and guessed words can then
+                        help recover the messages.</p>
+                    <ul>
+                        <li><strong>Initialization vector (IV):</strong> public extra input combined with a key to
+                            generate a different pseudorandom sequence for each message.</li>
+                        <li><strong>Requirement:</strong> an IV must be sufficiently large and never reused with the
+                            same key.</li>
+                        <li><strong>WEP example:</strong> WEP's 24-bit IV had about a 50% chance of reuse after roughly
+                            5,000 packets, making RC4 attacks practical.</li>
+                    </ul>
+                    <h3>Confidentiality is not integrity <a class="slide-reference" href="#slide-gallery"
+                            data-slide="28">Slide 28</a></h3>
+                    <p>Stream ciphers are malleable. When an attacker knows $M$ and $E(M)$, they can substitute a chosen
+                        $M'$ by transmitting:</p>
+                    <div class="formula">E'(M) = E(M) \oplus M \oplus M' = C(K) \oplus M'</div>
+                    <p>Bob decrypts the replacement as $M'$. A message authentication code (MAC) or authenticated
+                        encryption is needed to detect this manipulation.</p>
                 </section>
                 <section id="block-ciphers">
                     <h2>Block ciphers</h2>
-                    <p>A block cipher is a keyed permutation over fixed-size blocks. Substitution and permutation
-                        create confusion, diffusion, and the avalanche effect.</p>
-                    <p>DES and 3DES are obsolete. AES is the modern block cipher emphasized in the lecture. Padding
-                        may be needed when data does not fill a complete block.</p>
+                    <p>A <strong>block cipher</strong> is a keyed function that replaces a fixed-length input with a
+                        fixed-length output. For a fixed key, encryption is a bijection: a permutation of the block
+                        space, where each ciphertext block maps back to exactly one plaintext block.</p>
+                    <h3>Substitution, permutation, confusion, and diffusion <a class="slide-reference"
+                            href="#slide-gallery" data-slide="32">Slide 32</a></h3>
+                    <ul>
+                        <li><strong>Substitution:</strong> changes values and provides confusion, making the
+                            relationship between the key and ciphertext more complex.</li>
+                        <li><strong>Permutation:</strong> rearranges positions and provides diffusion, spreading the
+                            influence of each input bit across many output bits.</li>
+                        <li><strong>Modern construction:</strong> multiple rounds repeatedly apply keyed transformations
+                            while a key schedule derives round-specific subkeys.</li>
+                    </ul>
+                    <h3>DES, 3DES, and AES <a class="slide-reference" href="#slide-gallery" data-slide="35">Slide 35</a>
+                    </h3>
+                    <ul>
+                        <li><strong>DES:</strong> obsolete and broken; its 56-bit key and 64-bit block size permit
+                            attacks including SWEET32-style collision risks.</li>
+                        <li><strong>3DES:</strong> three applications of DES; it is deprecated.</li>
+                        <li><strong>AES:</strong> standardized in 2001; it uses 128-bit blocks and 128-, 192-, or
+                            256-bit keys. It is the modern block cipher emphasized here.</li>
+                    </ul>
+                    <h3>AES internals: orientation only <a class="slide-reference" href="#slide-gallery"
+                            data-slide="36">Slide 36</a></h3>
+                    <p>A 128-bit AES block is a $4 \times 4$ array of 8-bit bytes. Full rounds apply SubBytes,
+                        ShiftRows, MixColumns, and AddRoundKey; the final round omits MixColumns. The course goal is
+                        to recognize AES's construction and constraints, not to derive it by hand.</p>
+                    <h3>Arbitrary-length messages <a class="slide-reference" href="#slide-gallery" data-slide="39">Slide
+                            39</a></h3>
+                    <p>When a message does not fill a block, pad it with an established standard. Longer messages are
+                        split into blocks and processed using a block-cipher mode of operation.</p>
                 </section>
                 <section id="modes">
                     <h2>Modes of operation</h2>
-                    <ul>
-                        <li><strong>ECB:</strong> simple and parallel, but repeated plaintext blocks reveal patterns.
-                        </li>
-                        <li><strong>CBC:</strong> hides patterns with chaining, but encryption is sequential and errors
-                            can propagate.</li>
-                        <li><strong>CTR:</strong> supports parallelism and random access, but nonce or counter reuse is
-                            catastrophic.</li>
-                    </ul>
-                    <p>ECB, CBC, and CTR provide confidentiality only. Integrity requires authentication or an
-                        authenticated encryption construction.</p>
+                    <p>Modes define how a block cipher safely processes a message longer than one block. The lecture
+                        covers ECB, CBC, and CTR; all three are confidentiality-only modes.</p>
+                    <h3>Electronic Codebook (ECB) <a class="slide-reference" href="#slide-gallery" data-slide="41">Slide
+                            41</a></h3>
+                    <p>ECB encrypts each padded plaintext block independently with the same key. It supports parallel
+                        encryption, parallel decryption, and random access, but equal plaintext blocks produce equal
+                        ciphertext blocks. Do not use ECB for large or structured data because it leaks patterns.</p>
+                    <h3>Cipher Block Chaining (CBC) <a class="slide-reference" href="#slide-gallery"
+                            data-slide="44">Slide 44</a></h3>
+                    <p>CBC XORs each plaintext block with the previous ciphertext block before encrypting it; the first
+                        block uses a random IV. It hides repeated patterns when used properly. Encryption is sequential,
+                        but decryption can be parallelized when ciphertext blocks are available.</p>
+                    <p>CBC alone has no integrity. Modifying a previous ciphertext block causes predictable bit flips in
+                        the next decrypted plaintext block, so a MAC or authenticated-encryption mode is needed.</p>
+                    <h3>Counter mode (CTR) <a class="slide-reference" href="#slide-gallery" data-slide="46">Slide 46</a>
+                    </h3>
+                    <p>CTR encrypts unique counter values to generate a keystream, then XORs it with message blocks.
+                        It turns a block cipher into a stream-like cipher and supports parallel encryption, parallel
+                        decryption, and random access. Reusing a nonce/counter under the same key repeats the keystream
+                        and is catastrophic.</p>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>ECB</th>
+                                <th>CBC</th>
+                                <th>CTR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pattern leakage</td>
+                                <td>Yes</td>
+                                <td>No, with proper IV use</td>
+                                <td>No, with unique nonce/counter use</td>
+                            </tr>
+                            <tr>
+                                <td>Parallel encryption</td>
+                                <td>Yes</td>
+                                <td>No</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Parallel decryption</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Error propagation</td>
+                                <td>One block</td>
+                                <td>Current block corrupted; predictable next-block effect</td>
+                                <td>Corresponding bits only</td>
+                            </tr>
+                            <tr>
+                                <td>Random access</td>
+                                <td>Yes</td>
+                                <td>No</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Integrity included</td>
+                                <td>No</td>
+                                <td>No</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="callout"><strong>Choose authenticated encryption:</strong> when attackers can modify
+                        ciphertexts, prefer an approved AEAD construction such as CCM or GCM in a vetted protocol. Use
+                        confidentiality-only modes only when integrity and authenticity are provided elsewhere and all
+                        IV or nonce requirements are satisfied.</div>
                 </section>
             </main>
         </div>
@@ -451,12 +753,20 @@
         slideGallery.appendChild(slideViewer);
         function renderSlideViewer() {
             const slideNumber = slideNumbers[currentSlideIndex];
-            slideViewer.innerHTML = `<figure class="slide-card" role="button" tabindex="0" aria-label="Lecture 04 slide ${slideNumber} of 60"><figcaption>Slide ${slideNumber} of 60</figcaption><div class="slide-frame"><iframe loading="lazy" src="${base}#/${slideNumber}" title="CSC 574 Lecture 04 slide ${slideNumber} of 60"></iframe></div><aside class="lecture-notes"><strong>Lecture Notes</strong><p><strong>Slide Connection</strong>${notes[slideNumber - 1]}</p><p><strong>Professor's Words</strong>${notes[slideNumber - 1]}</p></aside></figure>`;
+            slideViewer.innerHTML = `<figure class="slide-card" role="button" tabindex="0" aria-label="Lecture 04 slide ${slideNumber} of 60"><figcaption>Slide ${slideNumber} of 60</figcaption><div class="slide-frame"><iframe loading="lazy" src="${base}#/${slideNumber}" title="CSC 574 Lecture 04 slide ${slideNumber} of 60"></iframe></div><aside class="lecture-notes"><strong>Slide Connection</strong><p>${notes[slideNumber - 1]}</p></aside></figure>`;
             const figure = slideViewer.querySelector('.slide-card');
             figure.addEventListener('click', () => { currentSlideIndex = (currentSlideIndex + 1) % slideNumbers.length; select.value = String(slideNumbers[currentSlideIndex]); renderSlideViewer(); });
             figure.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); figure.click(); } });
         }
         select.addEventListener('change', (event) => { currentSlideIndex = slideNumbers.indexOf(Number(event.target.value)); renderSlideViewer(); });
+        document.querySelectorAll('.slide-reference[data-slide]').forEach((reference) => {
+            reference.addEventListener('click', () => {
+                const slideNumber = Number(reference.dataset.slide);
+                currentSlideIndex = slideNumbers.indexOf(slideNumber);
+                select.value = String(slideNumber);
+                renderSlideViewer();
+            });
+        });
         renderSlideViewer();
     </script>
 </body>
