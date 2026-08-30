@@ -42,6 +42,12 @@ currently have a complete study guide.
 The Flash Cards section contains two homepage links side by side: `Open Flash Cards` for lecture-specific cards and
 `Exam Question Flash Cards` for exam-question practice. Keep both links compact and visible in that section.
 
+Keep the homepage sections in this order after Course Materials: Flash Cards, Review Questions, and Exam Questions.
+Review Questions belongs between Flash Cards and Exam Questions and links to the standalone practice-question bank and
+its answer key. Exam Questions contains the authoritative Exams Guide and, beside it, an `Exams Guide Answers` card.
+The Exams Guide page contains only the title, exam-format guidance, and instructor-provided guide objectives/example
+tasks. Do not place generated review questions or practice exams on that page.
+
 ## Running The Site
 
 Preferred local serving command:
@@ -88,6 +94,21 @@ Transcripts supplied for the cryptography lectures:
 
 Use these transcripts for exact professor wording, questions, examples, sidequests, exam hints, and lecture order. Treat the
 exported slide decks as the source of truth for slide content and slide numbering.
+
+## Study Content Fidelity and Format
+
+When a professor-provided document, transcript, or checked-in reference supplies wording, definitions, formulas,
+examples, or Learning Objectives, preserve that source wording. Do not paraphrase it and do not present a summary as a
+quotation or as `Professor's Words`.
+
+Only show a `Professor's Words` field when the text is an exact transcript quotation. If an exact quotation is not
+available, omit that field; do not substitute generated text. Keep generated explanatory material visibly separate from
+source material and label it accurately.
+
+Copy Learning Objectives verbatim from their authoritative source, including their introductory sentence, punctuation,
+and order. Place an `Answers` container directly beneath the objective bullets when answers are requested. Organize
+answers by objective and use clear bullets with one term, definition, requirement, or action per bullet. Bold the leading
+term or category label in definition bullets; do not pack multiple bold vocabulary definitions into a single sentence.
 
 ## Lecture 02 Notes
 
@@ -159,6 +180,7 @@ When updating either page:
 - For Lecture 04, preserve the distinctions between stream and block ciphers; pseudorandomness and one-time pads; IV/nonce reuse; ECB, CBC, and CTR; confusion and diffusion; DES, 3DES, and AES; padding; parallelism; random access; error propagation; and confidentiality versus integrity.
 - Include the professor's exam-relevant caveats: do not roll your own cryptography, do not reuse one-time-pad or stream-cipher key material, do not use ECB for structured data, and remember that the covered modes do not provide integrity by default.
 - Keep formulas and notation faithful to the lecture, using KaTeX or structured HTML when equations are shown.
+- For Lecture 03, use the updated source document at `/Users/home/Desktop/Home/Classes/CSC 574 | Computer Network Security/Weeks/Week 02 - Aug 24-28/Notes/Slides/Slides to Text ChatGPT lec03 intro crypto.docx` for its exact Learning Objectives and supplied slide content. Its explicitly numbered slides must remain reachable through the slide dropdown; use direct slide references in study material when a note depends on a numbered illustration.
 
 ## Flash Cards
 

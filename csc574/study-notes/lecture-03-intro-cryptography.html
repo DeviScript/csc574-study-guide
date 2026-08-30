@@ -241,6 +241,97 @@
             background: var(--card)
         }
 
+        .objective-answers {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-left: 5px solid var(--gold);
+            background: var(--paper)
+        }
+
+        .objective-answers h3 {
+            margin: 0 0 18px;
+            color: var(--ink)
+        }
+
+        .objective-answer {
+            margin: 0 0 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .objective-answer:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0
+        }
+
+        .objective-answer h4 {
+            margin: 0 0 8px;
+            color: var(--teal);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.1rem;
+            font-weight: 400
+        }
+
+        .objective-answer p {
+            margin: 0 0 8px
+        }
+
+        .objective-answer p:last-child {
+            margin-bottom: 0
+        }
+
+        .formula {
+            padding: 16px 20px;
+            margin: 20px 0;
+            color: var(--card);
+            background: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.1rem
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: var(--card)
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top
+        }
+
+        .comparison-table th {
+            color: var(--card);
+            background: var(--ink)
+        }
+
+        .slide-reference {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 7px;
+            border: 1px solid var(--teal);
+            border-radius: 4px;
+            color: var(--teal);
+            font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+            font-size: .7rem;
+            font-weight: 700;
+            line-height: 1.4;
+            text-decoration: none;
+            vertical-align: middle
+        }
+
+        .slide-reference:hover,
+        .slide-reference:focus-visible {
+            color: var(--card);
+            background: var(--teal);
+            outline: none
+        }
+
         .exam {
             margin-top: 40px;
             padding: 24px;
@@ -286,8 +377,7 @@
         <nav><a href="../index.html">Back to slides</a> | <a href="../lec03-intro-crypto/index.html#/1">Open Lecture
                 03</a></nav>
         <h1>Introduction to Cryptography</h1>
-        <p class="lede">Actual Lecture 03 slides with lecture notes placed beside the slide. Professor wording is
-            preserved in the transcript excerpts.</p>
+        <p class="lede">Actual Lecture 03 slides with source-aligned study material below the viewer.</p>
         <div class="rule"></div>
         <aside class="page-nav">
             <h2>On this page</h2>
@@ -303,34 +393,404 @@
             <main>
                 <section id="objectives">
                     <h2>Learning objectives</h2>
+                    <p>By the end of this lecture, you should be able to:</p>
                     <ul>
-                        <li>Define cryptography, cryptanalysis, and cryptology.</li>
-                        <li>Distinguish plaintext, ciphertext, encryption, decryption, keys, and key space.</li>
-                        <li>Compare symmetric and asymmetric cryptography.</li>
-                        <li>Explain Kirchhoff's principle, one-time pads, and perfect secrecy.</li>
+                        <li>Define cryptology, cryptography, cryptanalysis, plaintext, ciphertext, encryption,
+                            decryption, key, keyspace, and perfect secrecy.</li>
+                        <li>Define Kerckhoffs’s principle and explain why cryptosystems should conform to it.</li>
+                        <li>Identify key management problems.</li>
+                        <li>Explain types of cryptanalysis.</li>
+                        <li>Explain the one-time pad (OTP), how it provides perfect secrecy, and the practical issues
+                            that complicate its use.</li>
                     </ul>
+                    <div class="objective-answers">
+                        <h3>Answers</h3>
+                        <div class="objective-answer">
+                            <h4>Define cryptology, cryptography, cryptanalysis, plaintext, ciphertext, encryption,
+                                decryption, key, keyspace, and perfect secrecy</h4>
+                            <ul>
+                                <li><strong>Cryptology:</strong> the broader study of secure communication and code
+                                    systems.</li>
+                                <li><strong>Cryptography:</strong> developing and using cryptosystems.</li>
+                                <li><strong>Cryptanalysis:</strong> studying how to analyze or break cryptographic
+                                    systems.</li>
+                                <li><strong>Plaintext:</strong> the original readable message.</li>
+                                <li><strong>Ciphertext:</strong> the encrypted representation of the message.</li>
+                                <li><strong>Encryption:</strong> transforms plaintext into ciphertext.</li>
+                                <li><strong>Decryption:</strong> transforms ciphertext back into plaintext.</li>
+                                <li><strong>Key:</strong> an input used by a cryptographic algorithm to maintain
+                                    security against an
+                                    adversary.</li>
+                                <li><strong>Keyspace:</strong> the set of all possible key values.</li>
+                                <li><strong>Perfect secrecy:</strong> ciphertext does not change the adversary's
+                                    knowledge of which
+                                    plaintext was sent.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Define Kerckhoffs’s principle and explain why cryptosystems should conform to it</h4>
+                            <ul>
+                                <li>Security should rely on individual secret keys, not hidden algorithms.</li>
+                                <li>A cryptosystem should remain secure even if everything about the system except the
+                                    key is public knowledge.</li>
+                                <li>Public designs can receive broader review and analysis.</li>
+                                <li>If a key is compromised, replacing the key is more realistic than replacing a
+                                    secret algorithm.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Identify key management problems</h4>
+                            <ul>
+                                <li><strong>Lifecycle:</strong> generation, distribution, rotation, revocation, storage,
+                                    backup, and destruction.</li>
+                                <li><strong>Recipients:</strong> who gets which keys.</li>
+                                <li><strong>Distribution and storage:</strong> how users securely receive and store
+                                    keys.</li>
+                                <li><strong>Export:</strong> what happens when a key is exported.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Explain types of cryptanalysis</h4>
+                            <ul>
+                                <li><strong>Attack settings:</strong> ciphertext-only, known-plaintext,
+                                    chosen-plaintext, and
+                                    chosen-ciphertext.</li>
+                                <li><strong>Common approaches:</strong> brute force, linear cryptanalysis, differential
+                                    cryptanalysis,
+                                    side channels, and coercion.</li>
+                            </ul>
+                        </div>
+                        <div class="objective-answer">
+                            <h4>Explain the one-time pad (OTP), how it provides perfect secrecy, and the practical
+                                issues that complicate its use</h4>
+                            <p>A one-time pad encrypts a message by XORing it with a shared, secret, uniformly random
+                                key of the same length. It provides perfect secrecy only when the key is random, used
+                                once, kept secret, and destroyed after use.</p>
+                            <ul>
+                                <li><strong>One-time pad:</strong> an encryption method where Alice and Bob share a
+                                    secret, uniformly random key $k$ that is the same length as the message $m$.</li>
+                                <li><strong>Encryption:</strong> $c = m \oplus k$.</li>
+                                <li><strong>Decryption:</strong> $m = c \oplus k = (m \oplus k) \oplus k$. This
+                                    works because $(A \oplus B) \oplus B = A$.</li>
+                                <li><strong>Requirements:</strong> a uniformly random key, a key as long as the message,
+                                    and no key
+                                    reuse. After use, the key should be destroyed.</li>
+                                <li><strong>Perfect secrecy:</strong> every candidate plaintext remains possible under
+                                    some key, even
+                                    against an adversary with unlimited computation.</li>
+                                <li><strong>Practical issues:</strong> random key generation, secure key distribution,
+                                    message-length
+                                    keys, no key reuse, and no built-in integrity.</li>
+                                <li><strong>Key reuse:</strong> reusing the same key can expose a relationship between
+                                    both plaintext messages and destroys the perfect secrecy property.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
                 <section id="foundations">
                     <h2>Cryptography foundations</h2>
-                    <p>Cryptography protects selected properties such as confidentiality, integrity, and authenticity.
-                        It is a toolbox rather than a complete security solution.</p>
-                    <p>Keep the lecture distinctions clear: cryptography develops cryptosystems, cryptanalysis studies
-                        how to break them, and cryptology includes both.</p>
+                    <p>In this course, <strong>crypto</strong> means <strong>cryptography</strong>, not
+                        cryptocurrency. Cryptography is the art and science of secret writing: a toolbox that can
+                        provide selected security properties, rather than security in the abstract.</p>
+                    <h3>Crypto toolbox</h3>
+                    <p>The lecture's toolbox begins with plaintext and ciphertext, keys and algorithms, and encryption
+                        and decryption. A cryptosystem is evaluated against its security properties, threat model, and
+                        attacker capabilities.</p>
+                    <h3>Core terminology</h3>
+                    <ul>
+                        <li><strong>Cryptosystem:</strong> a method of disguising plaintext so only selected parties
+                            can recover it.</li>
+                        <li><strong>Cryptography:</strong> developing and using cryptosystems, including mechanisms
+                            such as encryption, hashes, MACs, and signatures.</li>
+                        <li><strong>Cryptanalysis:</strong> analyzing or breaking cryptographic systems.</li>
+                        <li><strong>Cryptology:</strong> cryptography plus cryptanalysis.</li>
+                        <li><strong>Plaintext or cleartext:</strong> the original readable message, before encryption
+                            or after successful decryption.</li>
+                        <li><strong>Ciphertext:</strong> the encrypted representation of a message.</li>
+                        <li><strong>Encryption:</strong> converts plaintext into ciphertext; <strong>decryption</strong>
+                            converts ciphertext back into plaintext.</li>
+                        <li><strong>Cipher:</strong> a cryptosystem's encryption and decryption procedures for turning
+                            plaintext into ciphertext and recovering the plaintext.</li>
+                    </ul>
+                    <h3>Participants and threat model</h3>
+                    <p>Alice and Bob are placeholder names for communicating parties. Alice commonly sends and Bob
+                        receives. Eve is a passive eavesdropper; Mallory is an active, malicious attacker; and Trent is
+                        sometimes a trusted third party. Other names, such as Carol or Charlie, represent additional
+                        participants.</p>
+                    <ul>
+                        <li><strong>Dave or Daphne:</strong> a fourth participant; <strong>Oscar:</strong> an opponent.
+                        </li>
+                        <li><strong>Peggy and Victor:</strong> the prover and verifier in a zero-knowledge proof.</li>
+                        <li><strong>Sybil:</strong> an attacker using multiple identities; <strong>Ivan:</strong> an
+                            insider. Names such as Erin and Frank represent further participants as needed.</li>
+                    </ul>
+                    <p>The basic lecture threat model places Alice and Bob on an untrusted public channel where
+                        Eve/Mallory can observe messages. Eve's initial goal is to read the message; Mallory may also
+                        modify or forge messages. Cryptography protects the message even though the channel is not
+                        trusted.</p>
+                    <h3>What cryptography can provide</h3>
+                    <ul>
+                        <li><strong>Confidentiality:</strong> keep data and communication secret by encrypting before
+                            sending or storing it and decrypting only for authorized parties.</li>
+                        <li><strong>Integrity:</strong> detect unauthorized changes or tampering. Integrity does not
+                            necessarily stop a change; it lets the recipient detect that the message was altered.</li>
+                        <li><strong>Authenticity:</strong> bind data to an expected origin and verify who created or
+                            sent it, such as checking whether Alice really sent a message.</li>
+                    </ul>
+                    <div class="callout"><strong>Important distinction:</strong> encryption alone does not
+                        automatically provide integrity or authenticity.</div>
+                    <h3>Where encryption appears</h3>
+                    <ul>
+                        <li><strong>Websites and networks:</strong> TLS, X25519, AES-GCM, and ChaCha20-Poly1305.</li>
+                        <li><strong>Wi-Fi:</strong> WPA2, WPA3, AES-CCMP, and SAE.</li>
+                        <li><strong>Messaging:</strong> Signal Protocol, X3DH, and Double Ratchet.</li>
+                        <li><strong>Storage:</strong> full-disk encryption with AES-XTS and platform key stores;
+                            password managers and backups with Argon2, PBKDF2, AES-GCM, or ChaCha20-Poly1305.</li>
+                        <li><strong>VPNs and files:</strong> WireGuard, IPsec, TLS, age, GPG, and AES.</li>
+                    </ul>
+                    <p>Efficient cryptographic primitives earn trust through extensive public analysis and no known
+                        practical attacks, not through a simple proof that every attack is impossible.</p>
+                    <h3>How the three properties look on an untrusted channel</h3>
+                    <ul>
+                        <li><strong>Confidentiality:</strong> without encryption, Eve can read Alice's "Hello!" on the
+                            public channel. With encryption, Eve sees ciphertext while Bob decrypts and recovers the
+                            message.</li>
+                        <li><strong>Integrity:</strong> without an integrity check, Mallory can change "Hello!" to
+                            "Hell!" and Bob cannot tell. With an integrity check, Bob detects the alteration.</li>
+                        <li><strong>Authenticity:</strong> without proof tied to Alice's expected identity or key,
+                            Mallory can forge a message that appears to be from Alice. Verification lets Bob reject a
+                            message that does not verify under Alice's expected key.</li>
+                    </ul>
+                    <h3>Cryptography is not complete security</h3>
+                    <p>Strong cryptography does not by itself solve buffer overflows, malware, SQL injection,
+                        cross-site scripting, unsafe logging, compromised endpoints, malicious administrators,
+                        access-control failures, or poor programming practices. Algorithm choice, parameters,
+                        implementation, key handling, APIs, and defaults all matter. Do not roll your own
+                        cryptography. Failures can be difficult to notice because a program can still appear to work.
+                    </p>
                 </section>
                 <section id="cryptosystems">
                     <h2>Cryptosystems and keys</h2>
-                    <p>A cryptosystem maps plaintext to ciphertext with an encryption key and recovers plaintext with a
-                        decryption key. Symmetric systems use the same key; asymmetric systems use different keys.</p>
-                    <p>Kirchhoff's principle requires security to depend on the secret key rather than a hidden
-                        algorithm. Key space is the set of possible key values.</p>
+                    <p>A cryptosystem turns readable information into protected information and recovers it correctly.
+                        Alice encrypts a plaintext message $M$ using encryption algorithm $E$ and key $K_e$ to produce
+                        ciphertext $C$. Bob uses decryption algorithm $D$ and key $K_d$ to recover the plaintext.</p>
+                    <div class="formula">M &rarr; Encryption (E + K<sub>e</sub>) &rarr; C &rarr; Decryption (D +
+                        K<sub>d</sub>) &rarr; M</div>
+                    <h3>Formal cryptosystem and correctness <a class="slide-reference" href="#slide-gallery"
+                            data-slide="26">Slide 26</a>
+                        <a class="slide-reference" href="#slide-gallery" data-slide="27">Slide 27</a>
+                    </h3>
+                    <p>A formal cryptosystem is the 6-tuple <strong>(E, D, G, M, C, K)</strong>:</p>
+                    <ul>
+                        <li><strong>E:</strong> encryption algorithm.</li>
+                        <li><strong>D:</strong> decryption algorithm.</li>
+                        <li><strong>G:</strong> key-generation algorithm.</li>
+                        <li><strong>M:</strong> message space, the set of plaintexts.</li>
+                        <li><strong>C:</strong> ciphertext space, the set of encrypted outputs.</li>
+                        <li><strong>K:</strong> key space, the set of possible keys.</li>
+                    </ul>
+                    <div class="formula">E(K<sub>e</sub>, M) = C &nbsp;&nbsp; D(K<sub>d</sub>, C) = M &nbsp;&nbsp;
+                        D(K<sub>d</sub>, E(K<sub>e</sub>, M)) = M</div>
+                    <p>The final relation is <strong>correctness</strong>: decrypting a message with the appropriate
+                        key must return the original plaintext.</p>
+                    <h3>Symmetric and asymmetric cryptography <a class="slide-reference" href="#slide-gallery"
+                            data-slide="28">Slide 28</a>
+                    </h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Secret-key or symmetric</th>
+                                <th>Public-key or asymmetric</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>K<sub>e</sub> = K<sub>d</sub></strong>; the same shared secret key encrypts
+                                    and decrypts. It is generally fast, but secure key distribution is the main
+                                    challenge.</td>
+                                <td><strong>K<sub>e</sub> &ne; K<sub>d</sub></strong>; different keys support public-key
+                                    encryption, key agreement, and digital signatures. It is usually slower than
+                                    symmetric cryptography.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Keys, key space, and security level</h3>
+                    <p>A <strong>key</strong> is an input to a cryptographic algorithm used to maintain security in the
+                        presence of an adversary. Keys are generally numbers; a password can help derive a key, but a
+                        human password is not automatically a strong cryptographic key. Some key values have special
+                        mathematical properties. A <strong>key space</strong> is the set of all possible key values.</p>
+                    <ul>
+                        <li>For a well-designed symmetric cipher, a longer key generally raises the cost of brute force.
+                        </li>
+                        <li>Algorithm weaknesses can reduce effective security even when keys are long; key lengths are
+                            not directly comparable across algorithm families.</li>
+                        <li>About 80-bit symmetric security is a legacy level and should not be used for new systems;
+                            128-bit security supports roughly a decade of protection, and 256-bit security supports
+                            protection over several decades.</li>
+                        <li><strong>Harvest now, decrypt later</strong>, also called steal now, decrypt later or
+                            retrospective decryption: adversaries can collect encrypted data today and decrypt it later
+                            as computing power, attacks, key compromise, or quantum technology improves. Long-lived
+                            secrets may need stronger protection now.</li>
+                    </ul>
+                    <h3>Kerckhoffs's principle and key management</h3>
+                    <p>A cryptosystem should remain secure even if everything about it except the key is public.
+                        Security
+                        should rely on a secret key, not a hidden algorithm or implementation. Public designs receive
+                        broader review, and replacing a compromised key is more practical than replacing a deployed
+                        secret algorithm.</p>
+                    <ul>
+                        <li><strong>Shannon (1949):</strong> assume the enemy knows the system being used.</li>
+                        <li><strong>Bellovin (2009):</strong> design the system assuming opponents know it in detail.
+                        </li>
+                        <li>Obscurity can slow casual analysis, but it is a weak primary security argument: a short key
+                            is easier to protect and replace than an entire algorithm.</li>
+                    </ul>
+                    <p>Key management asks who receives keys and how they are generated, distributed, stored, rotated,
+                        revoked, backed up, exported, and destroyed. Keys may be stored in protected files or keyrings,
+                        or hardware such as TPMs, smartcards, secure co-processors, and hardware security modules.</p>
+                    <p><strong>Key distribution</strong> asks how legitimate users securely receive keys;
+                        <strong>key storage</strong> asks how those keys remain protected after receipt. Secure
+                        cryptography depends on both, as well as replacement and destruction when keys are no longer
+                        valid.
+                    </p>
+                    <h3>Attack goals and cryptanalysis <a class="slide-reference" href="#slide-gallery"
+                            data-slide="37">Slide 37</a></h3>
+                    <p>Attack goals include recovering a key, full or partial plaintext, a property of plaintext,
+                        producing valid ciphertext, causing a predictable plaintext change by modifying ciphertext, or
+                        forging an authentication tag or signature.</p>
+                    <ul>
+                        <li><strong>Ciphertext-only:</strong> the adversary has only ciphertext.</li>
+                        <li><strong>Known-plaintext:</strong> the adversary has plaintext and matching ciphertext.</li>
+                        <li><strong>Chosen-plaintext:</strong> the adversary chooses plaintext and obtains ciphertext.
+                        </li>
+                        <li><strong>Chosen-ciphertext:</strong> the adversary chooses ciphertext and learns plaintext
+                            or a decryption-related response.</li>
+                        <li><strong>Common approaches:</strong> brute force; linear cryptanalysis, which uses biased
+                            linear relations among plaintext, ciphertext, and key bits; differential cryptanalysis,
+                            which studies how input differences affect output differences; side channels involving
+                            timing, power, caches, or electromagnetic emissions; and coercion to obtain a key or
+                            password directly.</li>
+                    </ul>
+                    <p>The more information or control an attacker has, the stronger the attack model and the more
+                        robust the cryptosystem must be. A system is secure only if it resists the attack goals that
+                        matter under its stated threat model.</p>
                 </section>
                 <section id="security">
                     <h2>Security concepts</h2>
-                    <p>One-time pads provide perfect secrecy only with uniformly random, message-length keys that are
-                        never reused. Information-theoretic security permits unlimited computation, while
-                        computational security depends on practical limits.</p>
-                    <p>Historical ciphers illustrate key-space size and cryptanalysis, but they are not appropriate for
-                        modern systems. Do not roll your own cryptography.</p>
+                    <h3>One-time pad and perfect secrecy <a class="slide-reference" href="#slide-gallery"
+                            data-slide="42">Slide 42</a></h3>
+                    <p>A one-time pad (OTP) uses a shared, secret, uniformly random key $k$ that is as long as the
+                        message $m$. It encrypts and decrypts with XOR:</p>
+                    <div class="formula">c = m &oplus; k &nbsp;&nbsp; m = c &oplus; k = (m &oplus; k) &oplus; k
+                        &nbsp;&nbsp; (A &oplus; B) &oplus; B = A</div>
+                    <ul>
+                        <li>The key must be uniformly random, at least as long as the message, used only once, and
+                            destroyed after use.</li>
+                        <li>Under those assumptions, OTP provides <strong>perfect secrecy</strong>: ciphertext gives an
+                            attacker no information about which plaintext was sent, even with unlimited computation.
+                        </li>
+                        <li>For any observed ciphertext, every candidate plaintext remains possible under some key.
+                            The ciphertext therefore does not change an adversary's knowledge of which plaintext was
+                            sent.</li>
+                        <li>Perfect secrecy does not provide integrity. An attacker may be unable to read ciphertext but
+                            can still alter it.</li>
+                        <li>OTP is operationally difficult because long or numerous messages require enormous amounts of
+                            securely distributed random key material.</li>
+                    </ul>
+                    <h3>Why OTP key reuse fails <a class="slide-reference" href="#slide-gallery" data-slide="45">Slide
+                            45</a></h3>
+                    <div class="formula">C<sub>1</sub> = M<sub>1</sub> &oplus; K &nbsp;&nbsp; C<sub>2</sub> =
+                        M<sub>2</sub> &oplus; K<br>C<sub>1</sub> &oplus; C<sub>2</sub> = (M<sub>1</sub> &oplus; K)
+                        &oplus; (M<sub>2</sub> &oplus; K) = M<sub>1</sub> &oplus; M<sub>2</sub></div>
+                    <p>When the same key encrypts two messages, XORing their ciphertexts cancels the key because
+                        $K \oplus K = 0$. The result exposes a relationship between the plaintexts; natural-language
+                        patterns, known text, and guesses can then reveal both messages. The Venona project is a
+                        historical example of OTP key reuse breaking a system: Soviet intelligence generated pads with
+                        typists, then reused pages during World War II, allowing the United States to decrypt about
+                        2,200 messages and expose espionage in the United Kingdom and the Manhattan Project.</p>
+                    <h3>Information-theoretic and computational security</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Information-theoretic security</th>
+                                <th>Computational security</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Secure even against unlimited computation. A correctly used OTP is the standard
+                                    example, but it often requires key material as large as the protected data.</td>
+                                <td>Also called conditional security. It relies on bounded attacker resources or on
+                                    mathematical problems believed hard to reverse, such as the assumption that
+                                    $P \ne NP$. DES, 3DES, AES, RSA, DSA, ECC, and Diffie-Hellman are examples of
+                                    deployed systems or primitives using this model; the notes also list MD5 and SHA.
+                                    Nearly all deployed cryptosystems use it.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Historical ciphers: educational, not secure</h3>
+                    <p>Cryptography developed from pen-and-paper methods, through electro-mechanical machines, to
+                        computer-based systems. These older ciphers build intuition about key spaces, brute force,
+                        frequency analysis, and pattern leakage, but they are not suitable for modern use.</p>
+                    <ul>
+                        <li><strong>Caesar cipher:</strong> <a class="slide-reference" href="#slide-gallery"
+                                data-slide="53">Slide 53</a> shifts each letter by key $x$. $c = (p + x) \bmod 26$ and
+                            $p = (c - x) \bmod 26$; with $x = 3$, HELLO becomes KHOOR. It has only 26 shifts, so brute
+                            force and frequency analysis break it easily. The ROT13 exercise $GUVF\ VF\ N\ TERNG\
+                            PYNFF$ decodes to "THIS IS A GREAT CLASS."</li>
+                        <li><strong>ROT13:</strong> <a class="slide-reference" href="#slide-gallery"
+                                data-slide="55">Slide 55</a> a Caesar shift of 13. Applying it twice restores the
+                            message;
+                            HELLO becomes URYYB and URYYB becomes HELLO. Because the alphabet has 26 letters, the
+                            encryption and decryption operations are effectively the same. It was used on Usenet to
+                            obscure spoilers and sensitive text in the 1980s, not to provide security.</li>
+                        <li><strong>Monoalphabetic substitution:</strong> <a class="slide-reference"
+                                href="#slide-gallery" data-slide="57">Slide 57</a> maps each letter through one fixed
+                            pattern.
+                            For example, a mapping could begin $A \rightarrow U$, $B \rightarrow X$, $C \rightarrow A$.
+                            Even with $26!$ possible substitutions, repeated letters, word boundaries, and language
+                            frequencies leak structure.</li>
+                        <li><strong>Homophonic substitution:</strong> allows one plaintext symbol to map to multiple
+                            ciphertext symbols, such as $a \rightarrow ZA$ or $b \rightarrow HLK$, which makes simple
+                            frequency analysis harder but does not make it modern secure encryption.</li>
+                        <li><strong>Polyalphabetic and Vigenere ciphers:</strong> change substitutions as a repeating
+                            key is applied. The repeating key is a weakness: Kasiski examination uses repeated
+                            ciphertext patterns and their distances to estimate key length.</li>
+                    </ul>
+                    <h3>Frequency and pattern analysis <a class="slide-reference" href="#slide-gallery"
+                            data-slide="58">Slide 58</a></h3>
+                    <ul>
+                        <li>Common English letters such as $e$, $t$, and $a$; bigrams such as $th$, $he$, and $en$;
+                            and trigrams such as $the$, $and$, and $tha$ provide clues.</li>
+                        <li>Repeated letters, word lengths, word boundaries, repeated words, and sentence context
+                            preserve useful structure in substitution ciphers.</li>
+                        <li>A large key space alone does not make a cipher secure if it leaks recognizable language
+                            patterns.</li>
+                    </ul>
+                    <h3>Polyalphabetic ciphers and Kasiski examination <a class="slide-reference" href="#slide-gallery"
+                            data-slide="61">Slide 61</a></h3>
+                    <p>A polyalphabetic cipher uses multiple monoalphabetic substitutions, so plaintext letters can map
+                        to different ciphertext letters and simple frequency distributions are masked. The Alberti
+                        cipher (1467), one of the first polyalphabetic ciphers, used a rotating cipher wheel based on
+                        the portable printing press to change the substitution every few letters. Its illustration shows
+                        a letter starting at $g \rightarrow A$, then moving at the next rotation from $g \rightarrow Q$.
+                    </p>
+                    <p>Vigenere is a polyalphabetic substitution cipher that repeats a key across the plaintext. For
+                        plaintext <strong>cryptois shortforcryptography</strong> and repeating key
+                        <strong>ABCDABCDABCDABCDABCDABCDABCD</strong>, the document gives ciphertext
+                        <strong>CSASTPKVSIQUTGQUCSASTPIUAQJB</strong>. It was once called <em>le chiffre
+                            indechiffrable</em>, was first described in 1553, and was not broken for about 300 years,
+                        but its repeating key is a weakness.
+                    </p>
+                    <p>Kasiski examination finds repeated ciphertext patterns and measures their spacing. In the
+                        example,
+                        <strong>CSASTP</strong> repeats 16 positions later, so $16$, $8$, $4$, $2$, and $1$ are possible
+                        key lengths. If the same plaintext pattern is encrypted under the same part of a repeating key,
+                        it can produce the same ciphertext pattern. Longer messages provide more repeated patterns and
+                        improve the estimate.
+                    </p>
+                    <p>Classical ciphers are useful for studying key spaces, brute force, frequency analysis, and
+                        pattern leakage. They should not be used for modern cryptography.</p>
                 </section>
             </main>
         </div>
@@ -442,12 +902,20 @@
         slideGallery.appendChild(slideViewer);
         function renderSlideViewer() {
             const slideNumber = slideNumbers[currentSlideIndex];
-            slideViewer.innerHTML = `<figure class="slide-card" role="button" tabindex="0" aria-label="Lecture 03 slide ${slideNumber} of 65"><figcaption>Slide ${slideNumber} of 65</figcaption><div class="slide-frame"><iframe loading="lazy" src="${base}#/${slideNumber}" title="CSC 574 Lecture 03 slide ${slideNumber} of 65"></iframe></div><aside class="lecture-notes"><strong>Lecture Notes</strong><p><strong>Slide Connection</strong>${notes[slideNumber - 1]}</p><p><strong>Professor's Words</strong>${notes[slideNumber - 1]}</p></aside></figure>`;
+            slideViewer.innerHTML = `<figure class="slide-card" role="button" tabindex="0" aria-label="Lecture 03 slide ${slideNumber} of 65"><figcaption>Slide ${slideNumber} of 65</figcaption><div class="slide-frame"><iframe loading="lazy" src="${base}#/${slideNumber}" title="CSC 574 Lecture 03 slide ${slideNumber} of 65"></iframe></div><aside class="lecture-notes"><strong>Slide Connection</strong><p>${notes[slideNumber - 1]}</p></aside></figure>`;
             const figure = slideViewer.querySelector('.slide-card');
             figure.addEventListener('click', () => { currentSlideIndex = (currentSlideIndex + 1) % slideNumbers.length; select.value = String(slideNumbers[currentSlideIndex]); renderSlideViewer(); });
             figure.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); figure.click(); } });
         }
         select.addEventListener('change', (event) => { currentSlideIndex = slideNumbers.indexOf(Number(event.target.value)); renderSlideViewer(); });
+        document.querySelectorAll('.slide-reference[data-slide]').forEach((reference) => {
+            reference.addEventListener('click', () => {
+                const slideNumber = Number(reference.dataset.slide);
+                currentSlideIndex = slideNumbers.indexOf(slideNumber);
+                select.value = String(slideNumber);
+                renderSlideViewer();
+            });
+        });
         renderSlideViewer();
     </script>
 </body>
