@@ -1,0 +1,1331 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#152b3a">
+    <title>CSC 574 | Future Learning Objectives</title>
+    <link rel="stylesheet" href="../exam%20questions/exam-pages.css">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        code {
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <nav><a href="../index.html">Back to slides</a> · <a href="../index.html#additional-study-materials">Additional study materials</a></nav>
+        <main>
+            <h1 id="future-learning-objectives">Future Learning
+            Objectives</h1>
+            <blockquote>
+            <p><strong>Additional study material:</strong> This document
+            was supplied from an external source. It is not
+            instructor-provided course material and is not confirmed to
+            be part of CSC 574 assessments.</p>
+            </blockquote>
+            <blockquote>
+            <p><strong>Source:</strong> User-provided
+            <code>CSC_574_Final_Exam_Study_Guide_Formatted.docx</code>.</p>
+            </blockquote>
+            <h2 id="11-security-fundamentals"><strong>1.1 Security
+            Fundamentals</strong></h2>
+            <blockquote>
+            <p>File name -
+            S24-csc574-slides-02-security-fundamentals</p>
+            <p>Lecture number - 02</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p><strong>• Define:</strong> confidentiality, integrity,
+            availability, asset, participant, vulnerability, threat,
+            adversary, defense, authorization, authentication, TCB,
+            risk</p>
+            <p><strong>• LDI:</strong> types of attacker (casual user,
+            cyber criminal, nation state, …)</p>
+            <p><strong>• LDI:</strong> the 4 archetype attacks and the 5
+            archetype defenses</p>
+            <p><strong>• Differentiate:</strong> concepts of trusted and
+            trustworthy</p>
+            <p><strong>• Create and articulate:</strong> threat models
+            for well-understood systems</p>
+            <p><strong>• Define:</strong> the principle of adequate
+            protection</p>
+            <h2 id="13-secret-key-crypto"><strong>1.3 Secret Key
+            Crypto</strong></h2>
+            <blockquote>
+            <p>File name - lec03-symmetric</p>
+            <p>Lecture number - 03</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p><strong>• Define:</strong> cryptology, cryptography,
+            cryptanalysis, plaintext, ciphertext, encryption,
+            decryption, key, keyspace, perfect secrecy</p>
+            <p><strong>• Define:</strong> Kirckhoffs’s principle and why
+            cryptosystems should conform to it</p>
+            <p>• Identify key management problems</p>
+            <p>• Explain types of cryptanalysis</p>
+            <p>• Explain OTP, how it offers perfect secrecy, and list
+            issues that complicate its use</p>
+            <p><strong>• NOT:</strong> Understand symmetric cipher
+            internals</p>
+            <p>• Define stream cipher, block cipher, block size,
+            permutation, substitution, confusion, diffusion</p>
+            <p>• Explain the distinction between stream and block
+            ciphers</p>
+            <p>• List and explain potential problems with using stream
+            ciphers</p>
+            <p>• Explain, diagram, and identify pros and cons of ECB,
+            CBC, and CTR cipher modes</p>
+            <p>• Choose an application-appropriate symmetric cipher and
+            mode.</p>
+            <p>• Identify which cipher modes guarantee integrity</p>
+            <h2 id="14-hashes-and-message-authentication"><strong>1.4
+            Hashes and Message Authentication</strong></h2>
+            <blockquote>
+            <p>File name - lec04-hashes</p>
+            <p>Lecture number - 04</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Create cryptographic constructions that provide
+            integrity and authenticity</p>
+            <p>• Explain the security differences between EtM, E&amp;M,
+            and MtE</p>
+            <p>• Identify and explain the three properties of a
+            cryptographic hash function</p>
+            <p>• Explain the significance of the birthday paradox to
+            hash function security</p>
+            <p>• Explain how HMAC works and why it is needed</p>
+            <p>• Describe how authenticated encryption modes of
+            operation are different from EtM, E&amp;M, and MtE.</p>
+            <p>• Identify at least three applications of hash
+            functions</p>
+            <h2 id="15-asymmetric-cryptography"><strong>1.5 Asymmetric
+            Cryptography</strong></h2>
+            <blockquote>
+            <p>File name - lec05-asymmetric</p>
+            <p>Lecture number - 05</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain common uses of RSA</p>
+            <p>• Explain the components of RSA public and private keys
+            and their relationship (including the common modulus and its
+            significance to public/private keys)</p>
+            <p>• Calculate (for small numbers) an RSA public/private
+            keypair and encrypt/decrypt a message using RSA</p>
+            <p>• Identify and explain the hard problem underlying
+            RSA</p>
+            <p>• Explain why “textbook” RSA is insecure (e.g., probable
+            message attacks, timing attacks) and the intuition behind
+            avoiding those problems (e.g., padding, blinding).</p>
+            <p>• Explain why asymmetric crypto operations are rarely
+            performed directly on data, and what we do instead.</p>
+            <p>• Explain digital signatures, common uses, and compute a
+            digital signature given a small RSA public/private key
+            pair</p>
+            <p>• Explain the differences between a digital signature and
+            an HMAC and the concept of non-repudiation</p>
+            <h2 id="16-key-management"><strong>1.6 Key
+            Management</strong></h2>
+            <blockquote>
+            <p>File name - lec06-keymanagement</p>
+            <p>Lecture number - 06</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain the uses of Diffie-Hellman</p>
+            <p>• Complete both steps of a DH exchange, given a small
+            modulus and base</p>
+            <p>• Identify and explain the hard problem underlying DH</p>
+            <p>• Explain practical attacks on DH (e.g., middle-person,
+            logjam) and solutions (e.g., authenticated DH)</p>
+            <p>• Define and explain perfect forward secrecy</p>
+            <p>• Explain how the CA model solves the “turtles
+            problem”</p>
+            <p>• Explain the purpose of a certificate, and the processes
+            of obtaining, verifying, and revoking a certificate w.r.t. a
+            CA</p>
+            <p>• Explain Public Key Infrastructures and potential
+            problems with their use, including examples (e.g., DigiNotar
+            incident), and potential solutions (e.g., certificate
+            transparency, CA pinning)</p>
+            <p>• Explain the tradeoffs between “web of trust” and PKI
+            models</p>
+            <h2 id="17-user-authentication"><strong>1.7 User
+            Authentication</strong></h2>
+            <blockquote>
+            <p>File name - lec07-userauth</p>
+            <p>Lecture number - 07</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Define authentication, credential</p>
+            <p>• Explain the difference between authentication and
+            identification</p>
+            <p>• Explain why authentication is fundamental to
+            security</p>
+            <p>• Identify examples of biometric authenticators and
+            explain issues with their use</p>
+            <p>• Identify examples of bearer-authenticators (“something
+            you have”)</p>
+            <p>• Identify and explain common problems, attacks and
+            defenses related to passwords and secret questions,
+            including online and offline brute-force attacks</p>
+            <p>• Explain how salts and password stretching work, as well
+            as how they mitigate brute-force attacks (and in what
+            situations they help)</p>
+            <p>• Explain the implications of password reuse (e.g.,
+            credential stuffing) and how password managers help</p>
+            <p>• Identify three types of credentials, trade offs, and
+            give examples</p>
+            <p>• Define and explain multi-factor authentication</p>
+            <p>• Explain the trade-offs of SMS as a second factor</p>
+            <h2 id="18-authentication-protocols"><strong>1.8
+            Authentication Protocols</strong></h2>
+            <blockquote>
+            <p>File name - lec08-authproto</p>
+            <p>Lecture number - 08</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain web authentication protocols and security
+            issues with their use</p>
+            <p>• Explain cryptographic authentication protocols</p>
+            <p>• Design and critique cryptographic authentication
+            protocols</p>
+            <p>◦ Design cookie authenticators, challenge–response
+            protocols, and protocols that establish and/or distribute
+            session keys</p>
+            <p>◦ Explain why a protocol authenticates a party</p>
+            <p>◦ Explain the purpose of nonce in authentication
+            protocols</p>
+            <p>◦ Identify flaws in a protocol (e.g., reflection, replay
+            attacks)</p>
+            <p>• Explain how tickets can provide single sign-on
+            (SSO)</p>
+            <p>• Explain the functionality of the KDC and TGS in
+            Kerberos</p>
+            <h2 id="cryptography"><strong>Cryptography</strong></h2>
+            <p>◦ define</p>
+            <p>▪ cryptosystem</p>
+            <p>▪ method of disguising plaintext messages so that only
+            select parties can decipher the ciphertext</p>
+            <p>▪ cryptology</p>
+            <p>▪ the combined study of cryptography and
+            cryptanalysis</p>
+            <p>▪ cryptography</p>
+            <p>▪ the art/science of developing and using
+            cryptosystems</p>
+            <p>▪ cryptanalysis</p>
+            <p>▪ the art/science of breaking cryptosystems</p>
+            <p>▪ plaintext</p>
+            <p>▪ This is the original, readable message or data that is
+            fed into an encryption algorithm. It's the unencrypted
+            information that is understandable without any need for
+            decryption.</p>
+            <p>▪ ciphertext</p>
+            <p>▪ This is the result of encrypting plaintext. Ciphertext
+            is transformed from readable data into an unreadable format
+            through the encryption process. It is designed to hide the
+            plaintext's content from anyone who does not have the proper
+            decryption key.</p>
+            <p>▪ encryption</p>
+            <p>▪ The process of converting plaintext into ciphertext.
+            Encryption uses an algorithm and a key to transform the
+            readable data (plaintext) into an unreadable format
+            (ciphertext) to protect the data's confidentiality.</p>
+            <p>▪ decryption</p>
+            <p>▪ The reverse process of encryption, decryption converts
+            ciphertext back into plaintext. This process uses a
+            decryption key, which may or may not be the same as the
+            encryption key, depending on the encryption method used
+            (symmetric or asymmetric encryption).</p>
+            <p>▪ key</p>
+            <p>▪ an input to a cryptographic algorithm used to maintain
+            security int he presence of an adversary</p>
+            <p>▪ keyspace</p>
+            <p>▪ a set of possible keys in a cryptosystem</p>
+            <p>▪ perfect secrecy</p>
+            <p>▪ A property of an encryption system where the ciphertext
+            does not reveal any information about the plaintext, except
+            possibly its length.</p>
+            <p>▪ cant bruteforce it because you’ll always get any answer
+            possible</p>
+            <p>▪ cipher</p>
+            <p>▪ any algo that’s used for encryption and decryption</p>
+            <p>▪ stream cipher</p>
+            <p>▪ an algo that generates a long keystream from a short
+            key</p>
+            <p>▪ acts as a random number generator with the key as the
+            seed</p>
+            <p>▪ works just like OTP. XOR with plaintext to encrypt, XOR
+            w ciphertext to decrypt</p>
+            <p>▪ block cipher</p>
+            <p>▪ function that replaces a fixed length input with a
+            fixed length output</p>
+            <p>▪ input/output size is called the “block size”</p>
+            <p>▪ block size</p>
+            <p>▪ input/output size of block cipher</p>
+            <p>▪ permutation</p>
+            <p>▪ deterministically scrambling things around</p>
+            <p>▪ substitution</p>
+            <p>▪ have mapping of one char to another char</p>
+            <p>▪ confusion</p>
+            <p>▪ we want to hide relationship between ciphertext and the
+            key. cant learn anything ab key from ciphertext</p>
+            <p>▪ diffusion</p>
+            <p>▪ hiding relationships between plaintext and
+            ciphertext.</p>
+            <p>◦ define kirckhoff’s principle and why cryptosystems
+            should conform to it</p>
+            <p>▪ cipher method should not be required to be secret. must
+            be able to fall into hands of enemy without
+            inconvenience</p>
+            <p>▪ “the enemy knows the system”</p>
+            <p>◦ identify key management problems</p>
+            <p>▪ key management (how to prevent keys from being leaked
+            or from being stolen)</p>
+            <p>▪ who gets which keys and how to securely get the
+            keys?</p>
+            <p>◦ explain types of cryptanalysis</p>
+            <p><strong>▪ ciphertext-only attack:</strong> eve has access
+            only to ciphertext</p>
+            <p><strong>▪ known-plaintext attack:</strong> eve has access
+            to plaintext and corresponding ciphertext</p>
+            <p><strong>▪ chosen-plaintext attack:</strong> eve can
+            choose plaintext and learn ciphertext</p>
+            <p><strong>▪ chosen-ciphertext attack:</strong> eve can
+            choose ciphertext and learn plaintext</p>
+            <p>◦ explain OTP, how it offers perfect secrecy, and list
+            issues that complicate its use</p>
+            <p>▪ one-time pad</p>
+            <p>▪ plaintext XOR random-pad = ciphertext</p>
+            <p>▪ ciphertext XOR random-pad = plaintext</p>
+            <p>▪ random-pad generated on encryption then sent to
+            receiver who uses it to decrypt. then gets rid of it</p>
+            <p>▪ offers perfect secrecy because we can prove that
+            knowledge of ciphertext yields no info about what plaintext
+            might be</p>
+            <p>▪ XOR anything with randomness, you get randomness
+            out.</p>
+            <p>▪ there is always a key that maps any message to any
+            ciphertext</p>
+            <p>▪ issues</p>
+            <p>▪ key must be as long as the message. can be extremely
+            big and impractical during key-management</p>
+            <p>▪ if key is used twice, plaintexts can be cracked. can
+            never reuse otp</p>
+            <p>▪ no integrity protection</p>
+            <p>◦ explain the distinction between stream and block
+            ciphers</p>
+            <p>▪ stream ciphers encrypt data one bit or byte at a time
+            (like stream of water flowing). block ciphers encrypt data
+            in fixed-size blocks at a time. stream</p>
+            <blockquote>
+            <p>ciphers often used in real-time communication systems
+            while block ciphers usually used to encrypt data that is
+            stored rather than sent.</p>
+            </blockquote>
+            <p>◦ list and explain potential problems with using stream
+            ciphers</p>
+            <p>▪ does not offer perfect secrecy</p>
+            <p>▪ still has problem of not allowing key reuse</p>
+            <p>◦ explain, diagram, and identify pros and cons of ECB,
+            CBC, and CTR cipher modes</p>
+            <p><strong>▪ Electronic Code Book:</strong> break message
+            into blocks, encrypt each block, send message in pieces.
+            Same on decrypt side</p>
+            <p><strong>▪ issues:</strong> it leaks information. dont use
+            ecb to gen large amts of ciphertext</p>
+            <p><strong>▪ Cipher Block Chaining:</strong> adds in a
+            random IV to randomize ciphertext appearance</p>
+            <p>▪ IV isn’t secret!</p>
+            <p>▪ chains together by XOR-ing the prev ciphtxt with
+            current plntxt block</p>
+            <p><strong>▪ issues:</strong> need things sent in order.
+            need to reassemble before decrypting. cannot encrypt blocks
+            in parallel</p>
+            <p><strong>▪ Counter Mode:</strong> a pseudorandom
+            function</p>
+            <p>▪ given an input but no key, hard to predict any part of
+            output</p>
+            <p>▪ use to gen keystream by encrypting a counter the size
+            of the block</p>
+            <p>▪ turns block cipher into stream cipher</p>
+            <p>▪ prevent keystream reuse, we can start counter at random
+            value</p>
+            <p><strong>▪ issues:</strong> limitation on integrity,
+            adversary knowns flipping a bit in ciphtxt can change same
+            bit in plntxt. also have to worry ab key stream reuse</p>
+            <p>◦ choose an application-appropriate symmetric cipher and
+            mode</p>
+            <p>◦ identify which cipher modes guarantee integrity</p>
+            <img src="media/image1.png" style="width:0.83333in;height:0.83333in" />
+
+            <p><em>NOT: understand symmetric cipher internals</em></p>
+            <h2 id="symmetric-crypto-and-hashes"><strong>Symmetric
+            crypto and hashes</strong></h2>
+            <p>◦ Create cryptographic constructions that provide
+            integrity and authenticity</p>
+            <p>▪ integrity = ensuring data cannot be changed in unauth
+            way</p>
+            <p>▪ authenticity = ensuring that a message originated from
+            a particular source</p>
+            <p>▪ message authentication codes (MACs) provide message
+            integrity and authenticity</p>
+            <p>▪ MAC uses symmetric encryption</p>
+            <p>▪ Uses encryption for confidentiality, MAC for integrity,
+            key for authenticity</p>
+            <p>◦ Explain the security differences between EtM, E&amp;M,
+            and MtE</p>
+            <p><strong>▪ E&amp;M:</strong> encrypt plaintext message,
+            mac plaintext message, send output of both together. in
+            general, not secure bc does not provide confidentiality +
+            could leak information</p>
+            <p><strong>▪ MtE:</strong> take message, compute mac first,
+            then encrypt both together</p>
+            <p>▪ encryption does not provide integrity</p>
+            <p>▪ leads to padding attack</p>
+            <p><strong>▪ EtM:</strong> take msg, encrypt it, then
+            compute mac over ciphertxt, not plntxt.</p>
+            <p>▪ best way to do it, easiest to prove secure</p>
+            <p>▪ ETM - ensures both integrity and authenticity of
+            ciphtxt itself. attacker cannot modify encrypted data
+            without also changing mac</p>
+            <p>▪ E&amp;M - less secure bc attacker can potentially
+            manipulate plntxt affecting integrity of encrypted
+            message</p>
+            <p>▪ MtE - can hide MAC errors and make padding oracle
+            attacks possible</p>
+            <p>◦ Identify and explain the three properties of a
+            cryptographic hash function</p>
+            <p>▪ one-way property</p>
+            <p>▪ cannot find x’ from h(x’)</p>
+            <p>▪ weak collision resistance</p>
+            <p>▪ no other y should be able to also be hashed to = hash
+            of another x</p>
+            <p>▪ Given a message and its hash, it should be very hard to
+            find another message that has the same hash</p>
+            <p>▪ strong collision resistance</p>
+            <p>▪ It should be very hard to find any two different
+            messages that result in the same hash.</p>
+            <p>◦ Explain the significance of the birthday paradox to
+            hash function security</p>
+            <p>▪ the probability of two or more people in a group of 23
+            share the same birthday is greater than 50%</p>
+            <p>▪ relates to hash function security because of the
+            likelihood of two different inputs producing the same hash
+            output (a collision)</p>
+            <p>▪ birthday attack exploits this to find collisions in
+            hash functions more efficiently than brute force</p>
+            <p><strong>▪ implication:</strong> collisions can be found
+            in approximately square root of hash output size</p>
+            <p>◦ Explain how HMAC works and why it is needed</p>
+            <p>▪ H(k XOR outerpad || H(k XOR innerpad|| M))</p>
+            <p>▪ ipad and opad used to make it provably secure</p>
+            <p><strong>◦ extra:</strong> cbc-mac: last block of
+            cbc-encrypted cipher text depends on both secret key and
+            every block of plaintext. great if you need integrity but
+            not confidentiality</p>
+            <p>▪ if use cbc to encrypt, you must use diff key to compute
+            MAC</p>
+            <p>◦ Describe how authenticated encryptions modes of
+            operation are different from EtM, E&amp;M, and MtE.</p>
+            <p>▪ CCM (counter with CBC-MAC) - counter mode for
+            encryption, cbc-mac for mac (use diff keys)</p>
+            <p>▪ GCM (Galois/Counter mode) - doing multiplication over
+            galois field, chain together similar to cbc (tends to be
+            more efficient than ccm)</p>
+            <p>◦ Identify at least three applications of hash
+            functions</p>
+            <h2 id="asymmetric-cryptography"><strong>Asymmetric
+            cryptography</strong></h2>
+            <p>◦ Explain common uses of RSA</p>
+            <p>◦ Explain the components of RSA public and private keys
+            and their relationship (including the common modulus and its
+            significance to public/private keys)</p>
+            <p>▪ e = exponent</p>
+            <p>▪ d = exponent</p>
+            <p>▪ n = modulus</p>
+            <p>▪ n = p * q</p>
+            <p>▪ public key = e and n</p>
+            <p>▪ private key = d and n</p>
+            <p>▪ d and e need to be multiplicative inverses of each
+            other (multiply together = 1)</p>
+            <p>▪ two prime numbers p and q (need to be BIG like 1024
+            bits big)</p>
+            <p>◦ Calculate (for small numbers) an RSA public/private
+            keypair and encrypt/decrypt a message using RSA</p>
+            <p>◦ Identify and explain the hard problem underlying
+            RSA</p>
+            <p>◦ Explain why “textbook” RSA is insecure (e.g., probable
+            message attacks, timing attacks) and the intuition behind
+            avoiding those problems (e.g., padding, blinding).</p>
+            <p>▪ its entirely deterministic in the plain text. if you
+            use same key to encrypt same plaintext twice, you get same
+            answer. anyone can compute rsa encryption with your public
+            key.</p>
+            <p>▪ if they want to see if you sent a message, they can
+            encrypt the message and confirm if what they saw is a
+            ciphertext.</p>
+            <p>▪ random padding so message includes randomness that
+            other side knows to throw it away but every encryption there
+            is different outcome.</p>
+            <p>▪ textbook RSA lacks integrity!</p>
+            <p>▪ timing attacks are very effective against RSA. uses
+            blinding to prevent against these attacks (pick random
+            number encrypt it, and multiply by it)</p>
+            <p>◦ Explain why asymmetric crypto operations are rarely
+            performed directly on data, and what we do instead.</p>
+            <p>▪ extremely time intensive and inefficient for large
+            amounts of data. There are limits due to key size which can
+            restrict the message size to be sent and this would be
+            extremely poor to use asymmetric crypto operations with.
+            Instead, we can encrypt the data a separate way using a
+            symmetric key. we then use asymmetric crypto operations to
+            encrypt and send that key to the recipient along with the
+            encrypted message. from there, the recipient would then
+            decrypt the key and then use the key to decrypt the message.
+            this is a hybrid encryption.</p>
+            <p>◦ Explain the differences between a digital signature and
+            an HMAC and the concept of non-repudiation</p>
+            <p>▪ properties of digsig</p>
+            <p><strong>▪ no forgery possible:</strong> no one can forge
+            message from alice</p>
+            <p><strong>▪ authenticity check:</strong> you should be able
+            to verify if signed message is really from alice</p>
+            <p><strong>▪ no alteration/integrity:</strong> no party can
+            undetectably alter a signed message</p>
+            <p>▪ provides authentication, integrity, and non-repudiation
+            (cannot deny having signed a signed msg)</p>
+            <h2 id="key-management"><strong>Key management</strong></h2>
+            <p>◦ key dist vs key agree</p>
+            <p>▪ key distribution is process where a key is assigned to
+            someone</p>
+            <p>▪ key agreement is where two or more parties cooperate on
+            which key to use</p>
+            <p>◦ Explain the uses of Diffie-Hellman</p>
+            <p>▪ allows for negotiating a secret over insecure
+            channels</p>
+            <p>▪ participants exchange intractable puzzles that can be
+            solved easily without additional info</p>
+            <p>▪ alice and bob share a puzzle with each other and its
+            impossible to solve unless you know a trick. alice and bob
+            are the only ones who know the trick.</p>
+            <p>◦ Given a small modulus and base, complete both steps of
+            a DH exchange</p>
+            <p>◦ Identify and explain the hard problem underlying DH</p>
+            <p>▪ subject to attacks by an ACTIVE adversary (Mallory)</p>
+            <p>▪ weak to on-path attacks (man in the middle attack).
+            this is key agreement, not authentication</p>
+            <p>▪ leads to authenticated DH</p>
+            <p>▪ use digital signatures?</p>
+            <p>◦ Explain practical attacks on DH (e.g., middle-person,
+            logjam) and solutions (e.g., authenticated DH)</p>
+            <p>◦ Define and explain perfect forward secrecy</p>
+            <p>▪ why use authenticated DH vs. Alice choosing a secret k,
+            signing it, and encrypting it with bob’s public key?</p>
+            <p><strong>▪ answer:</strong> it provides perfect forward
+            secrecy</p>
+            <p>▪ K is valid just for the session (ephemeral)</p>
+            <p>▪ K cannot be computed later if adversary obtains better
+            tech (quantum computer)</p>
+            <p>◦ Explain how the CA model solves the “turtles
+            problem”</p>
+            <p>▪ one person, set of people, or entities that we give our
+            trust to. sometimes gov agency, sometimes enterprise.</p>
+            <p>▪ will often have multiple trust anchors where if any one
+            of them vouches for something, we will trust it.</p>
+            <p>▪ often have several layers of delegation (Y vouches for
+            X, Z vouches for Y, I trust Z therefore I trust X)</p>
+            <p>▪ The certificate includes identity, public key, plus
+            signature from a trusted party. they are signed by a
+            certificate authority (CA)</p>
+            <p>▪ people trust a CA to vet identity</p>
+            <p>▪ identity may have been vetted by a registration
+            authority</p>
+            <p>◦ Explain the key purpose of a certificate, and the
+            processes of obtaining, verifying, and revoking a
+            certificate w.r.t. a CA</p>
+            <p>▪ solves a lot of redundancy problems.</p>
+            <p>▪ root certificate</p>
+            <p>▪ send signature (created from private key) and public
+            key to CA. they will use public key to verify your
+            identity</p>
+            <p><strong>▪ revocation causes:</strong> lost priv key,
+            compromised, owner no longer authorized</p>
+            <p>◦ Explain Public Key Infrastructures and potential
+            problems with their use, including examples (e.g., DigiNotar
+            incident), and potential solutions (e.g., certificate
+            transparency, CA pinning)</p>
+            <p>▪ PKI is hierarchy of keys used to authenticate
+            certificates</p>
+            <p>▪ requires root of trust (aka trust anchor)</p>
+            <p>▪ have to work your way up the tree to ensure that the CA
+            has the authority to issue a certificate (ncsu.edu CA cannot
+            issue a cert for chase.com)</p>
+            <p><strong>▪ cert transparency:</strong> a CA will publicly
+            publish every certificate they issue.</p>
+            <p>◦ Explain the tradeoffs between “web of trust” and PKI
+            models</p>
+            <h2 id="user-authentication"><strong>User
+            authentication</strong></h2>
+            <p>◦ Define</p>
+            <p>▪ authentication - “who are you?”</p>
+            <p>▪ the evaluation of credentials</p>
+            <p>▪ credential - the proof of identity</p>
+            <p>◦ Explain the difference between authentication and
+            identification</p>
+            <p>▪ authentication</p>
+            <p>▪ evaluates authenticity of identity proving
+            credentials</p>
+            <p>▪ identification</p>
+            <p>▪ actual process of determining the identity (applying
+            for driver license, they are doing identification
+            process)</p>
+            <p>▪ ascertains the identity of another person</p>
+            <p>▪ identification is like the process of claiming an
+            identity while authentication is the process of proving your
+            claimed identity is valid</p>
+            <p>◦ Explain why authentication is fundamental to
+            security</p>
+            <p>◦ Identify examples of biometric authenticators and
+            explain issues with their use</p>
+            <p>▪ fingerprint</p>
+            <p>▪ imperfect contact</p>
+            <p>▪ finger damage/finger loss</p>
+            <p>▪ lost fingerprints</p>
+            <p>▪ face recognition</p>
+            <p>▪ “fuzzy credential” (face changed based on mood)</p>
+            <p>▪ retina scanners</p>
+            <p>▪ voice signature</p>
+            <p>▪ easily spoofed</p>
+            <p>▪ dna</p>
+            <p>▪ hard for use online</p>
+            <p>▪ biometrics are not good against a strong adversary</p>
+            <p>▪ revocation (if your biometrics are leaked) what do you
+            do?</p>
+            <p>▪ there must always be a tolerance level (no fingerprint
+            is EXACTLY the same every time you scan it)</p>
+            <p>▪ static vs dynamic</p>
+            <p>▪ static - measuring state of your body at a certain
+            point in time</p>
+            <p>▪ dynamic - continuous authentication. looks at dynamic
+            features like how you move or act</p>
+            <p>◦ Identify examples of bearer-authenticators (“something
+            you have”)</p>
+            <p>▪ tokens (transponders)</p>
+            <p><strong>▪ how it works:</strong> one time password</p>
+            <p>▪ ezpass</p>
+            <p>▪ SecureID</p>
+            <p>▪ YubiKeys</p>
+            <p>▪ smartphones</p>
+            <p>▪ smartcards (store cryptographic keys onto a credit card
+            sized card)</p>
+            <p>▪ SIM card in phone is common example</p>
+            <p>▪ unpowered processors</p>
+            <p>▪ small nv storage</p>
+            <p>▪ tamper resistant</p>
+            <p>▪ digital certificates (used by websites to authenticate
+            themselves to customers)</p>
+            <p>◦ Identify and explain common problems, attacks and
+            defenses related to passwords and secret questions,
+            including online and offline brute-force attacks</p>
+            <p>◦ Explain how salts and password stretching work, as well
+            as how they mitigate brute-force attacks (and in what
+            situations they help)</p>
+            <p>▪ instead of storing H(salt|password), store
+            H^N(salt|password) for some large number N</p>
+            <p>◦ Explain the implications of password reuse (e.g.,
+            credential stuffing) and how password managers help</p>
+            <p>▪ cred stuffing (when password for one site is cracked,
+            adversaries will try that password on every other online
+            site)</p>
+            <p>◦ Identify three types of credentials, tradeoffs, and
+            give examples</p>
+            <p>▪ something you know</p>
+            <p>▪ password, passphrase, security questions, SSN</p>
+            <p>▪ something you have</p>
+            <p>▪ authentication app, key fob with code, MFA</p>
+            <p>▪ something you are</p>
+            <p>▪ biometrics (fingerprints, iris scans, voice prints)</p>
+            <p>◦ Define and explain multi-factor authentication</p>
+            <p>▪ requiring more than one authentication method</p>
+            <p>▪ usually it’s jsut 2-factor auth (2FA)</p>
+            <p>▪ often you want all three types of credentials
+            (something you have, know, are)</p>
+            <p>◦ Explain the trade-offs of SMS as a second factor</p>
+            <p>▪ apps have API access and can intercept SMS messages</p>
+            <p>▪ not encrypted in transit so if intercepted, anyone can
+            read it</p>
+            <p>▪ SIM card cloning</p>
+            <p>▪ social engineering cellular provider</p>
+            <h2 id="authentication-protocols"><strong>Authentication
+            protocols</strong></h2>
+            <p>◦ Explain web authentication protocols and security
+            issues with their use</p>
+            <p>▪ sometimes designed to authenticate both parties (mutual
+            authentication)</p>
+            <p>▪ sometimes just client auth or server auth</p>
+            <p><strong>▪ issues:</strong> weak keys/weak passwords,
+            reflection attack</p>
+            <p>◦ Explain cryptographic authentication protocols</p>
+            <p>◦ Design and critique cryptographic authentication
+            protocols</p>
+            <p>▪ Design cookie authenticators, challenge–response
+            protocols, and protocols that establish and/or distribute
+            session keys</p>
+            <p>▪ Explain why a protocol authenticates a party</p>
+            <p>▪ Explain the purpose of nonce in authentication
+            protocols</p>
+            <p>▪ Identify flaws in a protocol (e.g., reflection, replay
+            attacks)</p>
+            <p>◦ Explain how tickets can provide single sign-on
+            (SSO)</p>
+            <p>◦ Explain the functionality of the KDC and TGS in
+            Kerberos</p>
+            <h2 id="19-transport-layer-security"><strong>1.9 Transport
+            Layer Security</strong></h2>
+            <blockquote>
+            <p>File name - lec09-tls</p>
+            <p>Lecture number - 09</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain the “simplified” SSL protocol presented in
+            class</p>
+            <p><strong>◦ Connection Initiation:</strong> The client
+            initiates the connection.</p>
+            <p><strong>◦ Security Parameters:</strong> The server
+            selects security parameters.</p>
+            <p><strong>◦ Keying Material:</strong> The client generates
+            keying material.</p>
+            <p><strong>◦ Server Authentication:</strong> The server
+            authenticates and replicates the client's keying
+            material.</p>
+            <p><strong>◦ Communication:</strong> Client and server then
+            communicate securely</p>
+            <p>• Identify, explain, and compare key exchange methods</p>
+            <p><strong>◦ RSA:</strong> server must have certificate,
+            client encrypts secret with server’s public key</p>
+            <img src="media/image2.jpeg" style="width:3.89028in;height:2.47028in" />
+
+            <p>◦ Fixed DH: server and client exchange public keys,
+            certified by their certificates. You have a sort of
+            certificate (instead of putting encryption key in the cert,
+            you put a DH share)</p>
+            <p><strong>◦ Ephemeral DH (EDH):</strong> temp public keys
+            are exchanges and authenticated via an RSA signature. Uses a
+            certificate and a DH share to provide PFS</p>
+            <p><strong>◦ Anonymous DH:</strong> Exchanges keys without
+            authentication, making it vulnerable to MITM attacks</p>
+            <p>• Explain the differences between server and mutual
+            authentication</p>
+            <p>◦ Server authentication involves the 5 steps mentioned
+            above whereas mutual authentication has the client also
+            authenticating themselves. Once the server sends certificate
+            to client, the server then requests a certificate from the
+            client. The client then sends the server its own certificate
+            and then signs the keyedhas of the message and sends it to
+            the server.</p>
+            <p>• Identify attacks that circumvent SSL and/or TLS</p>
+            <p><strong>◦ Cipher downgrade attack:</strong> forces use of
+            weaker encryption by manipulating handshake messages</p>
+            <p><strong>◦ Truncation attacks:</strong> attacker signals
+            the end of a session prematurely, leading to potential data
+            exposure</p>
+            <p><strong>◦ Certificate verification issues:</strong>
+            improper validation of ssl certificates by applications can
+            lead to MITM attacks</p>
+            <p><strong>◦ BEAST, CRIME, and POODLE attacks:</strong>
+            exploint vulnerabilities in cipher block chaining in SSL 3.0
+            and compression methods</p>
+            <blockquote>
+            <p>Cant do TLS 1.3 without PFS</p>
+            </blockquote>
+            <h2 id="110-tcp-attacks-and-firewalls"><strong>1.10 TCP
+            Attacks and Firewalls</strong></h2>
+            <blockquote>
+            <p>File name - lec10-tcp-fw</p>
+            <p>Lecture number - 10</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain and describe IP message spoofing, sequence
+            number guessing, port scanning, and ARP spoofing</p>
+            <p>◦ IP Message Spoofing: This involves forging the source
+            address in IP packets to make the traffic appear as if it is
+            coming from a trusted, legitimate source. This can be used
+            to deceive systems or individuals and gain unauthorized
+            access to network resources.</p>
+            <p>◦ Sequence Number Guessing: In TCP communications,
+            sequence numbers are critical for maintaining the order of
+            packets. An attacker might guess the sequence number to
+            inject malicious packets into a session, potentially
+            hijacking or disrupting the communication.</p>
+            <p>◦ Port Scanning: Method to determine what hosts are on a
+            network and what services they run (usually by port but also
+            sometimes software versions). Often first step of attacker
+            recon and defender penetration testing. Most common tool is
+            nmap.</p>
+            <p>▪ Types of port scanning</p>
+            <p>• Python script that iterates over IP address and then
+            another script that iterates over ports. If it works, it
+            opens, if not, it doesnt. (TCP Scanning)</p>
+            <p>• SYN scanning. You send a syn and thats it. If something
+            comes back, the you know its open. Often called half-open
+            scanning as it does not open the full TCP connection. It is
+            “noisy”.</p>
+            <p>◦ ARP Spoofing: ARP resolves IP addresses to MAC
+            addresses. ARP spoofing involves sending fake ARP messages
+            onto a network, associating the attacker’s MAC address with
+            the IP address of another host, such as the gateway. This
+            results in the sending of data to the attacker instead of
+            the intended target.</p>
+            <p>• Define and compare stateless and stateful firewalls</p>
+            <p>• Evaluate a firewall policy for a given packet</p>
+            <blockquote>
+            <p>Job of TCP is to create an identity for particular
+            services/connections and ensure reliable delivery. Every
+            message is acknowledge at some point and if not, it will</p>
+            <p>retransmit. Also flow control. You can transmit/create
+            data faster than your receiver can process it.</p>
+            <p>Key property of TCP is congestion control.</p>
+            <p>Firewall is a device that sits between two or more
+            network entities (like routers) that monitors traffic. They
+            are intended to implement a policy to determine what traffic
+            is acceptable or not.</p>
+            </blockquote>
+            <h2 id="111-vpn"><strong>1.11 VPN</strong></h2>
+            <blockquote>
+            <p>File name - lec11-vpns</p>
+            <p>Lecture number - 11</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Identify and explain two main types of VPNs</p>
+            <p>◦ Institutional VPN</p>
+            <p>▪ Primarily used by organizations like enterprises and
+            universities to provide secure access to their networks over
+            the public internet</p>
+            <p>▪ Connect different segments of an organization’s network
+            across geographically separated areas, amking it appear as a
+            single unified network</p>
+            <p>▪ Focuses more on security and network management</p>
+            <p>◦ Commercial VPNs</p>
+            <p>▪ Offered by third-party providers that are most used by
+            individuals to maintain privacy and security while browsing
+            the internet.</p>
+            <p>▪ They route the user’s internet traffic through
+            provider’s servers which masks the user’s IP address and
+            encrypts their data.</p>
+            <p>▪ Often used to bypass geo-restrictions and maintain
+            anonymity online.</p>
+            <p>• Describe the advantages and disadvantages of a split
+            VPN</p>
+            <p>◦ What is a split VPN</p>
+            <p>▪ A VPN configuration that routes only part of the user’s
+            traffic through the VPN tunnel (usually only traffic that
+            needs access to protected network resources) while the rest
+            o the traffic accesses the internet directly</p>
+            <p>◦ Advantages</p>
+            <p>▪ Improved performance by reducing load on the VPN
+            gateway</p>
+            <p>▪ Less bandwidth consumption on the VPN tunnel</p>
+            <p>◦ Disadvantages</p>
+            <p>▪ Traffic not routed through the VPN might be exposed to
+            eavesdropping or attacks, potentially compromising user’s
+            data.</p>
+            <p>▪ Users might have false sense of security for all their
+            internet activities, not just those routed through VPN</p>
+            <h2 id="112-intrusion-detection-systems"><strong>1.12
+            Intrusion Detection Systems</strong></h2>
+            <blockquote>
+            <p>File name - lec12-ids</p>
+            <p>Lecture number - 12</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Define and compare signature vs. anomaly IDS</p>
+            <p>◦ IDS</p>
+            <p>▪ A device or software application that monitors a
+            network or system for malicious activity. Any detected
+            activity or violation is typically reported to an admin.</p>
+            <p>◦ Signature-Based IDS</p>
+            <p>▪ These systems use specific patterns of known malicious
+            activity to identify threats.</p>
+            <p>▪ Are highly effective at detecting known threats but
+            struggle with unique “zero-day” attacks as they rely on
+            updates to their database of signatures</p>
+            <p>◦ Anomaly-Based IDS</p>
+            <p>▪ These systems build a baseline of normal activity and
+            use machine learning or statistical methods to detect
+            deviations from this norm.</p>
+            <p>▪ They are potentially more effective at detecting new
+            and unknown threats but may suffer from higher rates of
+            false positives.</p>
+            <p>• Define and apply the base rate fallacy</p>
+            <p>◦ It is a common error where people neglect the overall
+            prevalence of a specific type of event (in this case
+            malicious activities).</p>
+            <p>◦ Ignoring the underlying rates of non-malicous vs
+            malicious activities when evaluating the effectiveness of
+            the IDS.</p>
+            <p>◦ Ex: if IDS has 99% accuracy rate, it sounds effective;
+            however, if the base rate of actual attacks is very low (1
+            in 10,000 packets), the number of false positives will
+            vastly outnumber true positives, leading to situation where
+            vast majority of alerts are false which can diminish trust
+            in the alerts and burden the system with unnecessary
+            investigations</p>
+            <blockquote>
+            <p>Recall metric (AKA sensitivity) - fraction of correct
+            instances among all instances that actually are positive
+            (malware)</p>
+            <p>Precision metric - fraction of correct instances
+            (malware) that algorithm believes are positive (malware)</p>
+            </blockquote>
+            <h2 id="113-software-vulnerabilities"><strong>1.13 Software
+            Vulnerabilities</strong></h2>
+            <blockquote>
+            <p>File name - lec16-vulnerabilities</p>
+            <p>Lecture number - 16</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Describe how common memory layouts impact buffer
+            overflows (e.g., stack and heap)</p>
+            <p>◦ Stack</p>
+            <p>▪ Stores local variables and control data for each
+            function (like return addresses and frame pointers)</p>
+            <p>▪ When buffer overflow occurs, it can overwrite adjacent
+            memory locations including critical control data.</p>
+            <p>▪ Leads to unauthorized control flow hijacking or
+            overwriting frame pointers.</p>
+            <p>◦ Heap</p>
+            <p>▪ Used for dynamic memory allocation controlled at
+            runtime.</p>
+            <p>▪ When overflow happens, can corrupt the heap management
+            data, leading to potential execution of arbitrary code.</p>
+            <p>▪ Leads to corruption of data structures and can alter
+            flow of program running.</p>
+            <p>• Explain how stack-based buffer overflows can change
+            control flow (e.g., by changing return address, frame
+            pointer, and local variables).</p>
+            <p>◦ Can change teh control flow by changing the return
+            address of the current function causing it to return to an
+            arbitrary location in memory.</p>
+            <p>◦ Can modify the frame pointer leading to erratic
+            behavior or crashes</p>
+            <p>◦ Can alter the local variables stored near the buffer on
+            the stack.</p>
+            <p>• LDI common memory defenses including StackGuard
+            (canaries), W^X (aka DEP), ASLR</p>
+            <p>◦ StackGuard (canaries)</p>
+            <p>▪ Placing a small known value (the canary) just before
+            the return address on the stack. When function returns, the
+            canary is checked and if the value has changed, and overflow
+            is assumed and program can take action or shut down.</p>
+            <p>◦ W^X (write XOR execute, AKA DEP)</p>
+            <p>▪ This policy can prevent execution of code from any part
+            of memory marked writable. Thus, even if an attacker can
+            inject (and write) malicious code, they cannot execute
+            it.</p>
+            <p>◦ ASLR</p>
+            <p>▪ Randomly arranges address space positions of key data
+            areas of a process, including the base of the executable and
+            positions of the stack, heap, and libraries. Makes it hard
+            for attacker to predict location of specific code or
+            structures.</p>
+            <p>▪ A compiler technique. Lose ability to use hardcoded
+            addresses anywhere. OS needs to assign binary address
+            segments to random places in memory.</p>
+            <h2 id="114-access-control"><strong>1.14 Access
+            Control</strong></h2>
+            <blockquote>
+            <p>File name - lec17-accesscontrol</p>
+            <p>Lecture number - 17</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Express access control as subjects, objects, rights
+            (SOR model) and draw an access control matrix</p>
+            <p>◦ Subjects</p>
+            <p>▪ Active entities in a system that perform actions
+            (Alice, Bob, Carol, or even processes operated by users)</p>
+            <p>◦ Objects</p>
+            <p>▪ Passive entities on which actions are performed (files,
+            databases, system devices, or even system processes)</p>
+            <p>◦ Rights</p>
+            <p>▪ The specific actions that subjects can perform on
+            objects (read, write, execute, delete, modify, etc.)</p>
+            <p>◦ Access Control Matrix</p>
+            <img src="media/image3.png" style="width:6.5in;height:1.33333in" />
+
+            <p>• Explain the three properties of a reference monitor
+            (tamperproof, complete mediation, simple enough to
+            verify)</p>
+            <p>◦ Reference Monitor</p>
+            <p>▪ machine that mediates all accesses to objects by
+            subjects</p>
+            <p>▪ Like a security guard for a computer system, it checks
+            every action by users to make sure they have permission to
+            perform actions on files or other resources.</p>
+            <p>◦ Complete mediation</p>
+            <p>▪ Every access request to objects by subjects must be
+            checked for permissions, ensuring no access can occur
+            without validation</p>
+            <p>◦ Tamperproof</p>
+            <p>▪ The reference monitor must be immune to modifications,
+            ensuring that no one can disable or alter its functions to
+            bypass security checks</p>
+            <p>◦ Simple enough to verify</p>
+            <p>▪ The rules and mechanisms uses to check permissions
+            should be simple enough that they can be verified as correct
+            and complete.</p>
+            <p>• Explain the principle of least privilege</p>
+            <p>◦ A subject should only have the minimal set of rights
+            necessary to perform its tasks. This limits the damage that
+            can occur due to accidents or unauthorized use of
+            access.</p>
+            <p>• Explain why RBAC is different than groups</p>
+            <p>◦ Role based access control</p>
+            <p>◦ A role is a collection of privileges associated with
+            some function or affiliation.</p>
+            <p>▪ A user can take on different roles at different times.
+            Lets us get closer to the principle of least privilege.</p>
+            <p>▪ User can change roles dynamically based on the task at
+            hand within a single session. Cannot change groups.</p>
+            <p>▪ Roles can be assigned and their permissions can be
+            adjusted more flexibly than a static group</p>
+            <blockquote>
+            <p>Two types of access control: mandatory and
+            discretionary</p>
+            <p>Mandatory: environment enforces static policy</p>
+            <p>Discretionary: object owners define policy</p>
+            <p>If you create a file, you can decide who can read or
+            write in it.</p>
+            </blockquote>
+            <h2 id="115-os-security"><strong>1.15 OS
+            Security</strong></h2>
+            <blockquote>
+            <p>File name - lec18-os</p>
+            <p>Lecture number - 16 (Attention: 1.13 Software
+            Vulnerabilities also had 16)</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Compare and contrast ACLs and C-Lists, and identify
+            when to use them.</p>
+            <p>◦ ACLs</p>
+            <p>▪ List associated with each object specifying which
+            subjects can access the object and what operations can be
+            performed</p>
+            <p>▪ They are attached to objects. Each entry in an ACL
+            specifies a subject and their allowed operations</p>
+            <p>▪ They are common in centralized systems such as
+            traditional OS’s where objects like files and directories
+            need protection</p>
+            <p>◦ C-Lists</p>
+            <p>▪ A capability list of objects that a given subject can
+            access along with the types of access allowed for each
+            object</p>
+            <p>▪ Are associated with subjects rather than objects. Each
+            capability is a token or key that grants the bearer access
+            rights to an object</p>
+            <p>▪ Common in distributed systems where maintaining
+            decentralized control over who can access what is more
+            practical</p>
+            <p>◦ C lists used in distributed systems while ACLs used in
+            centralized systems.</p>
+            <p>• Describe the basics of UNIX file system access control,
+            including setuid</p>
+            <p>◦ Unix file system is an access control mechanism that
+            includes permissions set on files and directories</p>
+            <p>◦ Permissions</p>
+            <p>▪ Each file and directory has three sets of permissions
+            for owner, group, and world.</p>
+            <p>• Read, write, execute</p>
+            <p>◦ Special permissions</p>
+            <p>▪ Setuid (set user id) is a special permission that can
+            be set on an executable file. It allows the program to run
+            with privileges of the file’s owner rather than the
+            privileges of the person executing the file.</p>
+            <p>• Explain the implication of monotonicity of access
+            control policy w.r.t. checking and defining policy</p>
+            <p>◦ Monotonicity refers to policy where more access rights
+            can only be added but cannot be taken away once granted.</p>
+            <p>◦ Example: if you are the owner of the file and the file
+            does not give the owner read, write, or execute rights BUT
+            the file does give the world read, write, or execute rights,
+            you can still perform those actions.</p>
+            <blockquote>
+            <p>Monotonic means it can only give rights, cannot take
+            away</p>
+            <p>Privilege escalation: when you go from a lower set of
+            privileges to a higher level</p>
+            </blockquote>
+            <h2 id="116-mobile-security"><strong>1.16 Mobile
+            Security</strong></h2>
+            <blockquote>
+            <p>File name - lec19-mobile</p>
+            <p>Lecture number - 18 (Attention: lecture number
+            mismatch)</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain methods and goals of mobile malware</p>
+            <p>◦ Trojans</p>
+            <p>▪ Malicious apps that disguise themselves as legitimate
+            apps but can be used to steal data, send SMS messages, or
+            install additional malware</p>
+            <p>◦ Spyware</p>
+            <p>▪ Software that is used to gather information about a
+            person or organization without their knowledge</p>
+            <p>▪ Could be monitoring user activities or stealing
+            sensitive data</p>
+            <p>◦ Ransomware</p>
+            <p>▪ Malware that encrypts user data and demands payment for
+            decryption key</p>
+            <p>◦ Adware</p>
+            <p>▪ Often bundled with free apps, they display unwanted
+            advertisements and can redirect search requests to ad
+            sites</p>
+            <p>◦ Rootkits</p>
+            <p>▪ Provide root or admin access to the attacker allowing
+            them to cover tracks or perform malicious attacks without
+            the user’s knowledge</p>
+            <p>• Compare and contrast static analysis and dynamic
+            analysis approaches for analyzing apps</p>
+            <p>◦ Static analysis</p>
+            <p>▪ Involves examining code of application without
+            executing it. Tools analyze the app’s source code or
+            decompiled binary to identify malicious patterns</p>
+            <p>▪ Can detect vulnerabilities and malicious code without
+            needing to run the app</p>
+            <p>▪ Might produce false positives and identify benign code
+            as malicious</p>
+            <p>▪ Limited in detecting environment-specific behaviors or
+            complex execution flows that only manifest during
+            runtime</p>
+            <p>◦ Dynamic analysis</p>
+            <p>▪ Involves running the application code in a controlled
+            environment and observe its actual behavior</p>
+            <p>▪ It shows exactly what the app does when it runs,
+            including any malicious activities and can test how the app
+            response to user interactions or other dynamic
+            conditions</p>
+            <p>▪ It requires a setup where the app can be safely
+            executed (the controlled environment) which consumes more
+            time and resources.</p>
+            <p>▪ It also might not test all possible scenarios if the
+            conditions to trigger certain behaviors are not met.</p>
+            <h2 id="117-anonymous-communication"><strong>1.17 Anonymous
+            Communication</strong></h2>
+            <blockquote>
+            <p>File name - lec20-anonymity</p>
+            <p>Lecture number - 20</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain the significance of metadata for security /
+            privacy</p>
+            <p>◦ Data that describes other data (time of creation of
+            data, location of data, details on file formats, etc.)</p>
+            <p>◦ Security usage</p>
+            <p>▪ Can be used to detect unusual patterns that might
+            indicate a security threat like a cyber attack or
+            unauthorized access</p>
+            <p>▪ Crucial for monitoring network traffic and identifying
+            potential threats or breaches based on anomalies in the
+            data</p>
+            <p>◦ Privacy</p>
+            <p>▪ It can reveal a lot about someone’s habits,
+            associations, and activities (ex: phone call metadata can
+            show who someone talked to, for how long, and how often,
+            etc)</p>
+            <p>• Explain anonymity sets</p>
+            <p>◦ Group of users among which an individual user’s actions
+            are indistinguishable to an outside observer</p>
+            <p>◦ Size of the anonymity set plays critical role in how
+            anonymous an individual is (think coveryourtracks
+            exercise)</p>
+            <p>◦ Larger anonymity sets</p>
+            <p>▪ Increase difficulty of determining any individual’s
+            actions, enhances privacy</p>
+            <p>◦ Set of possible senders/receivers</p>
+            <p>▪ Refers to all entities that could plausibly be
+            originator or recipient of a message within a given system.
+            Helps define breadth of anonymity set</p>
+            <p>• Compare and Contrast anonymizing proxies, Onion
+            Routing</p>
+            <p>◦ Both are technologies used to improve online privacy
+            and anonymity</p>
+            <p>◦ Anonymizing proxies</p>
+            <p>▪ Serve as a relay between user and internet. User
+            connects to proxy server which forwards requests to the
+            internet. Proxy hides user IP address from websites</p>
+            <p>▪ Simple to use and can effectively mask IP address from
+            services accessed</p>
+            <p>▪ Proxy server itself can see your real IP address and
+            sites you visit, creating a point of potential data leakage
+            if proxy server is compromised</p>
+            <p>◦ Onion routing</p>
+            <p>▪ Routes internet traffic through multiple layers of
+            encryption and a worldwide network of volunteer nodes,
+            making it extremely difficult to trace source or destination
+            of data</p>
+            <p>▪ Provides robust anonymity by separating identification
+            of the user from their activity, makes it nearly impossible
+            to trace activity back to user</p>
+            <p>▪ Typically slower than using direct connections or
+            anonymizing proxies due to multiple hops your data travels
+            through. Also, while anonymizes where traffic comes from, if
+            unencrypted, content could still reveal info about user at
+            exit nodes.</p>
+            <p>◦ Anonymizing proxies may be more efficient and faster
+            but less privacy protection and security than onion
+            routing.</p>
+            <h2 id="118-web-privacy"><strong>1.18 Web
+            Privacy</strong></h2>
+            <blockquote>
+            <p>File name - lec21-webpriv</p>
+            <p>Lecture number - 21</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Explain the significance of the referrer field to
+            privacy</p>
+            <p>◦ Referrer field in https is used to indicate url fo the
+            webpage that linked you to the page you are requesting.</p>
+            <p>◦ Data leakage</p>
+            <p>▪ Referrer field can disclose sensitive information to
+            third party websites about origin of the request (ex: user
+            clicks link from google, website can see that user came from
+            google and can see what user searched on google)</p>
+            <p>◦ Tracking and profiling</p>
+            <p>▪ Websites and third party services can use referrer data
+            to track user movements across the web and build profiles of
+            their interests and behaviors</p>
+            <p>• Describe how Cookies are used for tracking (1st party
+            vs 3rd party)</p>
+            <p>◦ First party cookies</p>
+            <p>▪ Set by domain a user is visiting directly and helps in
+            maintaining session states, user preferences, and other data
+            needed to maintain and enhance user experience</p>
+            <p>◦ Third party cookies</p>
+            <p>▪ Placed by domains other than the site a user visits
+            directly. Often placed by ads or embedded elements like
+            widgets. Primarily used for tracking users across multiple
+            sites to deliver targeted ads and analyze site usage</p>
+            <p>• Explain how stateless tracking / fingerprinting
+            works</p>
+            <p>◦ Collecting info about a user’s browser configuration
+            and device characteristics (like screen resolution, browser
+            version, installed fonts, plugins, etc.) to create a unique
+            “fingerprint”</p>
+            <p>◦ Unlike cookies, this does not need to store any data on
+            the user’s device, making it harder to detect and block</p>
+            <p>• Describe tracking defenses, naming several</p>
+            <p>◦ Tracking defenses can help provide robust defense
+            against various tracking methods to enhance privacy and data
+            security</p>
+            <p>◦ Types of defenses</p>
+            <p>▪ Browser configuration</p>
+            <p>• Adjusting browser settings to block or limit cookies
+            and javascript execution</p>
+            <p>▪ Extensions and add-ons</p>
+            <p>• Tools like privacy badger or adblock or https
+            everywhere can help block trackers and manage cookies. This
+            reduces chance of persistent tracking</p>
+            <p>▪ Private browsing modes</p>
+            <p>• Modes like incognito that do not save browsing history
+            or cookies</p>
+            <p>▪ Anti-tracking technologies</p>
+            <p>• Some browsers or devices have advanced anti-tracking
+            tech that block common trackers and third-party cookies</p>
+            <p>▪ Virtual private networks</p>
+            <p>• THEY DO NOT STOP TRACKING but can mask IP address
+            making it harder to correlate tracking data to your
+            location</p>
+            <h2 id="120-wireless-security"><strong>1.20 Wireless
+            Security</strong></h2>
+            <blockquote>
+            <p>File name - lec06-wireless-sec</p>
+            <p>Lecture number - NA (Attention)</p>
+            <p><strong>Objectives:</strong></p>
+            </blockquote>
+            <p>• Identify and explain the properties wireless networks
+            must maintain to be secure</p>
+            <p>◦ Confidentiality, integrity, availability,
+            authentication, identities, location.</p>
+            <p>◦ Confidentiality</p>
+            <p>▪ Ensuring that information transmitted over wireless
+            networks cannot be intercepted and read by unauthorized
+            parties. Often involves encrypting data transmitted over
+            network</p>
+            <p>◦ Integrity</p>
+            <p>▪ Ensuring that the data sent is not altered during
+            transmission. Use checksums or cryptographic hashes to
+            detect any alterations to data</p>
+            <p>◦ Availability</p>
+            <p>▪ Ensures that network services are available to users,
+            particularly when under attack or during high demand.
+            Measures like redundancy and robust network design can help
+            maintain availability</p>
+            <p>◦ Authentication</p>
+            <p>▪ Verifying identity of users and devices on network to
+            prevent unauthorized access</p>
+            <p>▪ Involves passwords, digital certs, or complex MFA
+            methods</p>
+            <p>◦ Identities</p>
+            <p>▪ Protecting the identity of users on the network to
+            prevent tracking or unauthorized access to personal info</p>
+            <p>◦ Location</p>
+            <p>▪ Protecting the location data of users which can be
+            sensitive. Prevent privacy invasions.</p>
+            <p>• Identify common threats to wireless networks</p>
+            <p>◦ eavesdropping/interception</p>
+            <p>▪ Intercepting wireless communications to capture
+            sensitive data</p>
+            <p>◦ Spoofing</p>
+            <p>▪ Impersonating a device ont he network to gain
+            unauthorized access</p>
+            <p>◦ Tampering</p>
+            <p>▪ Altering data in transit</p>
+            <p>◦ Denial of service</p>
+            <p>▪ Flooding network with excessive requests to disrupt
+            service for legitimate users</p>
+            <p>◦ Man-in-the-middle attacks</p>
+            <p>▪ Intercepting and possibly altering communications
+            between two parties who believe they are communicating with
+            each other</p>
+            <p>• Identify typical controls and security mechanisms in
+            wireless networks</p>
+            <p>◦ Encryption</p>
+            <p>▪ Using strong encryption protocols (WPA3 for Wifi
+            networks) to ensure data confidentiality</p>
+            <p>◦ Authentication protocols</p>
+            <p>▪ Implementing robust authentication mechanisms (like
+            WPA2- Enterprise) for authenticating network users</p>
+            <p>◦ Access controls</p>
+            <p>▪ Using MAC address filtering, hidden SSIDs, and
+            disabling broadcast to limit who can access network</p>
+            <p>◦ Network segmentation</p>
+            <p>▪ Dividing the network into subnetworks to limit access
+            to network resources</p>
+            <p>◦ Firewalls and intrusion detection systems</p>
+            <p>▪ Deploying firewalls and IDS to monitor and control
+            incoming/outgoing network traffic based on predetermined
+            security rules</p>
+            <blockquote>
+            <p>Want stream ciphers for wireless because resistance to
+            propagation of bit error ( common in wireless)</p>
+            <p>Unlike block ciphers, which encrypt data in fixed-size
+            blocks, stream ciphers encrypt data one bit or byte at a
+            time. This means that a single bit error in a ciphertext
+            affects only one bit in the decrypted plaintext, whereas in
+            block ciphers, a single bit error can corrupt the entire
+            block of plaintext.</p>
+            <p>Where is the IMSI, where are the keys? There is a
+            provisioning process. In the old school chips (hard sims),
+            it was burned into the hardware and never left.</p>
+            </blockquote>
+        </main>
+    </div>
+</body>
+
+</html>

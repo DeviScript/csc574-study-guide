@@ -731,45 +731,82 @@
                     </table>
 
                     <h3>Risk and adequate protection</h3>
-                    <div class="formula">R = T x V x C &nbsp; or, with combined success probability, &nbsp; R = P x C
-                    </div>
-                    <p>For an unauthorized withdrawal using a stolen or fake card:</p>
+                    <p><strong>Threat:</strong> An unauthorized person attempts to withdraw cash using a stolen or
+                        fake card.</p>
+                    <h4>Risk formula</h4>
+                    <p><strong>Risk = Threat &times; Vulnerability &times; Consequence</strong></p>
+                    <p><strong>R = T &times; V &times; C</strong></p>
+                    <h4>Baseline risk</h4>
                     <ul>
-                        <li><strong>Threat likelihood ($T$) = 0.3:</strong> an estimated 30% monthly chance that
-                            someone attempts a fraudulent withdrawal.</li>
-                        <li><strong>Vulnerability ($V$) = 0.6:</strong> if an attack is attempted, an estimated 60%
-                            chance that the attacker has sufficient card or PIN information to succeed.</li>
-                        <li><strong>Consequence ($C$) = $800:</strong> estimated direct financial loss and response
-                            cost from one successful fraudulent withdrawal.</li>
-                        <li><strong>Baseline risk:</strong> $R = 0.3 x 0.6 x $800 = $144/month$.</li>
+                        <li><strong>Threat (T) = 0.3</strong></li>
+                        <li><strong>Vulnerability (V) = 0.6</strong></li>
+                        <li><strong>Consequence (C) = $800</strong></li>
                     </ul>
+                    <p><strong>R = 0.3 &times; 0.6 &times; $800 = $144/month</strong></p>
                     <h3>Risk-reduction scenarios</h3>
                     <ul>
-                        <li><strong>Reduce threat with fraud monitoring and blocked-card lists:</strong>
+                        <li><strong>1. Reduce threat</strong>
+                            <p><strong>Control:</strong> Fraud monitoring and blocked-card lists.</p>
                             <ul>
-                                <li>$T = 0.3 \rightarrow 0.1$</li>
-                                <li>New risk: $R = 0.1 x 0.6 x $800 = $48/month$.</li>
-                                <li>Risk reduction: $144 - $48 = $96/month$.</li>
+                                <li><strong>T = 0.3 &rarr; 0.1</strong></li>
+                                <li>Threat is reduced from 30% to 10%.</li>
                             </ul>
+                            <p><strong>New risk:</strong></p>
+                            <p><strong>R = 0.1 &times; 0.6 &times; $800 = $48/month</strong></p>
+                            <p><strong>Risk reduction:</strong></p>
+                            <p><strong>$144 &minus; $48 = $96/month saved</strong></p>
                         </li>
-                        <li><strong>Reduce vulnerability with a security audit and current industry controls:</strong>
+                        <li><strong>2. Reduce vulnerability</strong>
+                            <p><strong>Control:</strong> Perform a security audit and update the ATM to current
+                                industry security standards.</p>
                             <ul>
-                                <li>$V = 0.6 \rightarrow 0.2$</li>
-                                <li>New risk: $R = 0.3 x 0.2 x $800 = $48/month$.</li>
-                                <li>Risk reduction: $144 - $48 = $96/month$.</li>
+                                <li><strong>V = 0.6 &rarr; 0.2</strong></li>
+                                <li>Vulnerability is reduced from 60% to 20%.</li>
                             </ul>
+                            <p><strong>New risk:</strong></p>
+                            <p><strong>R = 0.3 &times; 0.2 &times; $800 = $48/month</strong></p>
+                            <p><strong>Risk reduction:</strong></p>
+                            <p><strong>$144 &minus; $48 = $96/month saved</strong></p>
                         </li>
-                        <li><strong>Reduce consequence or transfer risk with insurance:</strong>
+                        <li><strong>3. Reduce consequence / transfer risk</strong>
+                            <p><strong>Control:</strong> Insurance covers most losses associated with successful
+                                fraud.</p>
                             <ul>
-                                <li>$C = $800 \rightarrow $100$</li>
-                                <li>New risk: $R = 0.3 x 0.6 x $100 = $18/month$.</li>
-                                <li>Risk reduction: $144 - $18 = $126/month$.</li>
+                                <li><strong>C = $800 &rarr; $100</strong></li>
+                                <li>The organization's financial consequence is reduced from $800 to $100.</li>
                             </ul>
+                            <p><strong>New risk:</strong></p>
+                            <p><strong>R = 0.3 &times; 0.6 &times; $100 = $18/month</strong></p>
+                            <p><strong>Risk reduction:</strong></p>
+                            <p><strong>$144 &minus; $18 = $126/month saved</strong></p>
                         </li>
                     </ul>
-                    <p>By these estimates alone, insurance produces the largest expected financial reduction:
-                        $144/month \rightarrow $18/month. It does not make fraud less likely or the ATM less
-                        vulnerable; it transfers much of the loss. The control is economically justified only when its
+                    <h3>Managing ATM risk</h3>
+                    <p>The original expected risk is:</p>
+                    <p><strong>R = 0.3 &times; 0.6 &times; $800 = $144/month</strong></p>
+                    <p>Comparing the three approaches:</p>
+                    <ul>
+                        <li><strong>Reduce threat:</strong> $48/month remaining risk; <strong>$96/month
+                                reduction</strong></li>
+                        <li><strong>Reduce vulnerability:</strong> $48/month remaining risk; <strong>$96/month
+                                reduction</strong></li>
+                        <li><strong>Reduce consequence with insurance:</strong> $18/month remaining risk;
+                            <strong>$126/month reduction</strong>
+                        </li>
+                    </ul>
+                    <p>Based strictly on these estimates, <strong>insurance provides the greatest reduction in
+                            expected financial risk</strong>. It lowers expected monthly loss by $126, from $144 to
+                        $18, an 87.5% reduction. Reducing threat or vulnerability lowers the expected loss by $96,
+                        from $144 to $48, a 66.7% reduction.</p>
+                    <p>Insurance does not reduce the likelihood that an attacker will attempt fraud or make the ATM
+                        itself less vulnerable. Instead, it <strong>transfers much of the financial consequence of a
+                            successful attack to the insurer</strong>.</p>
+                    <p>Therefore, in this example, <strong>reducing consequence / transferring risk is the most
+                            effective option for expected financial loss:</strong></p>
+                    <p><strong>Baseline expected loss &minus; risk reduction = remaining expected loss</strong></p>
+                    <p><strong>$144/month &minus; $126/month = $18/month</strong></p>
+                    <p>However, the result is only meaningful when compared with the <strong>cost of implementing
+                            each control</strong>. For example, insurance would only be economically worthwhile if its
                         cost is reasonable compared with the expected reduction in loss.</p>
                     <p>The principle of adequate protection asks whether a defense costs less than the expected loss it
                         reduces. Camera coverage, lighting, alarms, anti-skimmer checks, PIN shielding, and lower cash
@@ -1095,6 +1132,28 @@
                     <p>Here, T is threat likelihood, V is the probability of successful exploitation, P is the combined
                         probability of success, and C is cost or impact. The ATM example uses
                         0.30 x 0.60 x $800 = $144 expected loss per month.</p>
+                    <h3>ATM risk-reduction scenarios</h3>
+                    <p><strong>Threat:</strong> An unauthorized person attempts to withdraw cash using a stolen or
+                        fake card.</p>
+                    <ul>
+                        <li><strong>Reduce threat:</strong> Fraud monitoring and blocked-card lists reduce T from 0.3
+                            to 0.1. <strong>New risk:</strong> R = 0.1 &times; 0.6 &times; $800 = $48/month.
+                            <strong>Risk reduction:</strong> $144 &minus; $48 = $96/month saved.
+                        </li>
+                        <li><strong>Reduce vulnerability:</strong> A security audit and current industry security
+                            standards reduce V from 0.6 to 0.2. <strong>New risk:</strong> R = 0.3 &times; 0.2
+                            &times; $800 = $48/month. <strong>Risk reduction:</strong> $144 &minus; $48 =
+                            $96/month saved.</li>
+                        <li><strong>Reduce consequence / transfer risk:</strong> Insurance reduces C from $800 to
+                            $100. <strong>New risk:</strong> R = 0.3 &times; 0.6 &times; $100 = $18/month.
+                            <strong>Risk reduction:</strong> $144 &minus; $18 = $126/month saved.
+                        </li>
+                    </ul>
+                    <p>Insurance provides the greatest reduction in expected financial risk: it leaves $18/month of
+                        expected loss, compared with $48/month for the other two approaches. It transfers much of the
+                        financial consequence of a successful attack to the insurer; it does not make fraud less likely
+                        or the ATM less vulnerable. The comparison is meaningful only when the cost of each control is
+                        considered.</p>
                     <p>A broken window in a server room is best classified as a vulnerability: it is a flaw or condition
                         that exposes the system. An intruder is a possible threat that could exploit it. Threats may be
                         intentional, accidental, or environmental.</p>
