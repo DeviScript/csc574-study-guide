@@ -13,6 +13,11 @@ terminology, exam guidance, and learning expectations as authoritative for the s
 cards. This public repository publishes that folder, so do not add student work, credentials, or private course
 materials unless the repository visibility is changed.
 
+Externally sourced or user-provided study material belongs in `csc574/additional-study-materials/`, not in
+`course-reference/`. It is supplementary only: retain its source attribution, reproduce source content faithfully, and
+label it as external and not confirmed assessment content. Do not use it to revise instructor-provided Exam Questions,
+Exams Guide Answers, or exam flash cards unless explicitly requested.
+
 For exam-oriented content, use `course-reference/CSC_574_Fall_2026_Exam_Guide_Week_1.md` as the authoritative
 checked-in source. The Learning Objectives define testable material, while the nested example questions show possible
 Bloom-aligned task phrasing.
@@ -31,6 +36,7 @@ Bloom-aligned task phrasing.
 - `csc574/flash-cards.html`: interactive flash-card page with independent Lecture 02, 03, and 04 sections.
 - `csc574/exam-question-flash-cards.html`: exam-focused flash-card page with one card at a time and Previous/Next navigation.
 - `csc574/exam questions/`: source Markdown files and rendered HTML pages for possible exam questions and the answer key.
+- `csc574/additional-study-materials/`: external supplemental sources, their rendered pages, and required embedded media.
 
 The lecture order is Lecture 01, Lecture 02, Lecture 03, and Lecture 04.
 
@@ -42,7 +48,9 @@ currently have a complete study guide.
 The Flash Cards section contains two homepage links side by side: `Open Flash Cards` for lecture-specific cards and
 `Exam Question Flash Cards` for exam-question practice. Keep both links compact and visible in that section.
 
-Keep the homepage sections in this order after Course Materials: Flash Cards, Review Questions, and Exam Questions.
+Keep the homepage sections in this order after Course Materials: Flash Cards, Review Questions, Exam Questions, and
+Additional Study Materials. Additional Study Materials belongs below Exam Questions and must remain visually and
+semantically separate from the instructor-provided sections.
 Review Questions belongs between Flash Cards and Exam Questions and links to the standalone practice-question bank and
 its answer key. Exam Questions contains the authoritative Exams Guide and, beside it, an `Exams Guide Answers` card.
 The Exams Guide page contains only the title, exam-format guidance, and instructor-provided guide objectives/example
@@ -141,6 +149,7 @@ It combines the slides, transcript, exam guide, and master guide. It should reta
 - The ATM operating system as trusted because the ATM depends on it, but not automatically trustworthy.
 - The ransomware classification as modification plus interruption.
 - Risk formulas `R = T x V x C` and simplified `R = P x C`.
+- The instructor caveat that an ATM risk comparison is somewhat meaningless without comparable scenarios, assumptions, and control costs.
 - The principle of adequate protection and its cost/value tradeoff.
 
 Do not put a separate answer key underneath the questions. If restructuring the review section, verify that every question has exactly one answer rendered directly below it and that explicit labels are not duplicated by automatic ordered-list numbering.
@@ -202,7 +211,9 @@ that contain multiple items.
 
 The dedicated exam-practice page is `csc574/exam-question-flash-cards.html`. It should present one exam-focused card at a
 time with click or keyboard answer reveal and Previous/Next navigation. Keep the question-bank topics and answer wording
-aligned with the standalone Exam Questions and Answer Key pages.
+aligned with the standalone Exams Guide and Exams Guide Answers pages. Include one card for every Exams Guide Learning
+Objective and each nested instructor-provided example task, with its matching guide answer. Do not add external or
+historical practice-exam content to this page unless explicitly requested.
 
 ## Exam Questions Pages
 
@@ -215,6 +226,18 @@ The possible-exam-questions page is titled `CSC 574 Midterm Exam Questions`. Kee
 below that title, followed by an `Exams Guide` section. In the source Markdown, preserve the authoritative hierarchy:
 the seven Learning Objectives are parent bullets, and each instructor-provided example task is a nested child bullet
 under its related objective. Do not flatten those example tasks into a separate numbered list.
+
+## Additional Study Materials
+
+The current external source pages are:
+
+- `csc574/additional-study-materials/future-learning-objectives.md` and `.html`: user-provided future-learning objectives.
+- `csc574/additional-study-materials/historical-practice-exams.md` and `.html`: user-provided historical and sample exam questions and answers.
+
+When updating these pages, edit the Markdown source, preserve its attribution and external-material disclaimer, then
+render the matching HTML with `pandoc` and `additional-page.template.html`. Preserve extracted files in
+`csc574/additional-study-materials/media/` when the converted source references them. Verify the rendered page has a
+descriptive browser title, working media, and no horizontal overflow at narrow mobile widths.
 
 ## Validation
 

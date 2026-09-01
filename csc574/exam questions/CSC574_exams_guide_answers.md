@@ -44,6 +44,8 @@ Or, when probability is combined:
 
 $$R = P \times C$$
 
+When comparing ATM risk scenarios, retain the instructor caveat: the result is somewhat meaningless without comparable scenarios, assumptions, and control costs.
+
 ### Broken server-room window
 
 The broken window is a **vulnerability** because it is a weakness or condition that exposes the system. An intruder is a possible **threat**; entering through the window is an **attack**.

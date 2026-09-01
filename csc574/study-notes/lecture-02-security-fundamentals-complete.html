@@ -144,6 +144,32 @@
             background: #fff;
         }
 
+        .slide-controls {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            width: min(100%, 420px);
+            margin: 14px auto 0;
+        }
+
+        .slide-controls button {
+            padding: 8px 10px;
+            border: 1px solid rgba(24, 127, 123, 0.5);
+            border-radius: 6px;
+            color: var(--teal);
+            background: var(--card);
+            font: inherit;
+            font-size: .78rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .slide-controls button:hover,
+        .slide-controls button:focus-visible {
+            color: #fff;
+            background: var(--teal);
+        }
+
         .slide-viewer {
             display: block;
         }
@@ -190,6 +216,17 @@
             background: var(--paper);
         }
 
+        .slide-note .exam-question {
+            margin-bottom: 14px;
+            color: var(--ink);
+        }
+
+        .slide-note .exam-answer {
+            margin: 0;
+            padding-top: 10px;
+            border-top: 1px solid var(--line);
+        }
+
         .slide-note strong {
             display: block;
             margin-bottom: 3px;
@@ -205,6 +242,17 @@
 
         .slide-note p:last-child {
             margin-bottom: 0;
+        }
+
+        .slide-note .study-section-link {
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px solid var(--line);
+        }
+
+        .study-section-link a {
+            color: var(--teal);
+            font-weight: 800;
         }
 
         .slide-answer {
@@ -805,6 +853,8 @@
                             effective option for expected financial loss:</strong></p>
                     <p><strong>Baseline expected loss &minus; risk reduction = remaining expected loss</strong></p>
                     <p><strong>$144/month &minus; $126/month = $18/month</strong></p>
+                    <p><strong>Instructor caveat:</strong> the result is somewhat meaningless without comparable
+                        scenarios.</p>
                     <p>However, the result is only meaningful when compared with the <strong>cost of implementing
                             each control</strong>. For example, insurance would only be economically worthwhile if its
                         cost is reasonable compared with the expected reduction in loss.</p>
@@ -813,6 +863,29 @@
                         limits can be cost-effective. Moving an ATM indoors can sacrifice 24/7 availability, and an
                         overnight guard may cost more than the risk reduction justifies. The appropriate choice changes
                         with the ATM's location, assets, adversaries, and operating conditions.</p>
+                    <h3>Slide 14 ATM prompts and answers</h3>
+                    <ol>
+                        <li><strong>What properties does it need to maintain?</strong>
+                            <ul>
+                                <li><strong>Confidentiality:</strong> protect PINs, account information, and transaction
+                                    records from unauthorized disclosure.</li>
+                                <li><strong>Integrity:</strong> protect balances, withdrawal amounts, software, and cash
+                                    dispensing from unauthorized changes or errors.</li>
+                                <li><strong>Availability:</strong> preserve access to cash, network connectivity, and
+                                    authorized customer services.</li>
+                                <li><strong>Atomicity:</strong> ensure the withdrawal and account update complete
+                                    consistently.</li>
+                            </ul>
+                        </li>
+                        <li><strong>What adversaries might attack it, and what can they do?</strong> Physical attackers,
+                            skimmer operators, shoulder surfers, hackers, criminals, users, and environmental events can
+                            break into the machine, capture credentials, observe PIN entry, manipulate software or
+                            networks, redirect cash, or disrupt service.</li>
+                        <li><strong>What mechanisms maintain important properties despite those adversaries?</strong>
+                            Hardened cases, locks, tamper-evident seals, PIN shielding, anti-skimmer checks, transaction
+                            and balance verification, cash sensors, withdrawal limits, backup power, redundant network
+                            connections, and gas detection or venting.</li>
+                    </ol>
                 </section>
 
                 <section id="objectives">
@@ -1039,6 +1112,16 @@
                         as
                         expected. These definitions are useful, but they still require context: expected by whom, under
                         what conditions, and when?</p>
+                    <h3>Slide 10 questions and answers</h3>
+                    <ol>
+                        <li><strong>As expected by whom?</strong> Security is relative to the participant. A bank and a
+                            customer may have different assets, expectations, and capabilities, so the same system can
+                            appear secure to one participant but not the other.</li>
+                        <li><strong>Under what conditions?</strong> Specify the system's environment, assumptions,
+                            capabilities, and the conditions under which it is expected to behave as expected.</li>
+                        <li><strong>When?</strong> Specify the relevant time period and circumstances. A system's
+                            security claim is not an abstract guarantee that applies in every situation forever.</li>
+                    </ol>
                     <h3>From a definition to a security model</h3>
                     <ul>
                         <li>The properties assumed to hold form the <strong>trust model</strong>.</li>
@@ -1728,6 +1811,32 @@
             "review"
         ];
 
+        const sectionSlideRanges = [
+            { start: 6, end: 6, id: "objectives" },
+            { start: 8, end: 12, id: "security" },
+            { start: 13, end: 15, id: "atm" },
+            { start: 16, end: 23, id: "cia" },
+            { start: 24, end: 37, id: "vocabulary" },
+            { start: 38, end: 47, id: "attacks" },
+            { start: 48, end: 53, id: "threat-modeling" },
+            { start: 54, end: 61, id: "trust" },
+            { start: 62, end: 64, id: "security-model" },
+            { start: 65, end: 69, id: "economics" }
+        ];
+
+        const sectionSlideCoverage = {
+            objectives: "Slide 6 of 70",
+            security: "Slides 8-12 of 70",
+            cia: "Slides 16-23 of 70",
+            atm: "Slides 13-15 of 70",
+            vocabulary: "Slides 24-37 of 70",
+            attacks: "Slides 38-47 of 70",
+            "threat-modeling": "Slides 48-53 of 70",
+            trust: "Slides 54-61 of 70",
+            "security-model": "Slides 62-64 of 70",
+            economics: "Slides 65-69 of 70"
+        };
+
         collapsibleSections.forEach((sectionId) => {
             const section = document.getElementById(sectionId);
             if (!section) return;
@@ -1736,7 +1845,9 @@
             details.id = sectionId;
             const summary = document.createElement("summary");
             const heading = section.querySelector("h2");
-            summary.textContent = heading ? heading.textContent : sectionId.replace(/-/g, " ");
+            const sectionTitle = heading ? heading.textContent : sectionId.replace(/-/g, " ");
+            const coverage = sectionSlideCoverage[sectionId];
+            summary.textContent = coverage ? `${sectionTitle} · ${coverage}` : sectionTitle;
             const content = document.createElement("div");
             content.className = "section-content";
             if (heading) heading.remove();
@@ -1824,6 +1935,23 @@
             "Revisit the ATM security model: properties, adversaries, attacks, defenses, and adequate protection.",
             "Next time: introduction to cryptography and symmetric-key cryptography."
         ];
+        const examPracticeBySlide = {
+            10: { question: "Explain definitions of security.", answer: "A system is secure if it maintains well-specified properties despite the actions of well-specified adversaries. A complete claim identifies the participant, conditions, and time period." },
+            17: { question: "Define the 3 components of the CIA triad.", answer: "Confidentiality prevents unauthorized disclosure. Integrity prevents unauthorized modification. Availability preserves authorized access." },
+            25: { question: "Would you say a participant in a security model is limited to the actual people involved?", answer: "No. A participant is an expected system entity or viewpoint. Computers, agents, servers, clients, organizations, and hosts can be participants." },
+            31: { question: "Is a broken window in your server room considered under the term threat?", answer: "No. The broken window is a vulnerability. An intruder is a possible threat; entering through the window is an attack." },
+            35: { question: "Define confidentiality, integrity, availability, asset, participant, vulnerability, threat, attack, defense, TCB, and risk.", answer: "Risk is expected concern from likelihood, vulnerability, and impact: R = T x V x C, or R = P x C when probability is combined." },
+            39: { question: "Identify common attacker types, four attack archetypes, and five defense archetypes.", answer: "The attack archetypes are interception, modification, fabrication, and interruption." },
+            44: { question: "What attack archetypes match a ransomware scenario where an attacker encrypts files, interrupting dependent services?", answer: "Modification, because the files are changed, and interruption, because normal access to files and dependent services is blocked." },
+            47: { question: "List and define at least 3 out of the five archetype defenses that we discussed in the lecture.", answer: "Prevention blocks an attack or closes a vulnerability; deterrence makes an attack harder or less attractive; deflection makes this target less desirable; detection identifies an attack and responds; recovery restores after an attack or failure." },
+            59: { question: "Outline the difference of trusted and trustworthy.", answer: "Trusted means a component's failure can break the security policy. Trustworthy means there is reason or assurance to expect it to behave correctly under stated conditions." },
+            62: { question: "A security model consists of which other models?", answer: "Trust model + Threat model = Security model." },
+            66: { question: "Define the principle of adequate protection.", answer: "Protect assets to a degree consistent with their value. A defense is justified when its cost is lower than the expected loss it prevents." }
+        };
+
+        function examPracticeForSlide(slideNumber) {
+            return examPracticeBySlide[slideNumber] || null;
+        }
         const transcriptNotes = [
             "The professor introduced security fundamentals and explained that most course content is on the website.",
             "He encouraged students to use the slides and recordings as course resources.",
@@ -2006,6 +2134,26 @@
 
         slideNav.appendChild(select);
 
+        const slideControls = document.createElement("div");
+        slideControls.className = "slide-controls";
+        const previousButton = document.createElement("button");
+        previousButton.type = "button";
+        previousButton.textContent = "Previous";
+        const nextButton = document.createElement("button");
+        nextButton.type = "button";
+        nextButton.textContent = "Next";
+        slideControls.append(previousButton, nextButton);
+
+        previousButton.addEventListener("click", () => {
+            currentSlideIndex = (currentSlideIndex - 1 + slideNumbers.length) % slideNumbers.length;
+            renderSlideViewer();
+        });
+
+        nextButton.addEventListener("click", () => {
+            currentSlideIndex = (currentSlideIndex + 1) % slideNumbers.length;
+            renderSlideViewer();
+        });
+
         const slideViewer = document.createElement("div");
         slideViewer.className = "slide-viewer";
         slideGallery.appendChild(slideViewer);
@@ -2013,6 +2161,7 @@
         function renderSlideViewer() {
             const slideNumber = slideNumbers[currentSlideIndex];
             slideViewer.innerHTML = "";
+            select.value = String(slideNumber);
 
             const figure = document.createElement("figure");
             figure.className = "slide-card";
@@ -2023,38 +2172,28 @@
                     <div class="slide-frame"><iframe loading="lazy"
                         src="${slideDeckBase}#/${slideNumber}"
                         title="CSC 574 Lecture 02 slide ${slideNumber} of 70"></iframe></div>
-                    <aside class="slide-note"><strong>Lecture Notes</strong>
-                        <p><strong>Slide connection</strong>${slideNotes[slideNumber - 1]}</p>
-                        <p><strong>Professor's words</strong>${exactTranscriptNotes[slideNumber - 1] || ""}</p>
-                    </aside>
-                    ${slideNumber === 14 ? `<div class="slide-answer has-definitions"><div><strong>Answers</strong><ol>
-                        <li><strong>What properties does it need to maintain?</strong><ul class="property-list">
-                            <li><strong>Confidentiality:</strong> protect PINs, account information, and transaction records from unauthorized disclosure.</li>
-                            <li><strong>Integrity:</strong> protect balances, withdrawal amounts, software, and cash dispensing from unauthorized changes or errors.</li>
-                            <li><strong>Availability:</strong> preserve access to cash, network connectivity, and authorized customer services.</li>
-                            <li><strong>Atomicity:</strong> ensure the withdrawal and account update complete consistently, so the ATM cannot dispense cash without updating the account correctly.</li>
-                        </ul></li>
-                        <li><strong>What adversaries might attack it, and what can they do?</strong><ul class="property-list">
-                            <li><strong>Physical attackers:</strong> break into the machine.</li>
-                            <li><strong>Skimmer operators:</strong> capture card data or PINs.</li>
-                            <li><strong>Shoulder surfers:</strong> observe PIN entry.</li>
-                            <li><strong>Hackers:</strong> manipulate software or networks.</li>
-                            <li><strong>Criminals:</strong> redirect cash.</li>
-                            <li><strong>Users:</strong> make mistakes that affect security or transactions.</li>
-                            <li><strong>Environmental events:</strong> disrupt service.</li>
-                        </ul></li>
-                        <li><strong>What mechanisms maintain important properties despite those adversaries?</strong><ul class="property-list">
-                            <li><strong>Physical protection:</strong> hardened case, locks, and tamper-evident seals.</li>
-                            <li><strong>Input protection:</strong> PIN shielding and anti-skimmer checks.</li>
-                            <li><strong>Transaction protection:</strong> transaction and balance verification, cash sensors, and withdrawal limits.</li>
-                            <li><strong>Availability protection:</strong> backup power, redundant network connections, and gas detection or venting.</li>
-                        </ul></li>
-                    </ol></div><div class="answer-definitions"><strong>Definitions</strong><p><b>Confidentiality</b>: prevent unauthorized disclosure.</p><p><b>Integrity</b>: prevent unauthorized modification.</p><p><b>Availability</b>: preserve authorized access.</p><p><b>Atomicity</b>: complete the withdrawal and account update consistently.</p><p><b>Adversary</b>: anybody that attempts to circumvent the security infrastructure. Capabilities describe what the adversary can access, observe, modify, or control.</p><p><b>Mechanism</b>: a specific control that helps maintain a required property.</p><p><b>Defense</b>: a measure taken to reduce the potential or impact of an attack.</p></div></div>` : ""}
-                    ${slideNumber === 10 ? `<div class="slide-answer"><strong>Answers</strong><ol>
-                        <li><strong>As expected by whom?</strong><br>Security is relative to the participant. A bank and a customer may have different assets, expectations, and capabilities, so the same system can appear secure to one participant but not the other.</li>
-                        <li><strong>Under what conditions?</strong><br>Specify the system's environment, assumptions, capabilities, and the conditions under which it is expected to behave as expected.</li>
-                        <li><strong>When?</strong><br>Specify the relevant time period and circumstances. A system's security claim is not an abstract guarantee that applies in every situation forever.</li>
-                    </ol></div>` : ""}`;
+                    <aside class="slide-note"></aside>`;
+
+            const practice = examPracticeForSlide(slideNumber);
+            const panel = figure.querySelector(".slide-note");
+            if (practice) {
+                const title = document.createElement("strong");
+                title.textContent = "Exam Practice";
+                const question = document.createElement("p");
+                question.className = "exam-question";
+                question.innerHTML = `<strong>Likely exam question</strong>${practice.question}`;
+                const answer = document.createElement("p");
+                answer.className = "exam-answer";
+                answer.innerHTML = `<strong>Answer</strong>${practice.answer}`;
+                panel.append(title, question, answer);
+            } else {
+                const title = document.createElement("strong");
+                title.textContent = "Slide Summary";
+                const summary = document.createElement("p");
+                summary.className = "exam-question";
+                summary.textContent = slideNotes[slideNumber - 1];
+                panel.append(title, summary);
+            }
 
             const advance = () => {
                 currentSlideIndex = (currentSlideIndex + 1) % slideNumbers.length;
@@ -2069,7 +2208,28 @@
                 }
             });
 
+            const sectionRange = sectionSlideRanges.find(({ start, end }) => slideNumber >= start && slideNumber <= end);
+            if (sectionRange) {
+                const studySection = document.getElementById(sectionRange.id);
+                const sectionLink = document.createElement("p");
+                sectionLink.className = "study-section-link";
+                const label = document.createElement("strong");
+                label.textContent = "Study section";
+                const link = document.createElement("a");
+                link.href = `#${sectionRange.id}`;
+                link.textContent = studySection.querySelector("summary").textContent;
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    studySection.open = true;
+                    studySection.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+                sectionLink.append(label, link);
+                panel.appendChild(sectionLink);
+            }
+
             slideViewer.appendChild(figure);
+            slideViewer.appendChild(slideControls);
 
             slideNav.querySelectorAll("button").forEach((button, index) => {
                 button.classList.toggle("is-active", index === currentSlideIndex);
